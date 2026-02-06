@@ -108,12 +108,12 @@
 
 ### **B10 Cybersecurity and Privacy Management**
 
-|**WBS Code**|**Component**|**Description**|
-|---|---|---|
-|B10.1|Threat Model and Risk Assessment|Identify vulnerabilities in IoT and control flows|
-|B10.2|Data Encryption and Secure APIs|TLS for all services, encrypted storage|
-|B10.3|Role-Based Access Control|Fine-grained authorization by user roles and zones|
-|B10.4|Privacy-preserving Analytics|Differential privacy or FL for occupant behavior models|
+| **WBS Code** | **Component**                    | **Description**                                         |
+| ------------ | -------------------------------- | ------------------------------------------------------- |
+| B10.1        | Threat Model and Risk Assessment | Identify vulnerabilities in IoT and control flows       |
+| B10.2        | Data Encryption and Secure APIs  | TLS for all services, encrypted storage                 |
+| B10.3        | Role-Based Access Control        | Fine-grained authorization by user roles and zones      |
+| B10.4        | Privacy-preserving Analytics     | Differential privacy or FL for occupant behavior models |
 
 ---
 
