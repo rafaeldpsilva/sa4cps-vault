@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "export_date": "2026-02-07T23:18:43.195733",
+  "platform": "flatpak",
+  "config_version": 3,
+  "isolated_mode": false,
+  "ssh_config": "Host Docker1\n    HostName 192.168.2.68\n    User bolseiros\n    PreferredAuthentications password\n\nHost KubernetesMaster\n    HostName 192.168.2.91\n    User rdpds\n    PreferredAuthentications password\n\nHost Docker3\n    HostName 192.168.2.63\n    User admingecad\n    PreferredAuthentications password\n\nHost rasp\n    HostName 100.119.37.39\n    User rdpds\n    PreferredAuthentications password\n\nHost HAGecad\n    HostName 192.168.3.79\n    User admingecad\n\nHost raspllm\n    HostName raspllm.griffin-ling.ts.net\n    User rdpds\n    PreferredAuthentications password\n\nHost mac\n    HostName mac-mini-de-rdpds.griffin-ling.ts.net\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel4\n    HostName 10.8.91.130\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel2\n    HostName 10.8.91.128\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel3\n    HostName 10.8.91.129\n    User rdpds\n    PreferredAuthentications password\nHost caravel1\n    HostName 10.8.91.103\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel5\n    HostName 10.8.91.114\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel6\n    HostName 10.8.91.115\n    User rdpds\n    PreferredAuthentications password\n\nHost caravel7\n    HostName 10.8.91.110\n    User rdpds\n    PreferredAuthentications password\n",
+  "known_hosts": null,
+  "app_config": {
+    "config_version": 3,
+    "shortcuts": {},
+    "terminal": {
+      "theme": "monokai",
+      "font": "DejaVuSansM Nerd Font Mono 12",
+      "scrollback_lines": 10000,
+      "cursor_blink": true,
+      "audible_bell": false,
+      "pass_through_mode": false,
+      "term": null,
+      "encoding": "UTF-8"
+    },
+    "ui": {
+      "show_hostname": true,
+      "auto_focus_terminal": true,
+      "confirm_close_tabs": true,
+      "remember_window_size": true,
+      "window_width": 1200,
+      "window_height": 800,
+      "sidebar_width": 250,
+      "group_color_display": "fill",
+      "use_group_color_in_tab": false,
+      "use_group_color_in_terminal": false,
+      "group_row_display": "fullwidth",
+      "connection_sort_last": "name-asc",
+      "welcome_page_layout": "rows"
+    },
+    "welcome": {
+      "background_color": null,
+      "tile_color": null
+    },
+    "connections_meta": {},
+    "ssh": {
+      "connection_timeout": 30,
+      "keepalive_interval": 60,
+      "compression": false,
+      "auto_add_host_keys": true,
+      "verbosity": 0,
+      "debug_enabled": false,
+      "native_connect": false,
+      "use_isolated_config": false,
+      "connection_attempts": null,
+      "keepalive_count_max": null,
+      "strict_host_key_checking": "accept-new",
+      "batch_mode": false,
+      "ssh_overrides": [
+        "-o",
+        "ConnectTimeout=30",
+        "-o",
+        "ServerAliveInterval=60",
+        "-o",
+        "StrictHostKeyChecking=accept-new"
+      ]
+    },
+    "file_manager": {
+      "force_internal": false,
+      "open_externally": false,
+      "sftp_keepalive_interval": 30,
+      "sftp_keepalive_count_max": 5,
+      "sftp_connect_timeout": 20
+    },
+    "security": {
+      "store_passwords": true,
+      "ssh_agent_forwarding": true
+    },
+    "connection_groups": {
+      "groups": {
+        "5f0cb273-da9b-4227-96a0-3723f68f64a4": {
+          "id": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+          "name": "Caravel",
+          "parent_id": null,
+          "children": [],
+          "connections": [
+            "caravel7",
+            "caravel6",
+            "caravel5",
+            "caravel4",
+            "caravel3",
+            "caravel2",
+            "caravel1"
+          ],
+          "expanded": true,
+          "order": 0,
+          "color": "rgb(246,211,45)"
+        }
+      },
+      "connections": {
+        "caravel4": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel2": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel3": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel1": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel5": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel6": "5f0cb273-da9b-4227-96a0-3723f68f64a4",
+        "caravel7": "5f0cb273-da9b-4227-96a0-3723f68f64a4"
+      },
+      "root_connections": [
+        "Docker1",
+        "KubernetesMaster",
+        "Docker3",
+        "rasp",
+        "HAGecad",
+        "raspllm",
+        "mac"
+      ]
+    },
+    "app-startup-behavior": "welcome"
+  }
+}
