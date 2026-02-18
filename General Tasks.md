@@ -15,3 +15,4 @@ Conferences:
 LLM on power saving mode. It checks if the new questions aligns with the context. If not, clear the context
 
 Take a book. From the context of the books and dialogs extract preferences for each character
+
