@@ -16,4 +16,9 @@ LLM on power saving mode. It checks if the new questions aligns with the context
 
 Take a book. From the context of the books and dialogs extract preferences for each character
 
+CPE passam a ter leituras de 15 em 15
+
+Dashboard para site
+
+
 
