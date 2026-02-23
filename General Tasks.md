@@ -22,3 +22,10 @@ Dashboard para site
 
 
 
+https://www.webofscience.com/wos/woscc/full-record/WOS:001074198500001
+https://www.webofscience.com/wos/woscc/full-record/WOS:001161549505046
+https://www.webofscience.com/wos/woscc/full-record/WOS:000766623600016
+https://www.webofscience.com/wos/woscc/full-record/WOS:001667091300001
+https://www.webofscience.com/wos/woscc/full-record/WOS:001484877800001
+https://www.webofscience.com/wos/woscc/full-record/WOS:001383708900001
+https://www.webofscience.com/wos/woscc/full-record/WOS:001525524600042
