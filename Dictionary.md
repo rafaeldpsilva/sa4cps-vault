@@ -1,6 +1,6 @@
-**User Modeling Paradigms**
+## **User Modeling Paradigms**
 
-| Concept                               | Definition (as used in the doc)                                                                                |
+| Concept                               | Definition                                                                                                     |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **Smart Preferences**                 | Surface-level user preferences (e.g., comfort settings, thermostat), the baseline this research moves *beyond* |
 | **Environmental Modeling**            | Traditional approach to modeling users via physical setpoints (e.g., temperature, lighting)                    |
@@ -15,21 +15,21 @@
 
 ## Psychological & Interactional Dimensions
 
-| Concept | Definition |
-|---|---|
-| **Relational Psychographics / Psychographic Profiling** | The central modeling target — capturing personality, interaction style, and expectations as relational entities |
-| **Personality Traits** | Stable psychological characteristics of the user (operationalized via Big Five or MBTI frameworks) |
-| **Big Five** | A widely-used psychological model of personality (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism) |
-| **MBTI-derived traits** | Traits derived from the Myers-Briggs Type Indicator framework |
-| **Interaction Styles** | How the user prefers to engage with systems |
-| **Preferred Modality** | The user's preferred channel of interaction (e.g., voice vs. touch) |
-| **Agency Level** | Whether the user prefers to be proactive (initiating) or reactive (responding) in system interactions |
-| **Feedback Loops** | Cyclical mechanisms through which user behavior informs and adjusts the system model |
-| **Expectation Management** | Modeling what the user anticipates from system behavior |
-| **Trust in Automation** | The degree to which a user relies on or delegates control to automated systems |
-| **Anticipated System Reliability** | User's expectation of how consistently and correctly the system will perform |
-| **Transparency** | The degree to which a system explains its actions/decisions to the user |
-| **Intelligence Level (expected)** | The user's expectation of how "smart" or capable the system should appear/behave |
+| Concept                                                 | Definition                                                                                                               |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Relational Psychographics / Psychographic Profiling** | The central modeling target — capturing personality, interaction style, and expectations as relational entities          |
+| **Personality Traits**                                  | Stable psychological characteristics of the user (operationalized via Big Five or MBTI frameworks)                       |
+| **Big Five**                                            | A widely-used psychological model of personality (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism) |
+| **MBTI-derived traits**                                 | Traits derived from the Myers-Briggs Type Indicator framework                                                            |
+|                                                         |                                                                                                                          |
+|                                                         |                                                                                                                          |
+| **Agency Level**                                        | Whether the user prefers to be proactive (initiating) or reactive (responding) in system interactions                    |
+|                                                         |                                                                                                                          |
+|                                                         |                                                                                                                          |
+| **Trust in Automation**                                 | The degree to which a user relies on or delegates control to automated systems                                           |
+| **Anticipated System Reliability**                      | User's expectation of how consistently and correctly the system will perform                                             |
+| **Transparency**                                        | The degree to which a system explains its actions/decisions to the user                                                  |
+| **Intelligence Level (expected)**                       | The user's expectation of how "smart" or capable the system should appear/behave                                         |
 
 ---
 
