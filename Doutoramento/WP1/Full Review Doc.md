@@ -28,7 +28,7 @@ The scope is bounded by research that addresses the overall lifecycle of such sy
 
 We categorized keywords into four categories. A valid paper should cover at least three of these.
 
-%% What is the reasoning behind this?%%
+Traditional models user if statements logic. LLMs are included because they can perform Zero-Shot Reasoning, meaning that they can look at a user's sentence 
 Category A (Tech):
 - Large Language Models
 - Generative AI
@@ -55,4 +55,5 @@ Category D (Context):
 - Intelligent Communities
 - Built Environments
 - Ambient Intelligence
-- 
+- IoT User Experience
+
