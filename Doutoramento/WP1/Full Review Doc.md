@@ -11,8 +11,6 @@ This research is focused on the "Human-in-the-loop" aspcet, specifically looking
 
 **The where**: The context is physical environments such as Intelligent/Smart Communities and Buildings.
 
-%% Clarify the difference between these two concepts %%
-%% Define each and every concept%%
 **The who**: The model target is Relational Psychographics/ Psychographic Profiling. This includes personality traits (e.g., Big Five or MBTI-derived traits), interaction styles (e.g., Preferred modality (voice/touch), agency level (proactive/reactive), and feedback loops), and expectation management (e.g., trust levels in automation, anticipated system reliability, transparency, and "intelligence" level)
 
 **The how**:
@@ -30,10 +28,23 @@ The scope is bounded by research that addresses the overall lifecycle of such sy
 
 We categorized keywords into four categories. A valid paper should cover at least three of these.
 
-%% What is the reasonging%%
+%% What is the reasoning behind this?%%
 Category A (Tech):
 - Large Language Models
 - Generative AI
 - Foundation Models
 - Prompt Engineering
 - Multi-modal LLMs
+
+Category B (Human):
+- Personality Traits
+- Interaction Style/Modality
+- User Expectation
+- Cognitive Modeling
+- Behavioral Archetypes
+
+Category C (Graph/Relations):
+- Heterogeneous Information Networks
+- Graph Neural Networks
+- Knowledge Graphs
+- 
