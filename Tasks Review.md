@@ -1,15 +1,13 @@
 ## Phase 1: Foundation & Scope (Hours 1–5)
 
 - **Hour 1:** Define the specific "domain" of the review (e.g., UP/UM in E-learning vs. E-commerce) and draft a 200-word scope statement.
-    
 - **Hour 2:** Identify 10 core "Seed Papers" (highly cited foundational works) using Google Scholar or Scopus.
-    
 - **Hour 3:** Create a list of 15–20 keywords and Boolean strings (e.g., `"User Modeling" AND "Personalization" NOT "Profiling"`) for database searches.
-    
 - **Hour 4:** Set up a Reference Manager (Zotero/Mendeley) with folders for "Conceptual," "Technical/Algorithmic," and "Applications."
-    
 - **Hour 5:** Define "Inclusion/Exclusion" criteria (e.g., "Only papers from 2015–2026," "Must include empirical validation").
-    
+
+T1.1: Define the specific "domain" of the review
+T1.2: Draft a 200-word scope statement
 
 ---
 
