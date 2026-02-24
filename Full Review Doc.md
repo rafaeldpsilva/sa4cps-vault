@@ -9,5 +9,10 @@ This means that the system is not only modeling a "resident", but modeling a "pe
 ### What is the domain of this review?
 This research is focused on the "Human-in-the-loop" aspcet, specifically looking at how AI decodes human nature within physical spaces.
 
-The context is Intelligent/Smart Communities and Buildings
+The context is physical environments such as Intelligent/Smart Communities and Buildings.
+
+%% Clarify the difference between these two concepts %%
+%% Define each and every concept%%
+The model target is Relational Psychographics/ Psychographic Profiling. This includes personality traits (e.g., Big Five), interaction styles (e.g., proactive vs. reactive), and expectation management (e.g., trust levels in automation)
+
 
