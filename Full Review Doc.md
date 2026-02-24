@@ -22,4 +22,4 @@ This research is focused on the "Human-in-the-loop" aspcet, specifically looking
 ## Scope Statement
 This review investigates the intersection of User Profiling (UP) and User Modeling (UM) within Intelligent Buildings and Smart Communities, with a specific focus on the occupant's psychological and interactional dimensions. Moving beyond environmental setpoints, this research centers on modeling the occupant as a complex entity defined by its personality traits, interaction styles, and expectations.
 
-Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) to map the multi-dimensional relationships between these psychological entities and observed behaviors, enabling the compa
+Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) to map the multi-dimensional relationships between these psychological entities and observed behaviors, enabling the comparison of structural "User Graphs" to identify common interaction archetypes.
