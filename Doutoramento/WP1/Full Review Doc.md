@@ -44,6 +44,7 @@ Category B (Human):
 - Cognitive Modeling
 - Behavioral Archetypes
 
+
 Category C (Graph/Relations):
 - Heterogeneous Information Networks
 - Graph Neural Networks
