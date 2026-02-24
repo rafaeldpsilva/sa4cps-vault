@@ -17,4 +17,6 @@ This research is focused on the "Human-in-the-loop" aspcet, specifically looking
 
 **The how**:
 **LLMs:** Used as "Psychological Engines" to infer personality from natural language feedback or behavioral logs. Acting as "Feature Extractors" to translate raw interaction logs into the semantic nodes (personality/expectations) that populate the GNN.
-**GNNs:** Building heterogeneous graphs where edges represent the _strength of relationship_ between a user's personality and their interaction choices. This allows for **Cross-User Comparison** (graph isomorphism or alignment).
+**GNNs:** Building heterogeneous graphs where edges represent the _strength of relationship_ between a user's personality and their interaction choices. This allows for Cross-User Comparison (graph isomorphism or alignment).
+
+## Scope Statement
