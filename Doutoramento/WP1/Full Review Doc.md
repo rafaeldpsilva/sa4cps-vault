@@ -62,13 +62,14 @@ Category D (Context):
 ## Inclusion and Exclusion Criteria
 
 ### ✅ Inclusion Criteria
-1. Peer-reviewed: Must be from a journal or a top-tier conference 
-2. Language - Inglês
-3. Research Focus - Graph-based preference/user modeling, multi-agent systems, LLMs/SLMs, Distributed/Edge Architecture
-4. Application context - Intelligent Buildings, Smart Homes, Smart Cities, Adaptive Communities
-###### ❌ Exclusion Criteria
-1. Study Type - Short papers, posters, workshops, abstracts, editorials, pre-prints, books, or Ph.D. dissertations
-2. Methodology - Purely theoretical papers that do not present a concrete architecture, prototype, algorithm implementation, or simulation/validation results.
-3. Studies where GNNs/LLMs/MAS are used but the application domain is **not** related to the built environment (e.g., chemistry, finance, pure recommendation systems unrelated to smart control).
-4. Studies focusing solely on deterministic or rule-based control systems that do not integrate learning, graph models, or language models.
-5. Papers found to have been retracted or published in predatory journals or conferences.
+1. Peer-reviewed: Must be from a journal or a top-tier conference
+2. Approach: Must utilize at least one relational or generative method
+3. Human-Centric: Must model at least one psychological or interactional trait %%personality, expection, style%%
+4. Context: Must be situated in a built environment
+### ❌ Exclusion Criteria
+1. Focusing 
+2. Study Type - Short papers, posters, workshops, abstracts, editorials, pre-prints, books, or Ph.D. dissertations
+3. Methodology - Purely theoretical papers that do not present a concrete architecture, prototype, algorithm implementation, or simulation/validation results.
+4. Studies where GNNs/LLMs/MAS are used but the application domain is **not** related to the built environment (e.g., chemistry, finance, pure recommendation systems unrelated to smart control).
+5. Studies focusing solely on deterministic or rule-based control systems that do not integrate learning, graph models, or language models.
+6. Papers found to have been retracted or published in predatory journals or conferences.
