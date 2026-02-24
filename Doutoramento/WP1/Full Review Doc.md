@@ -25,3 +25,15 @@ This review investigates the intersection of User Profiling (UP) and User Modeli
 Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) to map the multi-dimensional relationships between these psychological entities and observed behaviors, enabling the comparison of structural "User Graphs" to identify common interaction archetypes. Furthermore, we examine the role of Large Language Models (LLMs) as reasoning engines that interpret qualitative user data to synthesize the nodes and attributes within these relational models.
 
 The scope is bounded by research that addresses the overall lifecycle of such system, from user data, to profiling, to modeling, and finally to personalization. We exclude papers focused solely on social network analysis or generic occupancy sensing. The goal is to provide a roadmap for developing "expectation-aware" systems that adapt their logic to the structural psychological profile of the user, rather than just their physical preferences.
+
+## Keywords and Strings
+
+We categorized keywords into four categories. A valid paper should cover at least three of these.
+
+%% What is the reasonging%%
+Category A (Tech):
+- Large Language Models
+- Generative AI
+- Foundation Models
+- Prompt Engineering
+- Multi-modal LLMs
