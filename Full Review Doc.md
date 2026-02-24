@@ -20,4 +20,6 @@ This research is focused on the "Human-in-the-loop" aspcet, specifically looking
 **GNNs:** Building heterogeneous graphs where edges represent the _strength of relationship_ between a user's personality and their interaction choices. This allows for Cross-User Comparison (graph isomorphism or alignment).
 
 ## Scope Statement
-This review investigates the intersection of User Profiling (UP) and User Modeling (UM) within Intelligent Buildings and Smart Communities, with a specific focus on the occupant's psychological and interactional dimensions. Moving beyond environmental setpoints, this research centers on modeling the occupant
+This review investigates the intersection of User Profiling (UP) and User Modeling (UM) within Intelligent Buildings and Smart Communities, with a specific focus on the occupant's psychological and interactional dimensions. Moving beyond environmental setpoints, this research centers on modeling the occupant as a complex entity defined by its personality traits, interaction styles, and expectations.
+
+Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) to map the multi-dimensional relationships between these psychological entities and observed behaviors, enabling the compa
