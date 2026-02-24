@@ -56,6 +56,9 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 
 T1.1: Define the specific "domain" of the review
 T1.2: Draft a 200-word scope statement
+T1.3: Create a list of 15–20 keywords and Boolean strings (e.g., `"User Modeling" AND "Personalization" NOT "Profiling"`) for database searches.
+T1.4: Set up a Reference Manager (Zotero/Mendeley) with folders for "Conceptual," "Technical/Algorithmic," and "Applications."
+T1.5: Define "Inclusion/Exclusion" criteria (e.g., "Only papers from 2015–2026," "Must include empirical validation").
 
 ---
 
