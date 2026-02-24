@@ -10,3 +10,4 @@ This means that the system is not only modeling a "resident", but modeling a "pe
 This research is focused on the "Human-in-the-loop" aspcet, specifically looking at how AI decodes human nature within physical spaces.
 
 The context is Intelligent/Smart Communities and Buildings
+
