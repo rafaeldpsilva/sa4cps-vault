@@ -47,4 +47,12 @@ Category C (Graph/Relations):
 - Heterogeneous Information Networks
 - Graph Neural Networks
 - Knowledge Graphs
+- Graph Alignment/Isomorphism
+- Relational Embedding
+
+Category D (Context):
+- Smart Buildings/Homes
+- Intelligent Communities
+- Built Environments
+- Ambient Intelligence
 - 
