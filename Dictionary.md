@@ -54,6 +54,5 @@
 | **Expectation-Aware Systems** | Systems that adapt their logic to the user's psychological and expectation profile, not just physical preferences |
 | **Psychological Profile**     | The complete structural representation of a user's personality, interaction style, and expectations               |
 | **Qualitative User Data**     | Non-numerical user input (text, speech, feedback) interpreted by LLMs                                             |
-| **System Lifecycle**          | The full pipeline: user data → profiling → modeling → personalization                                             |
-| **Occupancy Sensing**         | Generic detection of presence in a space — explicitly excluded from this review's scope                           |
-| **Social Network Analysis**   | Graph-based analysis of social relationships — also explicitly excluded from scope                                |
+
+
