@@ -73,8 +73,8 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 - **Hour 12:** Finalize a "Shortlist" of 30–40 high-quality papers for deep reading.
 
 **Tasks:**
-- [ ] T2.1: Run search strings in ACM Digital Library
-- [ ] T2.2: Run search strings in IEEE Xplore
+- [x] T2.1: Run search strings in ACM Digital Library
+- [x] T2.2: Run search strings in IEEE Xplore
 - [ ] T2.3: Screen first batch of titles/abstracts
 - [ ] T2.4: Screen second batch of titles/abstracts
 - [ ] T2.5: Perform backward snowballing
