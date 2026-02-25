@@ -93,9 +93,9 @@ Complete search string:
 Results: 15
 ### ACM:
 ```
-[[All: user modeling] OR [All: user profiling]] AND [[All: smart building*] OR [All: intelligent environment*] OR [All: smart communit*]] AND [[All: llm] OR [All: large language model*] OR [All: gnn] OR [All: graph neural network*] OR [All: knowledge graph*]] AND [[All: personality] OR [All: interaction style] OR [All: expectation*] OR [All: psychographic*]]
+[[**All**: "user modeling"] **OR** [**All**: "user profiling"]] **AND** [[**All**: "smart building*"] **OR** [**All**: "intelligent environment*"] **OR** [**All**: "smart communit*"]] **AND** [[**All**: llm] **OR** [**All**: "large language model*"] **OR** [**All**: gnn] **OR** [**All**: "graph neural network*"] **OR** [**All**: "knowledge graph*"]] **AND** [[**All**: personality] **OR** [**All**: "interaction style"] **OR** [**All**: expectation*] **OR** [**All**: psychographic*]]
 ```
-Results: 99,499
+Results: 51
 
 ### IEEE Xplore:
 ```
