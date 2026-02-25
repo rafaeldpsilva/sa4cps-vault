@@ -86,19 +86,12 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 ## Phase 3: Analysis & Synthesis (Hours 13–20)
 
 - **Hour 13:** Create a "Synthesis Matrix" (spreadsheet) with columns: Author, Method, UP/UM distinction, Data Source, and Findings.
-
 - **Hour 14:** Read 3 papers and extract data into the matrix.
-
 - **Hour 15:** Read 3 papers and extract data into the matrix.
-
 - **Hour 16:** Read 3 papers and extract data into the matrix.
-
 - **Hour 17:** (Repeat reading/extraction until at least 15-20 key papers are mapped).
-
 - **Hour 18:** Identify "Thematic Clusters" (e.g., Privacy in Profiling, Deep Learning in Modeling).
-
 - **Hour 19:** Draft a taxonomy diagram (the hierarchy of how UP and UM relate to each other).
-
 - **Hour 20:** Summarize the "Gaps" identified in the literature (e.g., lack of cross-platform modeling).
 
 **Tasks:**
