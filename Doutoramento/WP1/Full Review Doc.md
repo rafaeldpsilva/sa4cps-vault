@@ -73,6 +73,11 @@ Category D (Context):
 
 ## Search Strings
 
+User Modeling OR User Profiling
+Smart Building* OR Intelligent Environment* OR Smart Communit* 
+LLM OR Large Language Model* OR GNN OR Graph Neural Network* OR Knowledge Graph* 
+Personality OR Interaction Style OR Expectation* OR Psychographic*
+
 (TS=("User Modeling" OR "User Profiling") 
 AND TS=("Smart Building*" OR "Intelligent Environment*" OR "Smart Communit*") 
 AND TS=("LLM" OR "Large Language Model*" OR "GNN" OR "Graph Neural Network*" OR "Knowledge Graph*") 
