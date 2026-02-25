@@ -24,7 +24,7 @@ Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) 
 
 The scope is bounded by research that addresses the overall lifecycle of such system, from user data, to profiling, to modeling, and finally to personalization. We exclude papers focused solely on social network analysis or generic occupancy sensing. The goal is to provide a roadmap for developing "expectation-aware" systems that adapt their logic to the structural psychological profile of the user, rather than just their physical preferences.
 
-## Keywords and Strings
+## Keywords
 
 We categorized keywords into four categories. A valid paper should cover at least three of these.
 
@@ -70,3 +70,10 @@ Category D (Context):
 1. Focusing only on environment modeling (occupancy sensing, thermal comfort) without modeling the user's nature
 2. User profiling for sentimental analysis or ad-targetting on web platforms
 3. Deep learning papers that don't provide a "model" representation
+
+## Search Strings
+
+(TS=("User Modeling" OR "User Profiling") 
+AND TS=("Smart Building*" OR "Intelligent Environment*" OR "Smart Communit*") 
+AND TS=("LLM" OR "Large Language Model*" OR "GNN" OR "Graph Neural Network*" OR "Knowledge Graph*") 
+AND TS=("Personality" OR "Interaction Style" OR "Expectation*" OR "Psychographic*"))
