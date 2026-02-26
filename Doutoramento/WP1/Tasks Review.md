@@ -75,7 +75,7 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 **Tasks:**
 - [x] T2.1: Run search strings in ACM Digital Library
 - [x] T2.2: Run search strings in IEEE Xplore
-- [ ] T2.3: Screen first batch of titles/abstracts
+- [x] T2.3: Screen first batch of titles/abstracts
 - [ ] T2.4: Screen second batch of titles/abstracts
 - [ ] T2.5: Perform backward snowballing
 - [ ] T2.6: Perform forward snowballing
