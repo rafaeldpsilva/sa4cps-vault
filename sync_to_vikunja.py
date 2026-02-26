@@ -104,7 +104,7 @@ def main():
 
     target_project = projects[0]
     for p in projects:
-        if p.get("title") == "inbox-rdpds":
+        if p.get("title") == "Inbox-RDPDS":
             target_project = p
             break
     
