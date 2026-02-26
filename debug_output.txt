@@ -1,0 +1,16 @@
+--- Testing Create Task ---
+Created Parent: 147 - Automated Parent Task (Color: 3498db)
+
+--- Testing Create Subtask ---
+Created Subtask: 148 - Automated Subtask (Parent: None)
+Explicitly setting subtask relation...
+Relation set.
+
+--- Testing Update Task ---
+Updated Parent Status to Done: True
+
+--- Testing Delete Tasks (Cleanup) ---
+Deleted Subtask: 148
+Deleted Parent Task: 147
+
+All tests passed successfully!

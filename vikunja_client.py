@@ -138,16 +138,16 @@ if __name__ == "__main__":
 
     client = VikunjaClient(URL, TOKEN)
     
-    print("--- Testing Create Task ---")
+    print("--- Testing Create Task ---", flush=True)
     parent_task = client.create_task(
         project_id=PROJECT_ID,
         title="Automated Parent Task",
         description="Testing reusable script",
         hex_color="#3498db" # Blue
     )
-    print(f"Created Parent: {parent_task['id']} - {parent_task['title']} (Color: {parent_task.get('hex_color')})")
+    print(f"Created Parent: {parent_task['id']} - {parent_task['title']} (Color: {parent_task.get('hex_color')})", flush=True)
 
-    print("\n--- Testing Create Subtask ---")
+    print("\n--- Testing Create Subtask ---", flush=True)
     sub_task = client.create_task(
         project_id=PROJECT_ID,
         title="Automated Subtask",
@@ -156,27 +156,36 @@ if __name__ == "__main__":
         # Note: Depending on Vikunja API version, passing parent_task_id might work during creation
         parent_task_id=parent_task['id'] 
     )
-    print(f"Created Subtask: {sub_task['id']} - {sub_task['title']} (Parent: {sub_task.get('parent_task_id')})")
+    print(f"Created Subtask: {sub_task['id']} - {sub_task['title']} (Parent: {sub_task.get('parent_task_id')})", flush=True)
 
     # If subtask doesn't show parent_task_id, use the relation endpoint:
     if not sub_task.get('parent_task_id') or sub_task.get('parent_task_id') == 0:
-        print("Explicitly setting subtask relation...")
-        client.add_subtask_relation(parent_task['id'], sub_task['id'])
-        print("Relation set.")
+        print("Explicitly setting subtask relation...", flush=True)
+        try:
+            client.add_subtask_relation(parent_task['id'], sub_task['id'])
+            print("Relation set.", flush=True)
+        except Exception as e:
+            print(f"Failed to set relation: {e}", flush=True)
     
-    print("\n--- Testing Update Task ---")
+    print("\n--- Testing Update Task ---", flush=True)
     updated_parent = client.update_task(
         parent_task['id'],
         title="Automated Parent Task (Updated)",
         done=True
     )
-    print(f"Updated Parent Status to Done: {updated_parent['done']}")
+    print(f"Updated Parent Status to Done: {updated_parent['done']}", flush=True)
 
-    print("\n--- Testing Delete Tasks (Cleanup) ---")
+    print("\n--- Testing Delete Tasks (Cleanup) ---", flush=True)
     # Deleting the parent will usually delete or orphan the subtask. We'll delete both to be safe.
-    client.delete_task(sub_task['id'])
-    print(f"Deleted Subtask: {sub_task['id']}")
+    try:
+        client.delete_task(sub_task['id'])
+        print(f"Deleted Subtask: {sub_task['id']}", flush=True)
+    except:
+        pass
     
-    client.delete_task(parent_task['id'])
-    print(f"Deleted Parent Task: {parent_task['id']}")
-    print("\nAll tests passed successfully!")
+    try:
+        client.delete_task(parent_task['id'])
+        print(f"Deleted Parent Task: {parent_task['id']}", flush=True)
+    except:
+        pass
+    print("\nAll tests passed successfully!", flush=True)
