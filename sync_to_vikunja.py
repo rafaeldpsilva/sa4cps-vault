@@ -102,10 +102,9 @@ def main():
         print("No Vikunja projects found!")
         return
 
-    # User's project has ID=3 apparently, or we pick the first one
     target_project = projects[0]
     for p in projects:
-        if p.get("id") == 3:
+        if p.get("title") == "inbox-rdpds":
             target_project = p
             break
     
