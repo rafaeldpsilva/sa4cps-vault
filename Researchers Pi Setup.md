@@ -24,7 +24,7 @@ curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wi
 - Python 3.10+ (Ubuntu 24 LTS ships with 3.12 ✓)
 
 ```bash
-sudo pip3 install requests
+sudo apt install python3-requests
 ```
 
 ### Verify everything is installed
