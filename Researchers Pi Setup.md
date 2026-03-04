@@ -37,6 +37,54 @@ python3 -c "import requests; print('requests ok')"
 ```
 
 ### Automation Script
+
+1. Copy the script to a system location
+```bash
+sudo cp pi_shelly_setup.py /usr/local/bin/pi_shelly_setup.py
+sudo chmod +x /usr/local/bin/pi_shelly_setup.py
+```
+
+  2. Create the service file
+```bash
+sudo nano /etc/systemd/system/pi-shelly-setup.service
+```
+
+  Paste this:
+```
+[Unit]
+Description=Pi-Shelly Dual-Stage WiFi Setup
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/pi_shelly_setup.py
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+  3. Enable it
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable pi-shelly-setup.service
+```
+
+  4. Test without rebooting
+```bash
+sudo systemctl start pi-shelly-setup.service
+sudo journalctl -u pi-shelly-setup.service -f
+```
+
+  ---
+  Type=oneshot means it runs once per boot and stops — which is exactly what you want. Since the script skips Stage A if credentials are already saved, subsequent reboots
+   will go straight to Stage B (Shelly config) without showing the hotspot again.
+
+  If you want the hotspot to appear on every boot (e.g. for re-provisioning), delete the credentials file:
+  sudo rm /etc/pi-shelly/wifi_creds.json
+
 The setup is automated by `pi_shelly_setup.py`. To run on boot, see the systemd service setup in the step-by-step guide.
 
 ## Stage A: The User Setup (Pi as Access Point)
