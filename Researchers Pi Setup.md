@@ -9,9 +9,17 @@ This is the tutorial to setup and connect your Shelly and Pi.
 sudo apt install network-manager wireless-tools
 ```
 
-**wifi-connect** (not in apt):
+**wifi-connect** (not in apt, download binary from GitHub releases):
 ```bash
-bash <(curl -sf https://raw.githubusercontent.com/balena-os/wifi-connect/master/scripts/raspbian-install.sh)
+# For Pi 4/5 (aarch64)
+curl -fsSL 
+
+ \
+  | sudo tar -xz -C /usr/local/bin/
+
+# For Pi 3 (armv7)
+curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wifi-connect-v4-linux-armv7hf.tar.gz \
+  | sudo tar -xz -C /usr/local/bin/
 ```
 
 ### Python
