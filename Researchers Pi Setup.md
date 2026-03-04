@@ -9,6 +9,28 @@ This is the tutorial to setup and connect your Shelly and Pi.
 sudo apt install network-manager wireless-tools python3-pip
 ```
 
+### Configure NetworkManager as the network renderer
+Ubuntu Server uses `systemd-networkd` by default. `wifi-connect` requires NetworkManager to be in full control.
+
+```bash
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+Replace the contents with:
+```yaml
+network:
+  version: 2
+  renderer: NetworkManager
+```
+
+Then apply:
+```bash
+sudo netplan apply
+sudo systemctl restart NetworkManager
+sleep 3
+nmcli device status  # wlan0 should show "disconnected", not "unmanaged"
+```
+
 **wifi-connect** (not in apt, download binary from GitHub releases):
 ```bash
 # For Pi 4/5 (aarch64)
