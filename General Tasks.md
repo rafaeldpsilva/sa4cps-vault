@@ -16,10 +16,6 @@ LLM on power saving mode. It checks if the new questions aligns with the context
 
 Take a book. From the context of the books and dialogs extract preferences for each character
 
-https://www.webofscience.com/wos/woscc/full-record/WOS:001074198500001
-https://www.webofscience.com/wos/woscc/full-record/WOS:001161549505046
-https://www.webofscience.com/wos/woscc/full-record/WOS:000766623600016
-https://www.webofscience.com/wos/woscc/full-record/WOS:001667091300001
-https://www.webofscience.com/wos/woscc/full-record/WOS:001484877800001
-https://www.webofscience.com/wos/woscc/full-record/WOS:001383708900001
-https://www.webofscience.com/wos/woscc/full-record/WOS:001525524600042
+https://eclass.uth.gr/modules/document/file.php/PRE_P_122/Edward%20R.%20Tufte%20Envisioning%20Information%201990.pdf
+
+https://kyl.neocities.org/books/%5BTEC%20TUF%5D%20the%20visual%20display%20of%20quantitative%20information.pdf
