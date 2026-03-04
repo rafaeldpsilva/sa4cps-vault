@@ -44,7 +44,7 @@ def start_hotspot():
     # wifi-connect blocks until the user submits credentials and the Pi
     # successfully joins the home WiFi — no --output flag exists.
     result = subprocess.run(
-        f"wifi-connect --portal-ssid '{PORTAL_SSID}' --portal-interface {WIFI_IFACE}",
+        f"sudo wifi-connect --portal-ssid '{PORTAL_SSID}' --portal-interface {WIFI_IFACE}",
         shell=True, text=True
     )
     if result.returncode != 0:
