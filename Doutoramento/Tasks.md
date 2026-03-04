@@ -1,1 +1,3 @@
-- [ ]
+- [ ] Identify KPI and Metrics
+- [ ] Describe use cases
+- [ ] Define the functional and non-functional requirements
