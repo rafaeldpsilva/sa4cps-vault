@@ -1,3 +1,3 @@
-- [ ] Identify KPI and Metrics
-- [ ] Describe use cases
-- [ ] Define the functional and non-functional requirements
+- [ ] WP2 - Identify KPI and Metrics
+- [ ] WP2 - Describe use cases
+- [ ] WP2 - Define the functional and non-functional requirements
