@@ -2,6 +2,37 @@
 
 This is the tutorial to setup and connect your Shelly and Pi.
 
+## Requirements
+
+### System Packages
+```bash
+sudo apt install network-manager wireless-tools
+```
+
+**wifi-connect** (not in apt):
+```bash
+bash <(curl -sf https://raw.githubusercontent.com/balena-os/wifi-connect/master/scripts/raspbian-install.sh)
+```
+
+### Python
+- Python 3.10+ (Ubuntu 24 LTS ships with 3.12 ✓)
+
+```bash
+sudo pip3 install requests
+```
+
+### Verify everything is installed
+```bash
+python3 --version
+nmcli --version
+iwlist --version
+wifi-connect --version
+python3 -c "import requests; print('requests ok')"
+```
+
+### Automation Script
+The setup is automated by `pi_shelly_setup.py`. To run on boot, see the systemd service setup in the step-by-step guide.
+
 ## Stage A: The User Setup (Pi as Access Point)
 
 1. The Pi turns on and becomes a **Hotspot** (using `gecad-wifi-connect` or similar).
