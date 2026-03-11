@@ -1,0 +1,1 @@
+https://www.compete2030.gov.pt/avisos/
