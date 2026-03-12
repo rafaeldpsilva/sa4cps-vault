@@ -28,8 +28,6 @@ docker exec headscale headscale nodes list
 ```
 
 ### On the Raspberry Pi
-Save the `preauthkey-from-above` on the python script:
-
 ```bash
 # Install Tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
@@ -39,7 +37,7 @@ sudo tailscale login --login-server https://headscale.gecad.isep.ipp.pt \
   --authkey <preauthkey-from-above>
 ```
 
-
+Save the `preauthkey-from-above` on the python script, then copy the script to the Pi:
 ```bash
 scp pi_shelly_setup.py admin@{PI_IP}:/home/admin/
 ```
@@ -47,6 +45,8 @@ scp pi_shelly_setup.py admin@{PI_IP}:/home/admin/
 
 **wifi-connect** (not in apt, install via official script):
 ```bash
+bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
+
 # For Pi 4/5 (aarch64)
 curl -fsSL https://github.com/balena-os/wifi-connect/releases/download/v4.11.84/wifi-connect-aarch64-unknown-linux-gnu.tar.gz \
   | sudo tar -xz -C /usr/local/bin/ && cp /usr/local/bin/wifi-connect /usr/local/sbin
@@ -56,6 +56,7 @@ curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wi
   | sudo tar -xz -C /usr/local/bin/ && cp /usr/local/bin/wifi-connect 
 ```
 
+To 
 
 ### Verify everything is installed
 ```bash
