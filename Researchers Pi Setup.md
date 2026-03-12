@@ -314,6 +314,32 @@ sudo journalctl -u pi-shelly-setup.service -f
 
 The setup is automated by `pi_shelly_setup.py`. To run on boot, see the systemd service setup in the step-by-step guide.
 
+## Tailscale Setup
+
+### On the Headscale Server (Docker)
+```bash
+# Create a user
+docker exec -it headscale headscale users create test
+
+# List users (to get the user ID)
+docker exec -it headscale headscale users list
+
+# Generate a pre-auth key (replace 2 with the actual user ID)
+docker exec -it headscale headscale preauthkeys create --user 2
+```
+
+### On the Raspberry Pi
+```bash
+# Install Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# Join the Headscale network using the pre-auth key
+sudo tailscale login --login-server https://headscale.gecad.isep.ipp.pt \
+  --authkey <preauthkey-from-above>
+```
+
+---
+
 ## Stage A: The User Setup (Pi as Access Point)
 
 1. The Pi turns on and becomes a **Hotspot** (using `gecad-wifi-connect` or similar).
