@@ -21,10 +21,9 @@ docker exec -it headscale headscale users create {USER}
 docker exec -it headscale headscale users list
 
 # Generate a reusable, non-expiring pre-auth key
-docker exec -it headscale headscale preauthkeys create --user {USER_ID} --reusable --expiration 0
+docker exec -it headscale headscale preauthkeys create --user {USER_ID} --reusable --expiration 90d
 
 docker exec headscale headscale nodes list
-
 ```
 
 ### On the Raspberry Pi
