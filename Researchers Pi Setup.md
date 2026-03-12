@@ -5,29 +5,40 @@ This is the tutorial to setup and connect your Shelly and Pi.
 ## Requirements
 
 ### System Packages
+Python 3.10+ (Ubuntu 24 LTS ships with 3.12 ✓)
 ```bash
 sudo apt install python3-pip python3-requests
 ```
 
-### Configure Tailscale
-On the server:
+## Tailscale Setup
+
+### On the Headscale Server (Docker)
 ```bash
-sudo netplan apply
-sudo systemctl restart NetworkManager
-sleep 3
-nmcli device status  # wlan0 should show "disconnected", not "unmanaged"
+# Create a user
+docker exec -it headscale headscale users create test
+
+# List users (to get the user ID)
+docker exec -it headscale headscale users list
+
+# Generate a reusable, non-expiring pre-auth key (replace 2 with the actual user ID)
+docker exec -it headscale headscale preauthkeys create --user 2 --reusable --expiration 0
 ```
+
+### On the Raspberry Pi
+```bash
+# Install Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# Join the Headscale network using the pre-auth key
+sudo tailscale login --login-server https://headscale.gecad.isep.ipp.pt \
+  --authkey <preauthkey-from-above>
+```
+
+### Configure wifi-connect
 
 **wifi-connect** (not in apt, install via official script):
 ```bash
 bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
-```
-
-### Python
-- Python 3.10+ (Ubuntu 24 LTS ships with 3.12 ✓)
-
-```bash
-sudo apt install python3-requests
 ```
 
 ### Verify everything is installed
@@ -294,30 +305,6 @@ sudo journalctl -u pi-shelly-setup.service -f
   sudo rm /etc/pi-shelly/wifi_creds.json
 
 The setup is automated by `pi_shelly_setup.py`. To run on boot, see the systemd service setup in the step-by-step guide.
-
-## Tailscale Setup
-
-### On the Headscale Server (Docker)
-```bash
-# Create a user
-docker exec -it headscale headscale users create test
-
-# List users (to get the user ID)
-docker exec -it headscale headscale users list
-
-# Generate a reusable, non-expiring pre-auth key (replace 2 with the actual user ID)
-docker exec -it headscale headscale preauthkeys create --user 2 --reusable --expiration 0
-```
-
-### On the Raspberry Pi
-```bash
-# Install Tailscale
-curl -fsSL https://tailscale.com/install.sh | sh
-
-# Join the Headscale network using the pre-auth key
-sudo tailscale login --login-server https://headscale.gecad.isep.ipp.pt \
-  --authkey <preauthkey-from-above>
-```
 
 ---
 
