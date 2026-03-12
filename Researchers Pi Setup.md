@@ -6,7 +6,7 @@ This is the tutorial to setup and connect your Shelly and Pi.
 
 ### System Packages
 ```bash
-sudo apt install network-manager wireless-tools python3-pip
+sudo apt install python3-pip python3-requests
 ```
 
 ### Configure NetworkManager as the network renderer
@@ -31,15 +31,9 @@ sleep 3
 nmcli device status  # wlan0 should show "disconnected", not "unmanaged"
 ```
 
-**wifi-connect** (not in apt, download binary from GitHub releases):
+**wifi-connect** (not in apt, install via official script):
 ```bash
-# For Pi 4/5 (aarch64)
-curl -fsSL https://github.com/balena-os/wifi-connect/releases/download/v4.11.84/wifi-connect-aarch64-unknown-linux-gnu.tar.gz \
-  | sudo tar -xz -C /usr/local/bin/
-
-# For Pi 3 (armv7)
-curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wifi-connect-v4-linux-armv7hf.tar.gz \
-  | sudo tar -xz -C /usr/local/bin/
+bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
 ```
 
 ### Python
@@ -324,8 +318,8 @@ docker exec -it headscale headscale users create test
 # List users (to get the user ID)
 docker exec -it headscale headscale users list
 
-# Generate a pre-auth key (replace 2 with the actual user ID)
-docker exec -it headscale headscale preauthkeys create --user 2
+# Generate a reusable, non-expiring pre-auth key (replace 2 with the actual user ID)
+docker exec -it headscale headscale preauthkeys create --user 2 --reusable --expiration 0
 ```
 
 ### On the Raspberry Pi
