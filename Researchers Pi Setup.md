@@ -38,6 +38,18 @@ sudo tailscale login --login-server https://headscale.gecad.isep.ipp.pt \
 
 **wifi-connect** (not in apt, install via official script):
 ```bash
+# For Pi 4/5 (aarch64)
+curl -fsSL https://github.com/balena-os/wifi-connect/releases/download/v4.11.84/wifi-connect-aarch64-unknown-linux-gnu.tar.gz \
+  | sudo tar -xz -C /usr/local/bin/
+
+# For Pi 3 (armv7)
+curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wifi-connect-v4-linux-armv7hf.tar.gz \
+  | sudo tar -xz -C /usr/local/bin/
+bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
+```
+
+Automated script (deprecated):
+```bash
 bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
 ```
 
