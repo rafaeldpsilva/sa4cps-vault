@@ -1,7 +1,3 @@
-## "Dual-Stage" Connection
-
-This is the tutorial to setup and connect your Shelly and Pi.
-
 ## Requirements
 
 ### System Packages
@@ -41,6 +37,13 @@ Save the `preauthkey-from-above` on the python script, then copy the script to t
 ```bash
 scp pi_shelly_setup.py admin@{PI_IP}:/home/admin/
 ```
+
+To ensure connection redundancy from tailscale, activate rpi-connect on:
+```bash
+rpi-connect on
+rpi-connect signin
+```
+
 ### Configure wifi-connect
 
 **wifi-connect** (not in apt, install via official script):
@@ -55,9 +58,6 @@ curl -fsSL https://github.com/balena-os/wifi-connect/releases/download/v4.11.84/
 curl -fsSL https://github.com/balena-os/wifi-connect/releases/latest/download/wifi-connect-v4-linux-armv7hf.tar.gz \
   | sudo tar -xz -C /usr/local/bin/ && cp /usr/local/bin/wifi-connect 
 ```
-
-To 
-
 ### Verify everything is installed
 ```bash
 python3 --version
@@ -109,20 +109,11 @@ sudo systemctl start pi-shelly-setup.service
 sudo journalctl -u pi-shelly-setup.service -f
 ```
 
-  ---
-  Type=oneshot means it runs once per boot and stops — which is exactly what you want. Since the script skips Stage A if credentials are already saved, subsequent reboots
-   will go straight to Stage B (Shelly config) without showing the hotspot again.
-
-  If you want the hotspot to appear on every boot (e.g. for re-provisioning), delete the credentials file:
-  sudo rm /etc/pi-shelly/wifi_creds.json
-
-The setup is automated by `pi_shelly_setup.py`. To run on boot, see the systemd service setup in the step-by-step guide.
-
 ---
 
 ## Stage A: The User Setup (Pi as Access Point)
 
-1. The Pi turns on and becomes a **Hotspot** (using `gecad-wifi-connect` or similar).
+1. The Pi turns on and becomes a **Hotspot** (using `PiSetup` or similar).
     
 2. The User connects their phone to the Pi and enters their **Home WiFi** credentials.
     
