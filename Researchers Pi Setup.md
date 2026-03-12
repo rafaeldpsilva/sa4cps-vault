@@ -7,6 +7,7 @@ This is the tutorial to setup and connect your Shelly and Pi.
 ### System Packages
 Python 3.10+ (Ubuntu 24 LTS ships with 3.12 ✓)
 ```bash
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install python3-pip python3-requests
 ```
 
