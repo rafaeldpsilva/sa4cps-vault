@@ -9,21 +9,8 @@ This is the tutorial to setup and connect your Shelly and Pi.
 sudo apt install python3-pip python3-requests
 ```
 
-### Configure NetworkManager as the network renderer
-Ubuntu Server uses `systemd-networkd` by default. `wifi-connect` requires NetworkManager to be in full control.
-
-```bash
-sudo nano /etc/netplan/50-cloud-init.yaml
-```
-
-Replace the contents with:
-```yaml
-network:
-  version: 2
-  renderer: NetworkManager
-```
-
-Then apply:
+### Configure Tailscale
+On the server:
 ```bash
 sudo netplan apply
 sudo systemctl restart NetworkManager
