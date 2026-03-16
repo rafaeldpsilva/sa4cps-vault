@@ -7,7 +7,7 @@ Similar concepts of the literature:
 This means that the system is not only modeling a "resident", but modeling a "persona".
 
 ## Research Question
-
+To what extent have existing approaches combined relational and generative AI methods to model and extract the psychological and interactional dimensions of occupants (personality traits, interaction styles, and expectations) within intelligent or smart environments?
 
 ## What is the domain of this review?
 This research is focused on the "Human-in-the-loop" aspcet, specifically looking at how AI decodes human nature within physical spaces.
