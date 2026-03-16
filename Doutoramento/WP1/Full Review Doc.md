@@ -6,6 +6,9 @@ Similar concepts of the literature:
 
 This means that the system is not only modeling a "resident", but modeling a "persona".
 
+## Research Question
+
+
 ## What is the domain of this review?
 This research is focused on the "Human-in-the-loop" aspcet, specifically looking at how AI decodes human nature within physical spaces.
 
