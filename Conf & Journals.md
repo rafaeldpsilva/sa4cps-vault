@@ -36,9 +36,7 @@
 
 ---
 
-## Journals — Survey / Review Papers
-
-> Format: `SJR quartile · Impact Factor (2024)`
+## Journals — Review Papers
 
 - **ACM Computing Surveys** | Q1 · IF 39.9
 - **IEEE Communications Surveys & Tutorials** | Q1 · IF 54.5
@@ -50,8 +48,6 @@
 ---
 
 ## Conferences
-
-> Format: `CORE ranking`
 
 ### User Modeling & Intelligent Interfaces
 - **ACM UMAP** — User Modeling, Adaptation and Personalization | CORE A
