@@ -29,7 +29,7 @@ The scope is bounded by research that addresses the overall lifecycle of such sy
 
 ## Keywords
 
-We categorized keywords into four categories. A valid paper should cover at least three of these.
+A valid paper should cover at least three of these.
 
 Category A (Tech):
 - Large Language Models
@@ -37,8 +37,6 @@ Category A (Tech):
 - Foundation Models (??)
 - Prompt Engineering
 - Multi-modal LLMs
-Traditional models user if statements logic. LLMs are included because they can perform Zero-Shot Reasoning, meaning that they can look at a user's sentence and infer "This person is anxious and expects high transparency" without a pre-defined rule.
-Foundational Models capture the ability to use pre-trained models that already understand human language and social norms, applying them to the intelligent communities and buildings sector.
 
 Category B (Human):
 - Personality Traits
@@ -46,7 +44,6 @@ Category B (Human):
 - User Expectation
 - Cognitive Modeling
 - Behavioral Archetypes
-
 
 Category C (Graph/Relations):
 - Heterogeneous Information Networks
