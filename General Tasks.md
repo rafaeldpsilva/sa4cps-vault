@@ -1,6 +1,5 @@
 Journals:
 - UMUAI (User Modeling and User-Adapted Interaction)
-- Semantic Web Journal
 - IEEE Pervasive Computing
 - UbiComp / IMWUT (Interactive, Mobile, Wearable and Ubiquitous Computing)
 Conferences: 
