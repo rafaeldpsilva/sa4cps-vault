@@ -4,4 +4,5 @@
 2. Multi-occupant silent conflict resolution:
 	1. silent resolution
 	2. llm resolution
-3. 
+3. P2P resource sharing and cross-building preference
+4. Global end to end case study
