@@ -1,4 +1,2 @@
-[[Dynamic Content]]
 **Definition:** Holds details about an individual in a specific system or application, incorporating diverse content to shape and personalize the user experience. 
-This content usually falls into two categories: [[Static Content]], which provides foundational information, and dynamic, offering real-time updates and interactivity. This distinction highlights how
-content behaves and its frequency of change, creating a complete user representation.
+This content usually falls into two categories: [[Static Content]], which provides foundational information, and [[Dynamic Content]], offering real-time updates and interactivity. This distinction highlights how content behaves and its frequency of change, creating a complete user representation.
