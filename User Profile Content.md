@@ -1,2 +1,0 @@
-[[Static Content]]
-[[Dynamic Content]]
