@@ -1,4 +1,2 @@
-[[Demographic Data]]
-[[Background, knowledge and skills]]
-[[Goals and needs]]
-[[Personality Traits]]
+Static content refers to information that does not change frequently or automatically [Poo et al., 2003]. It is consistent across user sessions and does not adapt in real-time to user interactions [Eke et al., 2019]. Static content is typically set by the user during account creation or through profile settings and remains the same until the user decides to update
+it manually [Schiaffino and Amandi, 2009]. Examples of static content in a user profile include: [[Demographic Data]], [[Background, knowledge and skills]], [[Goals and needs]], and [[Personality Traits]].
