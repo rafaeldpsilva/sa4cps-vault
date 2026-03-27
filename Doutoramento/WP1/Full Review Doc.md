@@ -75,7 +75,6 @@ Category D (Context):
 
 User Modeling OR User Profiling
 Smart Building* OR Intelligent Environment* OR Smart Communit* 
-Personality OR Interaction Style OR Expectation* OR Psychographic*
 
 (TS=("User Modeling" OR "User Profiling") 
 AND TS=("Smart Building*" OR "Intelligent Environment*" OR "Smart Communit*") 
