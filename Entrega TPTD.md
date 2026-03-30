@@ -1,5 +1,5 @@
 Problem Statement:
 
-Objetivos:
+Objectives:
 
 Research Questions:
