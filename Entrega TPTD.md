@@ -1,12 +1,13 @@
 **Problem Statement:**
-Intelligent buildings today react to explicit commands rather than genuinely understanding the people inside them. When occupants share spaces, conflicts go unresolved or require manual intervention. Existing personalization approaches treat preferences as static, centralized, and explicitly stated — none of which holds in practice.
+The field of artificial intelligence is rapidly transforming various sectors, and its application in intelligent buildings presents a significant opportunity to enhance human-centric adaptation [1], [2]. The core challenge is to create systems that are adaptive to human needs, interactive in a natural way, and ensuring privacy and responsiveness [3].
 
-What doesn't exist yet (the gap):
-  - No framework jointly addresses: preference inference from noisy sensor data + multi-occupant conflict + autonomous agent action + LLM-mediated dialogue + privacy at the edge — as a unified, deployable system
-  - Graph-based relational user modeling (HGNNs) is underexplored in building environments
-  - Agents in smart buildings either act with no autonomy (pure rule-based) or unconstrained autonomy — neither is acceptable for users
-  - LLMs/SLMs are used for chatbots, not as context-aware mediators embedded in physical systems
-  - P2P resource sharing between building agents without a central broker is an open problem
+In user modeling, general solutions focus more on behavioral modeling, using approaches such as deterministic, stochastic, or agent-based [4]. However, for preference modeling, more traditional solutions rely on rule-based methods [5] that while providing many advantages such as explainability, do not capture nuanced variations in human preferences or handle the complexity in multi-occupant scenarios [6]. The emergence of graph-based representations [7], [8], [9], particularly knowledge graphs has provided a more robust method for modeling the connections between users, devices, spaces, and context, when compared with machine learning solutions which typically capture behavioral patterns from sensor data [10].
+
+From an architectural standpoint, the dominant paradigm has been centralized, cloud-based systems [11]. While powerful, this approach introduces problems in latency, reliability, privacy, and security [12], [13]. In response, a shift towards distributed and edge computing has gained momentum [14], [15], [16], aiming to process data closer to its source and, also, agent systems have been explored for decentralized control [17], [18].
+
+Interaction between human and buildings has evolved from simple dashboards to voice-activated commands. While an improvement, these forms of interaction often lack context-awareness, and are largely transactional and reactive [19]. The integration of large language models (LLM) [20], [21], [22] and small language models (SLM) [23], [24] present an opportunity to create fluid interaction and, also, enable proactive assistance. The primary gap is to integrate these language models with real-time and structured system context so they can leverage proactive preference elicitation, personalized system behavior, and handle conflict mediation [25], [26].
+
+In conclusion, while the literature presents advances in user preference modeling, distributed systems, and language models, there is a gap in research that combines these concepts into a unified framework. The work will evolve from the model proposed by the candidate in [27], [28]. This project directly addresses this multi-faceted gap, aiming to deliver a holistic solution that is more adaptive, interactive, and resilient than the current state of the art.
 
 **Objectives:**
 O1 — Characterize the landscape and gaps
