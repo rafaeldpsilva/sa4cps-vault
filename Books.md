@@ -1,6 +1,6 @@
+Hands-on machine learning with scikit-learn an pytorch
 AI Engineering: Building Applications with Foundation Models - Chip Huyen (O'Reilly, 2025)
 Designing Machine Learning Systems - Chip Huyen (O'Reilly, 2022/2024 updated)
-
 Statistical Rethinking - Richard McElreath
 
 ## **Data-Driven Science and Engineering**
@@ -22,3 +22,23 @@ Statistical Rethinking - Richard McElreath
 - **Vibe:** **The Safety Officer.** Focuses on Conformal Prediction and Bayesian workflows.
     
 - **Why read:** This is critical for real-life deployments. It moves you from "The forecast is 50MW" to "We are 95% certain the load will be between 48MW and 53MW." It covers the decomposition of uncertainty:
+
+## **Mastering Modern Time Series Forecasting**
+
+- **Author:** Valery Manokhin (2026)
+    
+- **Difficulty:** **Moderate.** Very focused on "what actually works."
+    
+- **Vibe:** **The Practitioner’s Edge.** It avoids the LLM hype and focuses on Gradient Boosting (CatBoost/XGBoost), N-BEATS, and modern State-Space Models (SSMs).
+    
+- **Why read:** It specifically addresses **Conformal Prediction** for time series, which is the current gold standard for reliable energy forecasting in production.
+
+## **AI and Digitalization in Energy Management**
+
+- **Editors:** Sanfilippo et al. (IET, 2025)
+    
+- **Difficulty:** **Variable.** A collection of deep-dives from senior scientists.
+    
+- **Vibe:** **The Industry Blueprint.** Covers federated learning for smart grids and digital twins.
+    
+- **Why read:** It bridges the gap between a "model" and a "deployment." It discusses the actual architecture needed for edge computing in substations and the ethics of autonomous grid control.
