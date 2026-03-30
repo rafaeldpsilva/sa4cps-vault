@@ -10,18 +10,19 @@ What doesn't exist yet (the gap):
 
 **Objectives:**
 O1 — Characterize the landscape and gaps
-  Systematically identify and synthesize the state of the art in user preference modeling, multi-agent systems, LLMs/SLMs on constrained devices, and context-aware adaptation in intelligent building environments, surfacing open research challenges.      
-                                                                                                                                                                                                                                                              
-  O2 — Heterogeneous relational user modeling                                                                                                                                                                                                                 
-  Design and evaluate a heterogeneous GNN architecture for dynamic, context-aware inference of latent occupant preferences from noisy sensor data, incorporating differential privacy guarantees for edge-deployed settings.                                  
-                                                                                                                                                                                                                                                              
-  O3 — Grounded LLM/SLM interaction for preference elicitation                                                                                                                                                                                                
-  Propose and assess a structured interaction model (grounded via MCP context schemas) enabling LLMs and SLMs to elicit, clarify, and negotiate occupant preferences in real-time — including conflict mediation in multi-occupant scenarios.                        
-  O4 — Bounded-autonomy agent model for intelligent communities                                                                                                                                                                                               
-  Define and validate a bounded-autonomy agent architecture capable of inferring latent needs, proactively discovering and deploying containerized services, and sharing resources via P2P mechanisms across a community of agents while preserving individual
-   privacy.                                                                                                                                           
-  O5 — Integrated framework validation                                                                                                                                                                                                                        
-  Design and evaluate the HAAIC framework holistically against human-centric KPIs in realistic scenarios (Digital Twin and real pilots), assessing the emergent system behavior when all components operate together.             
+Systematically identify and synthesize the state of the art in user modeling and user profiling, LLMs/SLMs on constrained devices, and context-aware adaptation in intelligent building environments, surfacing open research challenges.
+
+O2 — Heterogeneous relational user modeling
+Design and evaluate a heterogeneous GNN architecture for dynamic, context-aware inference of latent occupant preferences from noisy sensor data, incorporating differential privacy guarantees for edge-deployed settings.
+
+O3 — Grounded LLM/SLM interaction for preference elicitation
+Propose and assess a structured interaction model (grounded via MCP context schemas) enabling LLMs and SLMs to elicit, clarify, and negotiate occupant preferences in real-time — including conflict mediation in multi-occupant scenarios.
+
+O4 — Bounded-autonomy agent model for intelligent communities
+Define and validate a bounded-autonomy agent architecture capable of inferring latent needs, proactively discovering and deploying containerized services, and sharing resources via P2P mechanisms across a community of agents while preserving individual privacy.
+
+O5 — Integrated framework validation
+Design and evaluate the HAAIC framework holistically against human-centric KPIs in realistic scenarios (Digital Twin and real pilots), assessing the emergent system behavior when all components operate together.             
 
 **Research Questions:**
 RQ1. How can intelligent buildings dynamically model and adapt to the user’s individual and group preferences using graph-based heterogeneous representations? 
