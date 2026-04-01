@@ -34,6 +34,10 @@ RQ5     │ Intelligent communities — collective enrichment + privacy     │ 
 
 **RQ2.** How can occupant preferences be inferred from a dynamic profile across varying contexts and over time?
 
+**RQ3.** How can an intelligent building system proactively engage with its occupants based on the recognition of latent intent from real-time signals and inferred preferences?
+
+
+
 ## Objectives:
 O1: Characterize the landscape and gaps
 Systematically identify and synthesize the state of the art in user modeling and user profiling, LLMs/SLMs on constrained devices, and context-aware adaptation in intelligent building environments, surfacing open research challenges.
