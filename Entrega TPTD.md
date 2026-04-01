@@ -35,7 +35,7 @@ RQ5     │ Intelligent communities — collective enrichment + privacy     │ 
 **RQ2.** How can occupant preferences be inferred from a profile across varying contexts and over time?
 
 **RQ3.** How can an intelligent building system proactively engage with its occupants based on the recognition of latent intent from real-time signals and inferred preferences?
-	Que decisões podem ser tomadas pelo sistema de forma autónoma? ou que métodos podem ser adotados
+	Que decisões podem ser tomadas pelo sistema de forma autónoma? ou que métodos existem que podem ser adotados
 
 **RQ4.** How can an intelligent building system model the preferences and intents of multiple occupants and support preference negotiation in a shared occupancy context?
 
