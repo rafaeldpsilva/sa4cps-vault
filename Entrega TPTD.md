@@ -32,7 +32,7 @@ RQ5     │ Intelligent communities — collective enrichment + privacy     │ 
 
 **RQ1.** How can a dynamic occupant profile be constructed from behavioral, environmental, and interaction data in an intelligent building environment?
 
-**RQ2.** How can occupant preferences be inferred from a dynamic profile across varying contexts and over time?
+**RQ2.** How can occupant preferences be inferred from a profile across varying contexts and over time?
 
 **RQ3.** How can an intelligent building system proactively engage with its occupants based on the recognition of latent intent from real-time signals and inferred preferences?
 
