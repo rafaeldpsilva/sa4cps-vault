@@ -24,10 +24,10 @@ O1: Characterize the landscape and gaps
 Systematically identify and synthesize the state of the art in user modeling and user profiling, LLMs/SLMs on constrained devices, and context-aware adaptation in intelligent building environments, surfacing open research challenges.
 
 O2: Heterogeneous relational user modeling
-Design and evaluate a heterogeneous GNN architecture for dynamic, context-aware inference of latent occupant preferences from noisy sensor data.
+Design and evaluate a heterogeneous GNN architecture for dynamic, context-aware inference of latent occupant preferences from sensor data.
 
 O3: Grounded LLM/SLM interaction for preference elicitation
-Propose and assess a structured interaction model (grounded via MCP context schemas) enabling LLMs and SLMs to elicit, clarify, and negotiate occupant preferences in real-time — including conflict mediation in multi-occupant scenarios.
+Propose and assess a structured interaction model (grounded via MCP context schemas) enabling LLMs and SLMs to elicit, clarify, and negotiate occupant preferences in real-time, including conflict mediation in multi-occupant scenarios.
 
 O4: Bounded-autonomy agent model for intelligent communities
 Define and validate a bounded-autonomy agent architecture capable of inferring latent needs, proactively discovering and deploying containerized services, and sharing resources via P2P mechanisms across a community of agents while preserving individual privacy.
