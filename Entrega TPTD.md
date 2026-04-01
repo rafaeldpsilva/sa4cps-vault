@@ -34,3 +34,5 @@ Define and validate a bounded-autonomy agent architecture capable of inferring l
 
 O5: Integrated framework validation
 Design and evaluate the HAAIC framework holistically against human-centric KPIs in realistic scenarios (Digital Twin and real pilots), assessing the emergent system behavior when all components operate together.
+
+Human-centric Agent-based Adaptive Intelligent Communities
