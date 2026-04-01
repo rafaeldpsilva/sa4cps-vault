@@ -36,7 +36,7 @@ RQ5     │ Intelligent communities — collective enrichment + privacy     │ 
 
 **RQ3.** How can an intelligent building system proactively engage with its occupants based on the recognition of latent intent from real-time signals and inferred preferences?
 
-
+**RQ4.** How can an intelligent building system model the preferences and intents of multiple occupants and support preference negotiation in a shared occupancy context?
 
 ## Objectives:
 O1: Characterize the landscape and gaps
