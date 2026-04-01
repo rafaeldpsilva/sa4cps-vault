@@ -38,6 +38,7 @@ RQ5     │ Intelligent communities — collective enrichment + privacy     │ 
 
 **RQ4.** How can an intelligent building system model the preferences and intents of multiple occupants and support preference negotiation in a shared occupancy context?
 
+**RQ5.** How can a community of intelligent buildings share resources and contextual knowledge to improve individual and collective adaptation while preserving occupant privacy?
 ## Objectives:
 O1: Characterize the landscape and gaps
 Systematically identify and synthesize the state of the art in user modeling and user profiling, LLMs/SLMs on constrained devices, and context-aware adaptation in intelligent building environments, surfacing open research challenges.
