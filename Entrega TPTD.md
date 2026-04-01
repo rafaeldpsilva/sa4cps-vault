@@ -20,9 +20,11 @@ RQ3. How can an agent (or system) identify a user's latent goals and needs to au
 **RQ4**. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
 
 ### V2
+
+
 **Main RQ.** How can an intelligent building system continuously model and profile its occupants to proactively anticipate and fulfill their individual and collective needs?
 
-**RQ1.** 
+**RQ1.** How can a dynamic occupant profile be constructed from behavioral, environmental, and interaction data in an intelligent building environment?
 
 ## Objectives:
 O1: Characterize the landscape and gaps
