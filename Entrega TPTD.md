@@ -20,13 +20,6 @@ RQ3. How can an agent (or system) identify a user's latent goals and needs to au
 **RQ4**. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
 
 ### V2
--    │                        Concept cluster                        │       Role of interaction
-Main RQ │ Full chain — profile → preference → intent → proactive action │ —
-RQ1     │ User profiling — building the model from data                 │ None
-RQ2     │ Preference inference — across contexts and time               │ None
-RQ3     │ Intent recognition — latent needs + confirmation              │ Confirm / clarify with user
-RQ4     │ Multi-occupant dynamics — conflict and mediation              │ Mediate conflict through dialog
-RQ5     │ Intelligent communities — collective enrichment + privacy     │ None
 
 **Main RQ.** How can an intelligent building system continuously model and profile its occupants to proactively anticipate and fulfill their individual and collective needs?
 
