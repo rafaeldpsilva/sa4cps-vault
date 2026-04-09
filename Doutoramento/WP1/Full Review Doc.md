@@ -103,20 +103,23 @@ Results: 41
 
 
 ### V2
+Filters:
+- Last 5 year
 Total: 
 user modeling AND user profiling 
 profile AND preferences
 (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*)
 ### WOS: 
 ```
-(ALL=(user modeling AND user profiling) AND ALL=(intelligent OR smart OR cognitive) AND ALL=(home* OR communit* OR building*))
+(ALL=("user modeling" OR "user profiling") AND (ALL=(intelligent OR smart OR cognitive) AND ALL=(home* OR communit* OR building*)))
 ```
-Results: 267
+Results: 54
 ### ACM:
 ```
-[**All**: "user modeling"] **AND** [**All**: "user profiling"] **AND** [**All**: profile] **AND** [**All**: preferences] **AND** [[**All**: intelligent] **OR** [**All**: smart] **OR** [**All**: cognitive]] **AND** [[**All**: home*] **OR** [**All**: communit*] **OR** [**All**: building*]]
+[[**All**: "user modeling"] **OR** [**All**: "user profiling"]] **AND** [**All**: profile] **AND** [**All**: preferences] **AND** [[**All**: intelligent] **OR** [**All**: smart] **OR** [**All**: cognitive]] **AND** [[**All**: home*] **OR** [**All**: communit*] **OR** [**All**: building*]] **AND** [**E-Publication Date**: Past 5 years]
 ```
-Results: 132
+Results: 404
+
 
 ### IEEE Xplore:
 ```
