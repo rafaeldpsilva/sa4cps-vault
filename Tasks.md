@@ -8,7 +8,7 @@ kanban-plugin: board
 
 - [ ] Lista de review journals @{2026-04-27}
 - [ ] Lista de research journals @{2026-05-28}
-- [ ] State of the art
+- [ ] State of the art @{2026-06-15}
 
 
 ## Doing

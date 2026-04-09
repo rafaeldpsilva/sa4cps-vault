@@ -85,10 +85,13 @@ Complete search string:
 (TS=("User Modeling" OR "User Profiling") AND TS=("Smart Building*" OR "Intelligent Environment*" OR "Smart Communit*") AND TS=("LLM" OR "Large Language Model*" OR "GNN" OR "Graph Neural Network*" OR "Knowledge Graph*") AND TS=("Personality" OR "Interaction Style" OR "Expectation*" OR "Psychographic*"))
 
 ### WOS: 
+v1:
 ```
 (((ALL=(User Modeling OR User Profiling)) AND ALL=(Smart Building* OR Intelligent Environment* OR Smart Communit* )) AND ALL=(LLM OR Large Language Model* OR GNN OR Graph Neural Network* OR Knowledge Graph* )) AND ALL=(Personality OR Interaction Style OR Expectation* OR Psychographic*)
 ```
 Results: 15
+v2:
+```(ALL=(user modeling AND user profiling) AND ALL=(intelligent OR smart OR cognitive) AND ALL=(home* OR communit* OR building*))```
 ### ACM:
 ```
 [[**All**: "user modeling"] **OR** [**All**: "user profiling"]] **AND** [[**All**: "smart building*"] **OR** [**All**: "intelligent environment*"] **OR** [**All**: "smart communit*"]] **AND** [[**All**: llm] **OR** [**All**: "large language model*"] **OR** [**All**: gnn] **OR** [**All**: "graph neural network*"] **OR** [**All**: "knowledge graph*"]] **AND** [[**All**: personality] **OR** [**All**: "interaction style"] **OR** [**All**: expectation*] **OR** [**All**: psychographic*]]
