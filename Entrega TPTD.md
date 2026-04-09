@@ -24,16 +24,16 @@ In conclusion, while the literature presents advances in user preference modelin
 **RQ5.** How can a community of intelligent buildings share resources and contextual knowledge to improve individual and collective adaptation while preserving occupant privacy?
 ## Objectives:
 
-**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, language model-mediated interaction, and privacy-preserving multi-agent architectures in intelligent buildings, identifying the representational and architectural gaps that prevent systems from continuously anticipating and fulfilling individual and collective occupant needs.
+**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, language model-mediated interaction, and privacy-preserving multi-agent architectures in intelligent buildings, identifying the representational and architectural gaps that limit continuous anticipation and fulfillment of occupant needs.
 
-**O2.** Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate behavioral, environmental, and interaction data streams and support downstream inference tasks, assessed by expressiveness, coverage, and consistency with elicited occupant states in a controlled building environment.
+**O2.** Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate multimodal data streams and support downstream preference inference.
 
-**O3.** Investigate and assess mechanisms for inferring occupant preferences and contextual intent from dynamic profiles across varying conditions and temporal patterns, analyzing how inference accuracy and adaptation quality evolve as profile richness increases — assessed by alignment with stated preferences in controlled building scenarios.
+**O3.** Investigate and assess mechanisms for inferring occupant preferences and contextual intent from dynamic profiles, analyzing how inference accuracy evolves across varying conditions and temporal patterns.
 
-**O4.** Investigate and evaluate the role of language models in mediating proactive occupant engagement, analyzing their capacity to recognize latent occupant intent from inferred preferences and real-time contextual signals and to elicit, clarify, and negotiate preferences through natural dialogue — measured by intent recognition accuracy, dialogue coherence, and occupant-reported interaction quality.
+**O4.** Investigate the role of language models in proactive occupant engagement, evaluating their capacity to recognize latent intent and mediate preference elicitation and negotiation through natural dialogue.
 
-**O5.** Analyze conflict patterns arising from competing occupant preferences in shared spaces and compare negotiation strategies against fairness, satisfaction, and individual autonomy criteria, determining the conditions under which multi-occupant adaptation remains effective.
+**O5.** Analyze conflict patterns arising from competing occupant preferences in shared spaces and compare resolution strategies against fairness, satisfaction, and individual autonomy criteria.
 
-**O6.** Assess the viability of privacy-preserving peer-to-peer resource and knowledge sharing between autonomous building agents, evaluating how community-level contextual exchange influences individual adaptation quality while preserving occupant privacy — measured by adaptation improvement rates and privacy compliance under defined threat models.
+**O6.** Assess the viability of privacy-preserving peer-to-peer resource and knowledge sharing between building agents, evaluating the trade-off between community-level contextual exchange and individual occupant privacy.
 
-**O7.** Evaluate the integrated framework across Digital Twin simulation and real-environment pilots, assessing the contribution of each component — profiling, preference inference, language model-mediated interaction, multi-occupant negotiation, and community sharing — to the system's overall capacity to continuously anticipate and fulfill individual and collective occupant needs, measured against human-centric KPIs including comfort satisfaction, preference alignment rate, and conflict resolution success.
+**O7.** Evaluate the integrated framework across Digital Twin simulation and real-environment pilots, assessing each component's contribution to the system's capacity to continuously anticipate and fulfill individual and collective occupant needs.
