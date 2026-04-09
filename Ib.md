@@ -1,3 +1,14 @@
+**RQ1**. How can intelligent buildings dynamically model and adapt to the user’s individual and group preferences using graph-based heterogeneous representations? 
+
+**RQ2**. In what ways can LLMs and SLMs be employed, not only to infer user intent and contextual relevance, but also to interact with occupants through dialog for clarification, negotiation, and preference definition? 
+
+RQ3. How can an agent (or system) identify a user's latent goals and needs to autonomously discover, negotiate for, and deploy and use containerized services to address them? 
+**RQ3v2**. How can an agent identify a user's goals and needs to adapt the hardware and software landscape surrounding the user?
+
+**RQ4**. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
+
+### V2
+
 **O1: Characterize the landscape and open challenges** *(foundational → all RQs)*
 Systematically identify and synthesize the state of the art in occupant modeling and profiling, preference inference, human-building interaction through LLMs/SLMs, and privacy-preserving multi-agent systems in intelligent building environments, surfacing the open research challenges that motivate this thesis.
 

@@ -10,17 +10,6 @@ Interaction between human and buildings has evolved from simple dashboards to vo
 In conclusion, while the literature presents advances in user preference modeling, distributed systems, and language models, there is a gap in research that combines these concepts into a unified framework. The work will evolve from the model proposed by the candidate in [27], [28]. This project directly addresses this multi-faceted gap, aiming to deliver a holistic solution that is more adaptive, interactive, and resilient than the current state of the art.
 
 ## Research Questions:
-**RQ1**. How can intelligent buildings dynamically model and adapt to the user’s individual and group preferences using graph-based heterogeneous representations? 
-
-**RQ2**. In what ways can LLMs and SLMs be employed, not only to infer user intent and contextual relevance, but also to interact with occupants through dialog for clarification, negotiation, and preference definition? 
-
-RQ3. How can an agent (or system) identify a user's latent goals and needs to autonomously discover, negotiate for, and deploy and use containerized services to address them? 
-**RQ3v2**. How can an agent identify a user's goals and needs to adapt the hardware and software landscape surrounding the user?
-
-**RQ4**. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
-
-### V2
-
 **Main RQ.** How can an intelligent building system continuously model and profile its occupants to proactively anticipate and fulfill their individual and collective needs?
 
 **RQ1.** How can a dynamic occupant profile be constructed from behavioral, environmental, and interaction data in an intelligent building environment?
