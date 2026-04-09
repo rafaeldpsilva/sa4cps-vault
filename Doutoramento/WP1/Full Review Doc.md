@@ -74,7 +74,7 @@ Category D (Context):
 ## Search Strings
 
 ## V1
-Total: 107
+**Total: 107**
 
 User Modeling OR User Profiling
 Smart Building* OR Intelligent Environment* OR Smart Communit* 
@@ -104,8 +104,10 @@ Results: 41
 
 ### V2
 Filters:
-- Last 5 year
-Total: 
+- Last 5 years
+- Research Paper
+**Total: 632**
+
 user modeling AND user profiling 
 profile AND preferences
 (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*)
