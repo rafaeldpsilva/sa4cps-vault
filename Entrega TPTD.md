@@ -23,3 +23,15 @@ In conclusion, while the literature presents advances in user preference modelin
 
 **RQ5.** How can a community of intelligent buildings share resources and contextual knowledge to improve individual and collective adaptation while preserving occupant privacy?
 ## Objectives:
+
+**O1.** Characterize existing approaches to occupant modeling in intelligent buildings by conducting a systematic literature review, producing a structured taxonomy of representation methods, identified limitations, and open gaps — completed by the end of Year 1.
+
+**O2.** Design a dynamic occupant profiling mechanism that integrates heterogeneous behavioral, environmental, and interaction data to construct and continuously update individual occupant representations, validated against ground-truth preference data from a controlled building environment — completed by the end of Year 2.
+
+**O3.** Develop a context-aware preference inference model that derives and updates occupant preferences from dynamic profiles across varying environmental conditions and temporal patterns, assessed by precision and recall against elicited user preferences in a real or simulated building scenario — completed by the end of Year 2.
+
+**O4.** Design a proactive engagement mechanism that recognizes latent occupant intent from real-time signals and inferred preferences, and initiates autonomous building adaptations or dialog-based interactions, evaluated by intervention accuracy and occupant satisfaction ratings — completed by the end of Year 3.
+
+**O5.** Develop a multi-occupant preference negotiation model that identifies and resolves conflicts between individual profiles in shared occupancy contexts while preserving individual autonomy, assessed using fairness and satisfaction metrics in multi-user scenarios — completed by the end of Year 3.
+
+**O6.** Evaluate the integrated occupant-centric intelligent building framework in a representative deployment environment, measuring end-to-end performance across profiling accuracy, preference inference, proactive engagement, and conflict resolution against pre-defined KPIs — completed by the end of Year 4.
