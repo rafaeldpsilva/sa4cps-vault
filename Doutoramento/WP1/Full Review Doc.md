@@ -104,7 +104,7 @@ Results: 41
 
 ### V2
 Total: 
-user modeling OR user profiling 
+user modeling AND user profiling 
 profile AND preferences
 (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*)
 ### WOS: 
@@ -120,6 +120,6 @@ Results: 132
 
 ### IEEE Xplore:
 ```
-("All Metadata":User Modeling OR "All Metadata":User Profiling) AND ("All Metadata":Smart Building* OR "All Metadata":Intelligent Environment* OR "All Metadata":Smart Communit*) AND ("All Metadata":LLM OR "All Metadata":Large Language Model* OR "All Metadata":GNN OR "All Metadata":Graph Neural Network* OR "All Metadata":Knowledge Graph*) AND ("All Metadata":Personality OR "All Metadata":Interaction Style OR "All Metadata":Expectation* OR "All Metadata":Psychographic*)
+("user modeling" OR "user profiling" AND profile AND preferences AND (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*))
 ```
-Results: 41
+Results: 174
