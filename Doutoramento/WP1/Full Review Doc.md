@@ -114,9 +114,9 @@ profile AND preferences
 Results: 267
 ### ACM:
 ```
-[[**All**: "user modeling"] **OR** [**All**: "user profiling"]] **AND** [[**All**: "smart building*"] **OR** [**All**: "intelligent environment*"] **OR** [**All**: "smart communit*"]] **AND** [[**All**: llm] **OR** [**All**: "large language model*"] **OR** [**All**: gnn] **OR** [**All**: "graph neural network*"] **OR** [**All**: "knowledge graph*"]] **AND** [[**All**: personality] **OR** [**All**: "interaction style"] **OR** [**All**: expectation*] **OR** [**All**: psychographic*]]
+[**All**: "user modeling"] **AND** [**All**: "user profiling"] **AND** [**All**: profile] **AND** [**All**: preferences] **AND** [[**All**: intelligent] **OR** [**All**: smart] **OR** [**All**: cognitive]] **AND** [[**All**: home*] **OR** [**All**: communit*] **OR** [**All**: building*]]
 ```
-Results: 51
+Results: 132
 
 ### IEEE Xplore:
 ```
