@@ -104,7 +104,8 @@ Results: 41
 
 ### V2
 Total: 
-user modeling AND user profiling (or user profile or user preferences)
+user modeling OR user profiling 
+profile AND preferences
 (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*)
 ### WOS: 
 ```
