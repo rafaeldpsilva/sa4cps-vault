@@ -104,9 +104,8 @@ Results: 41
 
 ### V2
 Total: 
-user modeling AND user profiling
-AND ALL=(intelligent OR smart OR cognitive) 
-AND ALL=(home* OR communit* OR building*))
+user modeling AND user profiling (or user profile or user preferences)
+(intelligent OR smart OR cognitive) AND (home* OR communit* OR building*)
 ### WOS: 
 ```
 (ALL=(user modeling AND user profiling) AND ALL=(intelligent OR smart OR cognitive) AND ALL=(home* OR communit* OR building*))
