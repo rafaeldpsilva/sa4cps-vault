@@ -24,7 +24,7 @@ In conclusion, while the literature presents advances in user preference modelin
 **RQ5.** How can a community of intelligent buildings share resources and contextual knowledge to improve individual and collective adaptation while preserving occupant privacy?
 ## Objectives:
 
-**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, language model-mediated interaction, and privacy-preserving multi-agent architectures in intelligent buildings, identifying the representational and architectural gaps that limit continuous anticipation and fulfillment of occupant needs.
+**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, conflict resolution, and privacy-preserving multi-agent architectures in intelligent buildings, identifying the representational and architectural gaps that limit continuous anticipation and fulfillment of occupant needs.
 
 **O2.** Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate multimodal data streams and support downstream preference inference.
 
