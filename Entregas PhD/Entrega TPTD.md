@@ -17,14 +17,14 @@ In conclusion, while the literature presents advances in user preference modelin
 **RQ2.** How can occupant preferences be inferred from a profile across varying contexts and over time?
 
 **RQ3.** How can an intelligent building system proactively engage with its occupants based on the recognition of latent intent from real-time signals and inferred preferences?
-	Que decisões podem ser tomadas pelo sistema de forma autónoma? ou que métodos existem que podem ser adotados
 
-**RQ4.** How can an intelligent building system model the preferences and intents of multiple occupants and support preference negotiation in a shared occupancy context?
+**RQ4.** How can a system model the preferences and intents of multiple occupants and support preference negotiation in a shared occupancy context?
 
 **RQ5.** How can a community of intelligent buildings share resources and contextual knowledge to improve individual and collective adaptation while preserving occupant privacy?
+
 ## Objectives:
 
-**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, conflict resolution, and privacy-preserving multi-agent architectures in intelligent buildings, identifying the representational and architectural gaps that limit continuous anticipation and fulfillment of occupant needs.
+**O1.** Analyze and synthesize existing approaches to occupant modeling, preference inference, conflict resolution, and privacy-preserving multi-agent architectures in intelligent buildings.
 
 **O2.** Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate multimodal data streams and support downstream preference inference.
 
