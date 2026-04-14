@@ -1,56 +1,5 @@
-<!--
-=============================================================
-  STRUCTURAL RULES APPLIED (Mensh & Kording 2017)
-=============================================================
-  Rule 1  — Title encodes the central CLAIM, not just the topic.
-             Current title is descriptive. Candidate titles:
-             • "Machine Unlearning for IoT in Intelligent Buildings:
-               A Survey of Methods, Open Challenges, and Research Gaps"
-             • "The Verification Gap: Surveying Machine Unlearning
-               for Privacy-Sensitive IoT in Intelligent Buildings"
-             The title you commit to should be revisited every time
-             the paper's central argument sharpens.
-
-  Rule 2  — Write for a naive reader. Define terms on first use.
-             Avoid accumulated acronyms (IoT, IB, MU, FL, TEE, ZKP…).
-
-  Rule 3  — CCC at paper / section / paragraph scale (see below).
-
-  Rule 4  — No zig-zag: each concept appears in exactly one place.
-             Parallelism: §6 challenges map 1-to-1 onto §7 directions.
-
-  Rule 5  — Abstract tells the complete story (CCC in miniature).
-             First sentence: broad field. Narrows to gap. "Here we…"
-             announces results. Last sentence: broader significance.
-
-  Rule 6  — Introduction = progressive gap-narrowing paragraphs.
-             Each paragraph (except the last) ends on an "unknown."
-             Last paragraph compactly summarises what the paper does.
-
-  Rule 7  — §4 subsection headers are declarative CLAIMS, not labels.
-             Each header is a logical step the reader can fact-check.
-
-  Rule 8  — §6 + §7 = discussion: fills the gap, names caveats,
-             catalyses future work. §8 = conclusion: restates claim.
-
-=============================================================
-  CCC STRUCTURE MAP
-=============================================================
-  WHOLE PAPER
-    [C1 – Context]     §1 Introduction + §2 Background + §3 IoT in IBs
-    [C2 – Content]     §4 Machine Unlearning in IoT/IBs + §5 Case Studies
-    [C3 – Conclusion]  §6 Open Challenges + §7 Future Directions + §8 Conclusion
-
-  SECTION (repeated for every section)
-    [C1] Opening paragraph — situates the section within the paper's argument
-    [C2] Core subsections — the substance
-    [C3] Closing paragraph — synthesises findings, exposes the gap
-                             that motivates the next section
-
-  PARAGRAPH
-    Topic sentence (C1) → evidence / discussion (C2) → synthesis / transition (C3)
-=============================================================
---><!-- ══════════════════════════════════════════════════════════
+## Abstract
+<!-- ══════════════════════════════════════════════════════════
      RULE 5 — ABSTRACT  (complete CCC story in miniature)
      ══════════════════════════════════════════════════════════
      C1 (Context, ~2–3 sentences):
@@ -75,18 +24,8 @@
          frameworks / reference architectures, responsible deployment
          remains out of reach — calling the community to act.
 -->
-
-## Abstract
-
-<!-- WRITE THE ABSTRACT HERE following the CCC template above.
-     Aim for ~200 words. Write it last, after the body is stable. -->
-
----
-
-<!-- ══════════════════════════════════════════════════════
-     WHOLE-PAPER C1 – CONTEXT  (§1–§3)
-     Goal: establish WHY this survey is needed
-     ══════════════════════════════════════════════════════ -->
+<!--
+WRITE THE ABSTRACT HERE following the CCC template above. Aim for ~200 words. Write it last, after the body is stable. -->
 
 ## 1. Introduction
 
@@ -96,7 +35,7 @@
     C1: IoT devices in intelligent buildings generate continuous,
         fine-grained personal data (occupancy, energy use, biometrics).
     C2: ML models trained on this data enable optimisation (HVAC,
-        comfort, security) but also create detailed behavioural profiles that persist in model parameters even after raw data is deleted.
+        comfort, security) but also create detailed behavioural profilesthat persist in model parameters even after raw data is deleted.
     C3: This creates a fundamental tension between ML utility and
         occupant privacy — a tension the field has not fully resolved.
 
