@@ -96,8 +96,7 @@
     C1: IoT devices in intelligent buildings generate continuous,
         fine-grained personal data (occupancy, energy use, biometrics).
     C2: ML models trained on this data enable optimisation (HVAC,
-        comfort, security) but also create detailed behavioural profiles
-        that persist in model parameters even after raw data is deleted.
+        comfort, security) but also create detailed behavioural profiles that persist in model parameters even after raw data is deleted.
     C3: This creates a fundamental tension between ML utility and
         occupant privacy — a tension the field has not fully resolved.
 
