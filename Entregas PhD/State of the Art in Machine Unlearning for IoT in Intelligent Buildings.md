@@ -31,13 +31,7 @@ WRITE THE ABSTRACT HERE following the CCC template above. Aim for ~200 words. Wr
 
 <!-- RULE 6 — GAP PROGRESSION (one paragraph per scale of gap):
 
-  Para 1 — FIELD-LEVEL GAP
-    C1: IoT devices in intelligent buildings generate continuous,
-        fine-grained personal data (occupancy, energy use, biometrics).
-    C2: ML models trained on this data enable optimisation (HVAC,
-        comfort, security) but also create detailed behavioural profilesthat persist in model parameters even after raw data is deleted.
-    C3: This creates a fundamental tension between ML utility and
-        occupant privacy — a tension the field has not fully resolved.
+
 
   Para 2 — SUBFIELD-LEVEL GAP
     C1: Machine unlearning has emerged as the technical answer:
