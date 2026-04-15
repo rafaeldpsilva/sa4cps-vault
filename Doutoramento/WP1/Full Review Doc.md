@@ -128,3 +128,10 @@ Results: 404
 ("user modeling" OR "user profiling" AND profile AND preferences AND (intelligent OR smart OR cognitive) AND (home* OR communit* OR building*))
 ```
 Results: 174
+
+
+For each paper:
+- Which problem does it address?
+- What method it uses?
+- What type of solution it reaches (merely computational, real life test, demonstration)?
+- 
