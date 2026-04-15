@@ -134,4 +134,5 @@ For each paper:
 - Which problem does it address?
 - What method it uses?
 - What type of solution it reaches (merely computational, real life test, demonstration)?
+- The innovation or the advancements of the paper
 - 
