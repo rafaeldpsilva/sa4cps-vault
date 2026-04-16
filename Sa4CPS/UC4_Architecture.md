@@ -3,6 +3,19 @@
 ```mermaid
 flowchart TD
 
+    classDef edge    fill:#ffd599,stroke:#c68000,color:#1a1a1a
+    classDef sim     fill:#d4a8e8,stroke:#7b4fa6,color:#1a1a1a
+    classDef ingest  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef kafka   fill:#e8e8e8,stroke:#909090,color:#1a1a1a
+    classDef twin    fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef voltmon fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
+    classDef flex    fill:#ffd599,stroke:#c68000,color:#1a1a1a
+    classDef comp    fill:#d4a8e8,stroke:#7b4fa6,color:#1a1a1a
+    classDef trust   fill:#f9a8c9,stroke:#b84080,color:#1a1a1a
+    classDef storage fill:#c8d8e8,stroke:#4a6a8a,color:#1a1a1a
+    classDef app     fill:#a8e6ef,stroke:#2a8a96,color:#1a1a1a
+    classDef lab     fill:#d0d8d0,stroke:#507050,color:#1a1a1a
+
     subgraph EDGE["Edge · Raspberry Pi · Tailscale"]
         direction LR
         METER["Meter Reader"]
@@ -164,4 +177,18 @@ flowchart TD
     KFR --> APIGW
     XAIGEN --> APIGW
     INFLUX -.-> APIGW
+
+    %% Node classes
+    class METER,FLEDGE,MQTTC edge
+    class CSV,SIMCLI sim
+    class BROKER,VALID,CONSENT ingest
+    class KRR,KTS,KVE,KFR,KCO,KFL kafka
+    class PPNET,SYNCLOOP twin
+    class THRESH,FORECAST voltmon
+    class DECIDE,SIMACT,XAIGEN flex
+    class FLAGG,CONSFORECAST,FLEXEST,SITSUM comp
+    class COMREL,PLAUS,TSCORE trust
+    class INFLUX,PG,MODELREG storage
+    class APIGW,DASH app
+    class BMS,BATTERIES lab
 ```
