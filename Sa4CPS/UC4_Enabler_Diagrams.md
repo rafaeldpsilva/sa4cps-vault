@@ -22,7 +22,7 @@ flowchart LR
 
     subgraph EN["Voltage Detection & Mitigation"]
         TD["Threshold Detector"]
-        STF["Short-term Forecaster"]
+        STF["Short-term Voltage Forecaster"]
         MT["Mitigation Trigger"]
         TD --> STF --> MT
     end
