@@ -1,105 +1,167 @@
-# UC4 — Architecture Diagram (Draft)
+# UC4 — Computational Architecture
 
 ```mermaid
 flowchart TD
 
-    subgraph SOURCES["Data Sources"]
-        RP["Raspberry Pi nodes\nreal houses · Tailscale"]
-        SIM["Simulation Script\nCSV profiles → MQTT"]
-        BMSAPI["GECAD Battery BMS\nexisting REST/MQTT API"]
+    subgraph EDGE["Edge Layer · Raspberry Pi nodes · Tailscale VPN"]
+        direction LR
+        METER["Smart meter\nreader"]
+        FLEDGE["FL local\ntraining agent"]
+        MQTTC["MQTT client"]
+        METER --> MQTTC
+        FLEDGE -->|model updates| MQTTC
     end
 
-    MQTT["MQTT Broker\nTLS · device authentication"]
-
-    subgraph PERC["Perception Layer"]
-        E2["#2 Secure Data Ingestion\n& Validation Layer\nDigitalmente"]
-        E3["#3 Consent-Aware\nPerception Module\nDigitalmente · CEL"]
-        E1["#1 Voltage Detection\n& Mitigation\nISEP"]
+    subgraph SIMAGENT["Simulation Agent · GECAD server"]
+        direction LR
+        CSV["CSV load profiles"]
+        SIMCLI["MQTT client"]
+        CSV --> SIMCLI
     end
 
-    subgraph KAFKA["Message Bus · Kafka"]
-        KR[/"raw-readings"/]
-        KT[/"twin-state"/]
-        KV[/"voltage-events"/]
-        KF[/"flexibility-requests"/]
-        KC[/"comprehension-outputs"/]
-        KTR[/"trust-scores"/]
+    subgraph PLATFORM["GECAD Platform · Kubernetes"]
+
+        subgraph INGEST["Ingestion Pipeline"]
+            BROKER["MQTT Broker\nEMQX"]
+            VALID["Validation Service\nschema · plausibility · dedup · auth"]
+            CONSENT["Consent Router\nper-household tagging & routing"]
+            BROKER --> VALID --> CONSENT
+        end
+
+        subgraph KAFKA["Kafka"]
+            direction LR
+            KRR[/"raw-readings"/]
+            KTS[/"twin-state"/]
+            KVE[/"voltage-events"/]
+            KFR[/"flexibility-requests"/]
+            KCO[/"comprehension-outputs"/]
+            KFL[/"fl-model-updates"/]
+        end
+
+        subgraph CORE["Core Services"]
+            direction TB
+
+            subgraph TWIN["Digital Twin Service"]
+                PPNET["Pandapower\nnetwork model\n(buses · lines · loads · storage)"]
+                SYNCLOOP["Sync loop\n30s interval"]
+                SYNCLOOP -->|update loads & battery| PPNET
+                PPNET -->|runpp · bus voltages\nline loadings| SYNCLOOP
+            end
+
+            subgraph VOLTMON["Voltage Monitor"]
+                THRESH["Threshold detector\nEN 50160 · operational band"]
+                FORECAST["Short-term forecaster\nper-node · ARIMA / exp. smoothing"]
+                THRESH --> FORECAST
+            end
+
+            subgraph FLEXCOORD["Flexibility Coordinator"]
+                DECIDE["Decision logic\n+ safeguards\n(SoC floor · cooldown · rate limits)"]
+                SIMACT["Pre-act simulation\n(discharge in twin\nbefore real command)"]
+                XAIGEN["XAI explanation\ngenerator"]
+                DECIDE --> SIMACT
+                SIMACT -->|confirmed| DECIDE
+                DECIDE --> XAIGEN
+            end
+
+            subgraph COMPENG["Comprehension Engine"]
+                FLAGG["FL aggregator\nFlower · FedAvg"]
+                CONSFORECAST["Consumption forecaster\nLSTM / TFT · per household"]
+                FLEXEST["Flexibility estimator\nbattery SoC + load forecast"]
+                SITSUM["Situational summariser\ncommunity health · state"]
+                FLAGG --> CONSFORECAST
+                CONSFORECAST --> FLEXEST
+                FLEXEST --> SITSUM
+            end
+
+            subgraph TRUSTENG["Trust & Data Quality Engine"]
+                COMREL["Communication\nreliability tracker"]
+                PLAUS["Reading plausibility\nscorer"]
+                TSCORE["Trust score\nper node · rolling window"]
+                COMREL --> TSCORE
+                PLAUS --> TSCORE
+            end
+        end
+
+        subgraph STORAGE["Storage"]
+            INFLUX[("InfluxDB\ntime-series:\nreadings · twin state\nactivation history")]
+            PG[("PostgreSQL\nconsent registry\nactivation log\nconfiguration")]
+            MODELREG[("Model Registry\nFL weights\nper-household models")]
+        end
+
+        subgraph APPLAYER["Application Layer"]
+            APIGW["FastAPI\nREST + WebSocket"]
+            DASH["Vue.js Dashboard\ncommunity · voltage map\nforecast · flexibility log"]
+            APIGW --> DASH
+        end
+
     end
 
-    subgraph COMP["Comprehension Layer"]
-        E4["#4 Digital Twin\nPandapower · sync loop\nISEP"]
-        E8["#8 Trust & Data Quality\nAssessment Engine\nDigitalmente"]
-        E7["#7 Situational Comprehension\nEngine\nDigitalmente · CEL · ISEP"]
-        E6["#6 Activation of\nFlexible Resources\nISEP"]
-        E5["#5 Dashboard\nFastAPI · Vue.js\nISEP"]
+    subgraph LAB["GECAD Lab"]
+        BMS["Battery Management\nSystem"]
+        BATTERIES["Battery Bank"]
+        BMS <--> BATTERIES
     end
 
-    %% Sources → broker
-    RP -->|MQTT| MQTT
-    SIM -->|MQTT| MQTT
+    %% ── Edge & sim → broker ──────────────────────────────────────
+    MQTTC  -->|"MQTT · TLS"| BROKER
+    SIMCLI -->|"MQTT · TLS"| BROKER
 
-    %% Broker → ingestion → consent → Kafka
-    MQTT --> E2
-    E2 --> E3
-    E3 --> KR
+    %% ── Ingestion → Kafka ────────────────────────────────────────
+    CONSENT --> KRR
+    MQTTC   -->|model updates| KFL
 
-    %% raw-readings fans out to perception + twin + trust
-    KR --> E1
-    KR --> E4
-    KR --> E8
+    %% ── Kafka → Digital Twin ─────────────────────────────────────
+    KRR --> SYNCLOOP
 
-    %% Digital twin publishes state
-    E4 --> KT
+    %% ── Digital Twin → Kafka ─────────────────────────────────────
+    SYNCLOOP --> KTS
 
-    %% Trust engine publishes scores
-    E8 --> KTR
+    %% ── Kafka → Voltage Monitor ──────────────────────────────────
+    KRR --> THRESH
+    KTS --> THRESH
 
-    %% Voltage detector reads both raw and twin-state
-    KT --> E1
+    %% ── Voltage Monitor → Kafka ──────────────────────────────────
+    FORECAST --> KVE
+    FORECAST --> KFR
 
-    %% Voltage detector outputs
-    E1 --> KV
-    E1 --> KF
+    %% ── Kafka → Trust Engine ─────────────────────────────────────
+    KRR --> COMREL
+    KRR --> PLAUS
 
-    %% Comprehension engine inputs
-    KR --> E7
-    KT --> E7
-    KTR --> E7
+    %% ── Trust Engine → Kafka (implicit via Comprehension) ────────
+    TSCORE --> CONSFORECAST
 
-    %% Comprehension engine output
-    E7 --> KC
+    %% ── Kafka → Comprehension Engine ─────────────────────────────
+    KRR --> CONSFORECAST
+    KTS --> FLEXEST
+    KFL --> FLAGG
 
-    %% Flexibility activation
-    KF --> E6
-    E6 -->|discharge command| BMSAPI
-    BMSAPI -->|SoC · power output| E6
-    E6 -->|battery state update| KT
+    %% ── Comprehension Engine → Kafka ─────────────────────────────
+    SITSUM --> KCO
 
-    %% Dashboard consumes everything
-    KT --> E5
-    KV --> E5
-    KC --> E5
-    KF --> E5
+    %% ── Kafka → Flexibility Coordinator ──────────────────────────
+    KFR --> DECIDE
+    KTS --> DECIDE
+
+    %% ── Flexibility Coordinator ↔ BMS ────────────────────────────
+    DECIDE  -->|discharge command| BMS
+    BMS     -->|SoC · power output| DECIDE
+
+    %% ── Flexibility Coordinator → twin feedback ───────────────────
+    DECIDE -->|battery state update| SYNCLOOP
+
+    %% ── Storage writes ───────────────────────────────────────────
+    KRR --> INFLUX
+    KTS --> INFLUX
+    DECIDE -.->|activation record| PG
+    CONSENT -.->|consent reads| PG
+    FLAGG   -.->|model read/write| MODELREG
+
+    %% ── API layer subscriptions ──────────────────────────────────
+    KTS --> APIGW
+    KVE --> APIGW
+    KCO --> APIGW
+    KFR --> APIGW
+    XAIGEN --> APIGW
+    INFLUX -.->|historical queries| APIGW
 ```
-
-## Component summary
-
-| # | Enabler | Layer | Party | Core technology |
-|---|---------|-------|-------|----------------|
-| 1 | Voltage Detection & Mitigation | Perception | ISEP | Kafka consumer · threshold + forecast |
-| 2 | Secure Data Ingestion & Validation | Perception | Digitalmente | Schema validation · dead-letter queue |
-| 3 | Consent-Aware Perception Module | Perception | Digitalmente · CEL | Consent registry · message router |
-| 4 | Digital Twin | Comprehension | ISEP | Pandapower · sync loop |
-| 5 | Dashboard | Comprehension | ISEP | FastAPI · Vue.js |
-| 6 | Activation of Flexible Resources | Comprehension | ISEP | BMS API · XAI · safeguards |
-| 7 | Situational Comprehension Engine | Comprehension | Digitalmente · CEL · ISEP | Federated learning · consumption forecast |
-| 8 | Trust & Data Quality Engine | Comprehension | Digitalmente | Per-node trust scores |
-
-## Key data flows
-
-- **raw-readings** — validated per-household meter readings (voltage, power, timestamp) after consent filtering
-- **twin-state** — Pandapower outputs: per-bus voltage, line loadings, battery SoC, published every sync interval
-- **voltage-events** — NORMAL / WARNING / CRITICAL per node, emitted by #1
-- **flexibility-requests** — structured trigger events (node, deviation magnitude, urgency) from #1 or operator
-- **trust-scores** — per-node data quality weights [0–1], consumed by #7
-- **comprehension-outputs** — consumption forecasts, aggregate forecast, flexibility estimate, situational summary
