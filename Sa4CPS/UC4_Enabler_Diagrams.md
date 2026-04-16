@@ -11,30 +11,35 @@
 ```mermaid
 flowchart LR
 
-    classDef input   fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc    fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
-    classDef output  fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef src   fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc  fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
+    classDef dst   fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
 
-    MI("Meter Readings")
-    NS("Network State")
+    subgraph SRC["Data Sources"]
+        HH["Smart Meters"]
+        DT["Digital Twin"]
+    end
 
-    TD["Threshold Detector"]
-    STF["Short-term Forecaster"]
-    MT["Mitigation Trigger"]
+    subgraph EN["Voltage Detection & Mitigation"]
+        TD["Threshold Detector"]
+        STF["Short-term Forecaster"]
+        MT["Mitigation Trigger"]
+        TD --> STF --> MT
+    end
 
-    VE("Voltage Event")
-    FR("Flexibility Request")
+    subgraph DST["Outputs"]
+        DASH["Operator Dashboard"]
+        FC["Flexibility Coordinator\n(battery activation)"]
+    end
 
-    MI --> TD
-    NS --> TD
-    TD --> STF
-    STF --> VE
-    STF --> MT
-    MT --> FR
+    HH  -->|voltage & power readings| TD
+    DT  -->|bus voltages · line loadings| TD
+    STF -->|voltage event\nNORMAL · WARNING · CRITICAL| DASH
+    MT  -->|flexibility request| FC
 
-    class MI,NS input
+    class HH,DT src
     class TD,STF,MT proc
-    class VE,FR output
+    class DASH,FC dst
 ```
 
 ---
@@ -44,37 +49,43 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input   fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc    fill:#a8c8ff,stroke:#1a4a9a,color:#1a1a1a
-    classDef output  fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
-    classDef reject  fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
-    classDef log     fill:#e8e8e8,stroke:#909090,color:#1a1a1a
+    classDef src  fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc fill:#a8c8ff,stroke:#1a4a9a,color:#1a1a1a
+    classDef dst  fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
+    classDef rej  fill:#ffe0e0,stroke:#c04040,color:#1a1a1a
 
-    DM("Device Message")
+    subgraph SRC["Data Sources"]
+        RP["Raspberry Pi Nodes\n(real households)"]
+        SA["Simulation Agent\n(virtual households)"]
+    end
 
-    AUTH["Authentication"]
-    SV["Schema Validator"]
-    PC["Plausibility Checker"]
-    AUTH --> SV --> PC
+    subgraph EN["Secure Data Ingestion & Validation"]
+        AUTH["Authentication"]
+        SV["Schema Validator"]
+        PC["Plausibility Checker"]
+        AUTH --> SV --> PC
+    end
 
-    VS("Validated Data Stream")
-    DLQ("Dead Letter Queue")
-    AL("Audit Log")
+    subgraph DST["Outputs"]
+        PLAT["Community Platform\n(validated data stream)"]
+        DLQ["System Administrator\n(rejected messages)"]
+        AL["Audit Log\n(compliance record)"]
+    end
 
-    DM --> AUTH
-    PC --> VS
-    AUTH -->|rejected| DLQ
-    SV  -->|invalid|  DLQ
-    PC  -->|implausible| DLQ
-    AUTH -.-> AL
-    SV   -.-> AL
-    PC   -.-> AL
+    RP --> |raw energy readings| AUTH
+    SA --> |synthetic load data| AUTH
+    PC  -->|valid message| PLAT
+    AUTH -->|auth failure| DLQ
+    SV   -->|invalid format| DLQ
+    PC   -->|impossible reading| DLQ
+    AUTH -.->|event| AL
+    SV   -.->|event| AL
+    PC   -.->|event| AL
 
-    class DM input
+    class RP,SA src
     class AUTH,SV,PC proc
-    class VS output
-    class DLQ reject
-    class AL log
+    class PLAT,AL dst
+    class DLQ rej
 ```
 
 ---
@@ -84,34 +95,41 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input   fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef src     fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
     classDef proc    fill:#f9a8c9,stroke:#b84080,color:#1a1a1a
-    classDef full    fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
-    classDef partial fill:#ffd599,stroke:#c68000,color:#1a1a1a
+    classDef full    fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
+    classDef partial fill:#fff3dc,stroke:#c68000,color:#1a1a1a
     classDef blocked fill:#e8e8e8,stroke:#909090,color:#1a1a1a
 
-    ID("Incoming Data Stream")
-    CR("Consent Registry")
+    subgraph SRC["Inputs"]
+        DS["Validated Data Stream\n(from ingestion layer)"]
+        HM["Household Members\n(manage consent preferences)"]
+    end
 
-    CL["Consent Lookup"]
-    DC["Data Classifier"]
-    RE["Routing Engine"]
-    CL --> DC --> RE
+    subgraph EN["Consent-Aware Perception Module"]
+        CR[("Consent Registry")]
+        CL["Consent Lookup"]
+        DC["Data Classifier"]
+        RE["Routing Engine"]
+        CR --> CL --> DC --> RE
+    end
 
-    FDS("Full Data Stream")
-    ADS("Anonymised Stream")
-    BL("Blocked")
+    subgraph DST["Data Destinations"]
+        CA["Comprehension Engine\n(full granular data)"]
+        AN["Anonymised Analytics\n(aggregated data only)"]
+        BL["Local Household Storage\n(data not shared with community)"]
+    end
 
-    ID --> CL
-    CR --> CL
-    RE -->|full consent|    FDS
-    RE -->|partial consent| ADS
-    RE -->|no consent|      BL
+    DS  --> CL
+    HM  -->|set preferences| CR
+    RE  -->|full consent| CA
+    RE  -->|partial consent| AN
+    RE  -->|no consent| BL
 
-    class ID,CR input
-    class CL,DC,RE proc
-    class FDS full
-    class ADS partial
+    class DS,HM src
+    class CR,CL,DC,RE proc
+    class CA full
+    class AN partial
     class BL blocked
 ```
 
@@ -126,29 +144,46 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc   fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
-    classDef output fill:#a8d5a2,stroke:#1a6a1a,color:#1a1a1a
+    classDef src  fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef mid  fill:#c8e8c8,stroke:#3a8a3a,color:#1a1a1a
+    classDef dst  fill:#dcf0dc,stroke:#1a6a1a,color:#1a1a1a
 
-    RD("Real Meter Data")
-    SD("Simulated Meter Data")
-    BS("Battery State")
+    subgraph SRC["Data Sources"]
+        RH["Real Households\n(Raspberry Pi smart meters)"]
+        VH["Virtual Households\n(simulation agents)"]
+        BMS["Battery Bank\n(GECAD Lab BMS)"]
+    end
 
-    SU["State Updater"]
-    NM["Network Model"]
-    PF["Power Flow Engine"]
-    SU --> NM --> PF
+    subgraph EN["Digital Twin"]
+        SU["State Updater"]
+        NM["Network Model\n(virtual grid topology)"]
+        PF["Power Flow Engine"]
+        SU --> NM --> PF
+    end
 
-    NS("Network State\nvoltages · flows · SoC")
+    NS("Network State\nbus voltages · line loadings · battery SoC")
 
-    RD --> SU
-    SD --> SU
-    BS --> SU
-    PF --> NS
+    subgraph DST["Consumed by"]
+        VM["Voltage Monitor"]
+        FLC["Flexibility Coordinator"]
+        DB["Dashboard"]
+        CE["Comprehension Engine"]
+    end
 
-    class RD,SD,BS input
+    RH  -->|real-time consumption & voltage| SU
+    VH  -->|synthetic load profiles| SU
+    BMS -->|state of charge · power output| SU
+    PF  --> NS
+    NS  --> VM
+    NS  --> FLC
+    NS  --> DB
+    NS  --> CE
+
+    class RH,VH,BMS src
     class SU,NM,PF proc
-    class NS output
+    class NS mid
+    class VM,FLC,DB,CE dst
 ```
 
 ---
@@ -158,38 +193,40 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc   fill:#a8e6ef,stroke:#2a8a96,color:#1a1a1a
-    classDef output fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef src  fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc fill:#a8e6ef,stroke:#2a8a96,color:#1a1a1a
+    classDef dst  fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
 
-    NS("Network State")
-    VE("Voltage Events")
-    FC("Forecasts")
-    FL("Flexibility Log")
-    XAI("XAI Explanations")
+    subgraph SRC["Data Sources"]
+        DT["Digital Twin\n(network state)"]
+        VM["Voltage Monitor\n(alerts & events)"]
+        CE["Comprehension Engine\n(forecasts · situational summary)"]
+        FLC["Flexibility Coordinator\n(activation log · XAI explanations)"]
+    end
 
-    DA["Data Aggregator"]
-    API["API Layer"]
-    DA --> API
+    subgraph EN["Dashboard"]
+        DA["Data Aggregator"]
+        API["API Layer"]
+        DA --> API
+    end
 
-    CO("Community Overview")
-    VM("Voltage Map")
-    FP("Forecast Panel")
-    FLV("Flexibility Log")
+    subgraph DST["Users"]
+        CM["Community Manager\n(overview · flexibility log)"]
+        GO["Grid Operator\n(voltage map · alerts)"]
+        RES["Residents\n(consumption · forecast)"]
+    end
 
-    NS  --> DA
-    VE  --> DA
-    FC  --> DA
-    FL  --> DA
-    XAI --> DA
-    API --> CO
-    API --> VM
-    API --> FP
-    API --> FLV
+    DT  --> DA
+    VM  --> DA
+    CE  --> DA
+    FLC --> DA
+    API --> CM
+    API --> GO
+    API --> RES
 
-    class NS,VE,FC,FL,XAI input
+    class DT,VM,CE,FLC src
     class DA,API proc
-    class CO,VM,FP,FLV output
+    class CM,GO,RES dst
 ```
 
 ---
@@ -199,40 +236,46 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc   fill:#ffd599,stroke:#c68000,color:#1a1a1a
-    classDef guard  fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
-    classDef output fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef src   fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef guard fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
+    classDef proc  fill:#ffd599,stroke:#c68000,color:#1a1a1a
+    classDef dst   fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
 
-    FR("Flexibility Request")
-    BS("Battery State")
+    subgraph SRC["Triggers & Context"]
+        VM["Voltage Monitor\n(automated request)"]
+        OP["Grid Operator\n(manual request via dashboard)"]
+        BMS["Battery Bank BMS\n(state of charge · available power)"]
+        DT["Digital Twin\n(pre-act simulation environment)"]
+    end
 
-    SG["Safeguards"]
-    FC["Feasibility Check"]
-    PS["Pre-act Simulation"]
-    AE["Actuation Engine"]
-    XG["XAI Generator"]
+    subgraph EN["Flexibility Coordinator"]
+        SG["Safeguards\n(SoC floor · rate limits · cooldown)"]
+        FC["Feasibility Check"]
+        PS["Pre-act Simulation\n(verify effect before committing)"]
+        AE["Actuation Engine"]
+        XG["XAI Generator"]
+        SG --> FC --> PS -->|verified| AE --> XG
+    end
 
-    SG --> FC
-    FC --> PS
-    PS -->|verified| AE
-    AE --> XG
+    subgraph DST["Outputs"]
+        BAT["Battery Bank\n(discharge command)"]
+        DASH["Dashboard\n(explanation for operators & residents)"]
+        LOG["Activation Record\n(history & reporting)"]
+    end
 
-    DC("Discharge Command")
-    EX("XAI Explanation")
-    AR("Activation Record")
+    VM  -->|flexibility request| FC
+    OP  -->|manual request| FC
+    BMS -->|current state| SG
+    BMS -->|current state| FC
+    DT  -->|simulation result| PS
+    AE  -->|discharge command| BAT
+    XG  -->|why · what · expected effect| DASH
+    AE  -->|record| LOG
 
-    FR --> FC
-    BS --> FC
-    BS --> SG
-    AE --> DC
-    XG --> EX
-    AE --> AR
-
-    class FR,BS input
-    class FC,PS,AE,XG proc
+    class VM,OP,BMS,DT src
     class SG guard
-    class DC,EX,AR output
+    class FC,PS,AE,XG proc
+    class BAT,DASH,LOG dst
 ```
 
 ---
@@ -242,39 +285,41 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc   fill:#d4a8e8,stroke:#7b4fa6,color:#1a1a1a
-    classDef output fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef src  fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc fill:#d4a8e8,stroke:#7b4fa6,color:#1a1a1a
+    classDef dst  fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
 
-    MU("FL Model Updates")
-    RR("Meter Readings")
-    NS("Network State")
-    TS("Trust Scores")
+    subgraph SRC["Inputs"]
+        RP["Raspberry Pi Nodes\n(locally trained FL models\nno raw data leaves the household)"]
+        DP["Data Pipeline\n(validated meter readings)"]
+        DT["Digital Twin\n(network state)"]
+        TE["Trust Engine\n(per-node reliability weights)"]
+    end
 
-    FLA["FL Aggregator"]
-    CF["Consumption Forecaster"]
-    FE["Flexibility Estimator"]
-    SS["Situational Summariser"]
+    subgraph EN["Situational Comprehension Engine"]
+        FLA["FL Aggregator\n(combines local household models)"]
+        CF["Consumption Forecaster\n(per household & community aggregate)"]
+        FE["Flexibility Estimator\n(available battery capacity + sheddable load)"]
+        SS["Situational Summariser\n(community health snapshot)"]
+        FLA --> CF --> FE --> SS
+    end
 
-    FLA --> CF
-    CF  --> FE
-    FE  --> SS
+    subgraph DST["Outputs"]
+        DASH["Dashboard\n(forecasts · community health)"]
+        FLC["Flexibility Coordinator\n(available flexibility estimate)"]
+    end
 
-    HF("Household Forecasts")
-    FEO("Flexibility Estimate")
-    SUM("Situational Summary")
+    RP --> FLA
+    DP --> CF
+    TE --> CF
+    DT --> FE
+    CF --> DASH
+    SS --> DASH
+    FE --> FLC
 
-    MU --> FLA
-    RR --> CF
-    TS --> CF
-    NS --> FE
-    CF --> HF
-    FE --> FEO
-    SS --> SUM
-
-    class MU,RR,NS,TS input
+    class RP,DP,DT,TE src
     class FLA,CF,FE,SS proc
-    class HF,FEO,SUM output
+    class DASH,FLC dst
 ```
 
 ---
@@ -284,26 +329,33 @@ flowchart LR
 ```mermaid
 flowchart LR
 
-    classDef input  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef proc   fill:#f9a8c9,stroke:#b84080,color:#1a1a1a
-    classDef output fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
+    classDef src  fill:#dce8ff,stroke:#3a6fc4,color:#1a1a1a
+    classDef proc fill:#f9a8c9,stroke:#b84080,color:#1a1a1a
+    classDef dst  fill:#dcf0dc,stroke:#3a8a3a,color:#1a1a1a
 
-    RR("Meter Readings")
+    subgraph SRC["Input"]
+        DP["Data Pipeline\n(validated meter readings\nfrom all households)"]
+    end
 
-    CT["Communication Tracker"]
-    PLQ["Plausibility Scorer"]
-    TA["Trust Aggregator"]
+    subgraph EN["Trust & Data Quality Engine"]
+        CT["Communication Tracker\n(is the node reporting consistently?)"]
+        PS["Plausibility Scorer\n(are the readings physically possible?)"]
+        TA["Trust Aggregator\n(rolling per-node score · 0 to 1)"]
+        CT --> TA
+        PS --> TA
+    end
 
-    CT  --> TA
-    PLQ --> TA
+    subgraph DST["Outputs"]
+        CE["Comprehension Engine\n(weights each household's contribution\nto community forecasts)"]
+        DASH["Dashboard\n(low-trust node alerts\nfor system administrators)"]
+    end
 
-    TSC("Trust Score per Node")
+    DP --> CT
+    DP --> PS
+    TA -->|trust score per node| CE
+    TA -->|degraded node alert| DASH
 
-    RR --> CT
-    RR --> PLQ
-    TA --> TSC
-
-    class RR input
-    class CT,PLQ,TA proc
-    class TSC output
+    class DP src
+    class CT,PS,TA proc
+    class CE,DASH dst
 ```
