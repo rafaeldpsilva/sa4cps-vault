@@ -1,12 +1,24 @@
 """
-Systematic review screener — title + abstract pass.
+Systematic review screener — title + abstract pass (rule-based).
 Reads all .bib files from review-bib/, deduplicates, applies keyword-based
 inclusion/exclusion criteria, and outputs screening_results.csv.
 
+Revised criteria (v2):
+  IC3 — any AI method (ML, RL, KG, GNN, LLM, Bayesian, etc.)
+         Method type (relational / generative / general) is recorded for synthesis.
+  IC4 — any occupant preference, behavioral pattern, latent intent, or
+         collective dynamic beyond physical setpoints (broader than personality/traits)
+  IC5 — built environment context (unchanged)
+  EC1 — environment-only with no occupant preference/intent layer
+  EC2 — web-platform profiling with no built-environment application
+  EC3 — removed as a keyword-detectable gate (unreliable from title/abstract alone)
+  EC4 — non-full paper / no abstract
+  EC5 — published before 2019
+
 Decisions:
-  INCLUDE    — hits IC3 + IC4 + IC5 with no hard exclusion
-  EXCLUDE    — hits at least one exclusion criterion (EC1–EC5)
-  UNCERTAIN  — does not clearly match either; needs manual review
+  INCLUDE   — IC3 + IC4 + IC5 met, no hard exclusion
+  EXCLUDE   — at least one EC triggered
+  UNCERTAIN — not clearly in or out; needs manual review
 """
 
 import csv
@@ -21,46 +33,80 @@ from pathlib import Path
 GENERATIVE_AI = [
     "large language model", "llm", "gpt", "chatgpt", "generative ai",
     "foundation model", "bert", "transformer-based", "natural language processing",
-    "nlp", "language model", "generative model",
+    "nlp", "language model", "generative model", "multimodal ai",
+    "retrieval-augmented", "rag", "in-context learning",
 ]
 
 RELATIONAL_AI = [
     "knowledge graph", "graph neural network", "gnn", "ontology", "ontologies",
     "semantic web", "heterogeneous graph", "heterogeneous network",
     "relational embedding", "graph-based", "knowledge base", "graph convolutional",
-    "graph attention", "knowledge representation",
+    "graph attention", "knowledge representation", "knowledge-enhanced",
+    "semantic model", "linked data",
 ]
 
+GENERAL_AI = [
+    "machine learning", "deep learning", "neural network", "reinforcement learning",
+    "bayesian", "probabilistic model", "federated learning", "transfer learning",
+    "random forest", "decision tree", "clustering", "classification",
+    "regression model", "support vector", "attention mechanism",
+    "convolutional network", "recurrent network", "lstm", "autoencoder",
+    "diffusion model", "embedding", "recommendation algorithm",
+    "collaborative filtering", "matrix factorization",
+]
+
+# IC4 — broader occupant human dimension (preferences, intent, behavior, collective)
 HUMAN_DIMENSION = [
-    "personality", "interaction style", "interaction modality", "user expectation",
-    "cognitive model", "behavioral archetype", "psychographic", "big five",
-    "mbti", "trust level", "user preference", "user profile", "user model",
-    "preference modeling", "preference learning", "occupant preference",
-    "resident preference", "occupant model", "user behavior model",
+    # Preferences
+    "user preference", "occupant preference", "resident preference",
+    "preference modeling", "preference learning", "preference profile",
+    "preference elicitation", "preference inference",
+    # Behavioral / profiling
+    "user profile", "user profil", "user model", "occupant model",
+    "behavioral pattern", "behavior model", "behavioral model",
+    "user behavior", "occupant behavior",
+    # Intent / proactive
+    "latent intent", "intent inference", "intent recognition",
+    "proactive", "anticipatory", "implicit feedback",
+    # Interaction style / modality
+    "interaction style", "interaction modality", "interaction preference",
+    # Psychological / personality (retained from v1)
+    "personality", "cognitive model", "psychographic", "big five", "mbti",
+    "user expectation", "trust level", "behavioral archetype",
+    # Temporal / dynamic
+    "dynamic profile", "profile evolution", "preference evolution",
+    "temporal preference", "contextual preference", "context-aware",
+    # Collective / multi-user
+    "group preference", "collective preference", "multi-user",
+    "shared preference", "preference conflict", "preference negotiation",
 ]
 
 BUILT_ENV = [
     "smart building", "smart home", "intelligent building", "intelligent environment",
     "smart environment", "built environment", "ambient intelligence", "smart communit",
     "smart space", "smart office", "smart city", "iot", "cyber-physical",
-    "home automation", "building automation", "intelligent home",
+    "home automation", "building automation", "intelligent home", "smart room",
+    "indoor environment", "occupant", "building occupant",
 ]
 
 ENV_ONLY = [
     "thermal comfort", "occupancy detection", "occupancy sensing", "energy consumption",
     "hvac", "temperature control", "heating system", "cooling system",
-    "energy efficiency", "energy management", "demand response",
+    "energy efficiency", "energy management", "demand response", "energy optimization",
 ]
 
 WEB_PLATFORM = [
     "social media", "ad targeting", "advertisement targeting", "e-commerce",
     "sentiment analysis", "web platform", "online platform", "social network analysis",
     "click-through rate", "news recommendation", "movie recommendation",
+    "social recommendation", "product recommendation", "twitter", "facebook",
+    "instagram", "weibo", "tiktok", "youtube recommendation",
 ]
 
 NON_PAPER = [
-    "workshop summary", "keynote", "editorial", "book chapter", "tutorial",
-    "demo paper", "extended abstract", "poster paper",
+    "workshop summary", "workshop program", "keynote", "editorial",
+    "book chapter", "tutorial", "demo paper", "extended abstract", "poster paper",
+    "welcome and committee", "workshop welcome",
 ]
 
 # ---------------------------------------------------------------------------
@@ -70,7 +116,6 @@ NON_PAPER = [
 def parse_bib(filepath: Path) -> list[dict]:
     text = filepath.read_text(encoding="utf-8", errors="replace")
     entries = []
-    # Split on entry starts
     raw_entries = re.split(r"(?=@\w+\s*\{)", text)
     for raw in raw_entries:
         raw = raw.strip()
@@ -78,12 +123,10 @@ def parse_bib(filepath: Path) -> list[dict]:
             continue
         entry = {"_source": filepath.stem, "_raw_type": ""}
 
-        # Entry type
         m = re.match(r"@(\w+)\s*\{", raw, re.IGNORECASE)
         if m:
             entry["_raw_type"] = m.group(1).lower()
 
-        # Fields
         for field in ["title", "abstract", "year", "doi", "author",
                       "booktitle", "journal", "keywords"]:
             pattern = rf"(?i)\b{field}\s*=\s*[{{\"](.*?)[}}\"](?:\s*,|\s*\}})"
@@ -91,7 +134,6 @@ def parse_bib(filepath: Path) -> list[dict]:
             if fm:
                 entry[field] = re.sub(r"\s+", " ", fm.group(1).strip())
             else:
-                # Try multi-line braces
                 pattern2 = rf"(?i)\b{field}\s*=\s*\{{(.*?)\}}(?:\s*,|\s*\}})"
                 fm2 = re.search(pattern2, raw, re.DOTALL)
                 entry[field] = re.sub(r"\s+", " ", fm2.group(1).strip()) if fm2 else ""
@@ -136,6 +178,18 @@ def hits(text: str, terms: list[str]) -> list[str]:
     return [t for t in terms if t in text_lower]
 
 
+def method_type(gen_hits, rel_hits, gen_ai_hits) -> str:
+    """Return a label describing the method type found, for synthesis."""
+    types = []
+    if rel_hits:
+        types.append("relational")
+    if gen_hits:
+        types.append("generative")
+    if gen_ai_hits and not (rel_hits or gen_hits):
+        types.append("general-ml")
+    return "+".join(types) if types else "unknown"
+
+
 def screen(entry: dict) -> tuple[str, str]:
     title = entry.get("title", "")
     abstract = entry.get("abstract", "")
@@ -147,7 +201,7 @@ def screen(entry: dict) -> tuple[str, str]:
     if not abstract.strip():
         return "EXCLUDE", "EC4 – no abstract available"
 
-    # EC4 — non-paper type
+    # EC4 — non-paper entry type
     if entry_type in ("misc", "phdthesis", "mastersthesis", "techreport", "unpublished"):
         return "EXCLUDE", "EC4 – non-paper type"
     if hits(combined, NON_PAPER):
@@ -159,41 +213,47 @@ def screen(entry: dict) -> tuple[str, str]:
         if year < 2019:
             return "EXCLUDE", f"EC5 – published before 2019 ({year})"
     except (ValueError, TypeError):
-        pass  # unknown year, don't exclude on this alone
+        pass
 
-    # EC2 — web platform with no built environment
+    # EC2 — web platform with no built environment anchor
     web_hits = hits(combined, WEB_PLATFORM)
     built_hits = hits(combined, BUILT_ENV)
     if web_hits and not built_hits:
         return "EXCLUDE", f"EC2 – web/social platform context ({', '.join(web_hits[:2])})"
 
-    # EC1 — environment-only (no human dimension signals)
+    # EC1 — environment-only (no occupant preference/intent layer)
     env_hits = hits(combined, ENV_ONLY)
     human_hits = hits(combined, HUMAN_DIMENSION)
     if env_hits and not human_hits:
         return "EXCLUDE", f"EC1 – environment-only modeling ({', '.join(env_hits[:2])})"
 
-    # IC3 — relational or generative AI method
-    gen_hits = hits(combined, GENERATIVE_AI)
-    rel_hits = hits(combined, RELATIONAL_AI)
-    has_method = bool(gen_hits or rel_hits)
+    # IC3 — any AI method (relational, generative, or general ML)
+    gen_hits   = hits(combined, GENERATIVE_AI)
+    rel_hits   = hits(combined, RELATIONAL_AI)
+    genai_hits = hits(combined, GENERAL_AI)
+    has_method = bool(gen_hits or rel_hits or genai_hits)
 
-    # IC4 — human dimension
+    # IC4 — occupant preference / behavioral / intent dimension
     has_human = bool(human_hits)
 
     # IC5 — built environment
     has_context = bool(built_hits)
 
     if has_method and has_human and has_context:
-        method_used = (gen_hits[:1] or []) + (rel_hits[:1] or [])
-        return "INCLUDE", f"IC3({', '.join(method_used[:2])}) + IC4({human_hits[0]}) + IC5({built_hits[0]})"
+        mtype = method_type(gen_hits, rel_hits, genai_hits)
+        method_label = (gen_hits[:1] or rel_hits[:1] or genai_hits[:1])[0]
+        return "INCLUDE", (
+            f"IC3({mtype}: {method_label}) + "
+            f"IC4({human_hits[0]}) + "
+            f"IC5({built_hits[0]})"
+        )
 
-    # Partial matches → UNCERTAIN with reason
+    # Partial matches → UNCERTAIN
     missing = []
     if not has_method:
-        missing.append("no relational/generative AI method detected")
+        missing.append("no AI method detected")
     if not has_human:
-        missing.append("no psychological/interactional dimension detected")
+        missing.append("no occupant preference/intent dimension detected")
     if not has_context:
         missing.append("no built environment context detected")
     return "UNCERTAIN", "; ".join(missing)
