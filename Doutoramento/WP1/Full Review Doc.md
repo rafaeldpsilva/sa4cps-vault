@@ -133,24 +133,49 @@ Output: `screening_results.csv`
 | UNCERTAIN | 517 |
 
 ### Exclusion Breakdown
-| Criterion | Count |
-|-----------|-------|
-| EC2 – web/social/recommendation platform | 73 |
-| EC4 – no abstract / non-full paper | 11 |
-| EC1 – environment-only modeling | ~20 |
+| Criterion | Count | % of exclusions |
+|-----------|------:|----------------:|
+| EC2 – web/social platform context | 90 | 86.5% |
+| EC4 – non-full paper / no abstract | 11 | 10.6% |
+| EC1 – environment-only modeling | 3 | 2.9% |
+
+#### EC2 sub-contexts
+| Sub-context | Count |
+|-------------|------:|
+| Social media | 32 |
+| E-commerce | 25 |
+| News recommendation | 14 |
+| Sentiment analysis | 10 |
+| Online platform (generic) | 9 |
+| Click-through rate | 6 |
+| Movie recommendation | 3 |
+| Ad targeting | 1 |
 
 ### UNCERTAIN Breakdown
-| Missing signals | Count |
-|----------------|-------|
-| All three (method + human + context) | 223 |
-| Method + context (has human dimension only) | 131 |
-| Human + context (has method only) | 79 |
-| Context only (has method + human) | 63 |
-| Method + human (has context only) | 16 |
-| Method only | 4 |
-| Human only | 1 |
+
+Individual flag frequency across the 517 uncertain papers:
+
+| Missing criterion | Papers flagged | % of UNCERTAIN |
+|-------------------|---------------:|---------------:|
+| No built environment context | 496 | 95.9% |
+| No relational/generative AI method | 374 | 72.3% |
+| No psychological/interactional dimension | 319 | 61.7% |
+
+Flag combinations:
+
+| Missing signals | Count | % of UNCERTAIN |
+|----------------|------:|---------------:|
+| All three (method + human + context) | 223 | 43.1% |
+| No built env + no relational/GenAI method | 131 | 25.3% |
+| No built env + no psychological dimension | 79 | 15.3% |
+| No built env only (has method + human) | 63 | 12.2% |
+| No relational/GenAI + no psychological (built env present) | 16 | 3.1% |
+| No relational/GenAI only | 4 | 0.8% |
+| No psychological dimension only | 1 | 0.2% |
 
 ### Notes
+- **EC2 is the dominant exclusion driver** (87% of all exclusions). The search pulls heavily from recommendation-systems literature (social media, e-commerce, news) that shares the right methods but not the right domain.
+- **"No built environment context" is the dominant UNCERTAIN flag** (96% of uncertain papers). The UNCERTAIN pile is large but mostly not borderline — these papers lack domain relevance rather than methodological relevance.
 - The 63 papers with method + human but no context signal are recommendation-system papers (POI, video, sequential) that should likely move to EC2 after manual check.
 - The 223 missing all signals are almost certainly off-topic but were not safely auto-excluded; they require a fast title scan.
 - The 4 automatic INCLUDEs were verified as plausible candidates.
