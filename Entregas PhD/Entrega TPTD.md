@@ -10,7 +10,7 @@ Interaction between human and buildings has evolved from simple dashboards to vo
 In conclusion, while the literature presents advances in user preference modeling, distributed systems, and language models, there is a gap in research that combines these concepts into a unified framework. The work will evolve from the model proposed by the candidate in [27], and [28]. This project directly addresses this multi-faceted gap, aiming to deliver a holistic organic solution that is more adaptive, interactive, and resilient than the current state of the art.
 
 ## Research Questions:
-**Main** **RQ.** How can intelligent systems continuously model and profile their users to proactively anticipate and fulfill their individual and collective needs?
+**Main** **RQ.** How can intelligent systems continuously synthesize and evolve holistic occupant representations to proactively infer latent intent and fulfill the heterogeneous, dynamic needs of individual and collective occupants?
 
 **RQ1.** How can a dynamic and organic user preference profile be generated and evolve from user’s behavioral, environmental contexts, and interactions?
 

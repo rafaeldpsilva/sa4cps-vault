@@ -10,99 +10,75 @@ This means that the system is not only modeling a "resident", but modeling a "pe
 *To what extent have existing approaches applied relational or generative AI methods to infer and model the psychological and interactional dimensions of occupants (personality traits, interaction styles, and expectations) within intelligent or smart buildings?*
 
 ## What is the domain of this review?
-This research is focused on the "Human-in-the-loop" aspcet, specifically looking at how AI decodes human nature within physical spaces.
+This review maps how AI has been applied to decode the human dimension within physical spaces — not what the environment does, but who the occupant is.
 
 **The where**: The context is intelligent or smart buildings. Smart communities may serve as a broader deployment context, but the locus of user modeling is always the building level.
 
-**The who**: The model target is Relational Psychographics/ Psychographic Profiling. This includes personality traits (e.g., Big Five or MBTI-derived traits), interaction styles (e.g., Preferred modality (voice/touch), agency level (proactive/reactive), and feedback loops), and expectation management (e.g., trust levels in automation, anticipated system reliability, transparency, and "intelligence" level)
+**The who**: The model target is the occupant's psychological and interactional profile. This includes personality traits (e.g., Big Five or MBTI-derived traits), interaction styles (e.g., preferred modality (voice/touch), agency level (proactive/reactive), feedback loops), and expectation management (e.g., trust levels in automation, anticipated system reliability, transparency, and perceived "intelligence" level).
 
-**The how**:
-**LLMs:** Used as "Psychological Engines" to infer personality from natural language feedback or behavioral logs. Acting as "Feature Extractors" to translate raw interaction logs into the semantic nodes (personality/expectations) that populate the GNN.
-**GNNs:** Building heterogeneous graphs where edges represent the _strength of relationship_ between a user's personality and their interaction choices. This allows for Cross-User Comparison (graph isomorphism or alignment).
+**The how**: This review surveys the AI methods that existing work has used to infer or represent these dimensions. This encompasses **relational methods** — such as knowledge graphs, ontologies, and graph-based models — that capture structured relationships between user traits and behaviors; and **generative AI methods** — such as large language models and foundation models — that interpret qualitative or behavioral data to derive psychological attributes. The review does not prescribe a specific method; it characterises the landscape of approaches found in the literature.
 
 ## Scope Statement
-This review investigates the intersection of User Profiling (UP) and User Modeling (UM) within intelligent or smart buildings, with a specific focus on the occupant's psychological and interactional dimensions. Moving beyond environmental setpoints, this research centers on modeling the occupant as a complex entity defined by its personality traits, interaction styles, and expectations.
+This review investigates the intersection of User Profiling (UP) and User Modeling (UM) within intelligent or smart buildings, with a specific focus on the occupant's psychological and interactional dimensions. Moving beyond environmental setpoints, this research examines how existing work models the occupant as a complex entity defined by personality traits, interaction styles, and expectations.
 
-Central to this scope is the use of Heterogeneous Graph Neural Networks (HGNNs) to map the multi-dimensional relationships between these psychological entities and observed behaviors, enabling the comparison of structural "User Graphs" to identify common interaction archetypes. Furthermore, we examine the role of Large Language Models (LLMs) as reasoning engines that interpret qualitative user data to synthesize the nodes and attributes within these relational models.
+In scope are studies that apply relational AI methods (e.g., knowledge graphs, ontologies, graph neural networks, semantic networks) or generative AI methods (e.g., large language models, foundation models, generative architectures) to infer, represent, or reason about these psychological and interactional dimensions. We are interested in the full lifecycle: from raw user data and behavioral signals, through profiling and structured modeling, to personalization or adaptation of the built environment.
 
-The scope is bounded by research that addresses the overall lifecycle of such system, from user data, to profiling, to modeling, and finally to personalization. We exclude papers focused solely on social network analysis or generic occupancy sensing. The goal is to provide a roadmap for developing "expectation-aware" systems that adapt their logic to the structural psychological profile of the user, rather than just their physical preferences.
+We exclude papers focused solely on environmental modeling (occupancy sensing, thermal comfort, energy optimization) that do not address the user's psychological or interactional nature, user profiling for sentiment analysis or commercial ad-targeting on web platforms, and studies that apply deep learning purely as a prediction engine without producing any interpretable user model or profile representation. The goal is to map the state of the art and identify what methods and representations have been used, providing a foundation for future "expectation-aware" system design.
 
 ## Keywords
 
-A valid paper should cover at least three of these.
+A valid paper should cover at least one keyword from Category C or D (context anchor), at least one from Category B (human dimension), and at least one from Category A or E (AI method).
 
-Category A (Tech):
-- Large Language Models
+Category A (Generative AI Methods):
+- Large Language Models / LLM
 - Generative AI
-- Foundation Models (??)
-- Prompt Engineering
-- Multi-modal LLMs
+- Foundation Models
+- Natural Language Processing
+- Multimodal AI
 
-Category B (Human):
+Category B (Human Dimensions):
 - Personality Traits
-- Interaction Style/Modality
+- Interaction Style / Modality
 - User Expectation
 - Cognitive Modeling
 - Behavioral Archetypes
+- Psychographic Profiling
 
-Category C (Graph/Relations):
+Category C (Relational AI Methods):
+- Knowledge Graph
+- Graph Neural Networks / GNN
+- Ontology / Semantic Web
 - Heterogeneous Information Networks
-- Graph Neural Networks
-- Knowledge Graphs
-- Graph Alignment/Isomorphism
 - Relational Embedding
+- User Modeling / User Profiling
 
 Category D (Context):
-- Smart Buildings/Homes
-- Smart Communities / Intelligent Buildings
+- Smart Buildings / Smart Homes
+- Intelligent Environments
 - Built Environments
 - Ambient Intelligence
-- IoT User Experience
+- Smart Communities
+- IoT / Cyber-Physical Systems
 
 ## Inclusion and Exclusion Criteria
 
+All inclusion criteria must be satisfied. Any single exclusion criterion is sufficient to reject.
+
 ### ✅ Inclusion Criteria
-1. Peer-reviewed: Must be from a journal or a top-tier conference
-2. Approach: Must utilize at least one relational or generative method
-3. Human-Centric: Must model at least one psychological or interactional trait %%personality, expection, style%%
-4. Context: Must be situated in a built environment
+1. **Publication type**: Peer-reviewed journal article or full conference paper (not workshop summary, poster, or extended abstract)
+2. **Language**: Written in English
+3. **AI Method**: Applies at least one relational AI method (knowledge graph, GNN, ontology, semantic model) OR at least one generative AI method (LLM, foundation model, generative architecture)
+4. **Human Dimension**: Models or infers at least one psychological or interactional occupant trait — personality, interaction style/modality, or expectation/trust
+5. **Context**: Work is situated in a built environment (smart building, smart home, intelligent environment, smart community, or equivalent)
+
 ### ❌ Exclusion Criteria
-1. Focusing only on environment modeling (occupancy sensing, thermal comfort) without modeling the user's nature
-2. User profiling for sentimental analysis or ad-targetting on web platforms
-3. Deep learning papers that don't provide a "model" representation
+1. **EC1 – Environment-only**: Focuses exclusively on physical or environmental modeling (occupancy sensing, thermal comfort, energy, HVAC) without addressing the occupant's psychological or interactional nature
+2. **EC2 – Web platform**: User profiling for web-platform purposes (ad targeting, sentiment analysis, social media recommendation) with no built-environment application
+3. **EC3 – Black-box DL**: Uses deep learning purely as a black-box predictor with no interpretable user model, profile, or structured representation as output
+4. **EC4 – Non-paper**: Workshop summaries, keynote abstracts, editorials, or papers with no retrievable abstract
+5. **EC5 – Out of date**: Published before 2019
 
 ## Search Strings
-
-## V1
-**Total: 107**
-
-User Modeling OR User Profiling
-Smart Building* OR Intelligent Environment* OR Smart Communit* 
-
-(TS=("User Modeling" OR "User Profiling") 
-AND TS=("Smart Building*" OR "Intelligent Environment*" OR "Smart Communit*") 
-AND TS=("LLM" OR "Large Language Model*" OR "GNN" OR "Graph Neural Network*" OR "Knowledge Graph*") 
-AND TS=("Personality" OR "Interaction Style" OR "Expectation*" OR "Psychographic*"))
-
-### WOS: 
-```
-(((ALL=(User Modeling OR User Profiling)) AND ALL=(Smart Building* OR Intelligent Environment* OR Smart Communit* )) AND ALL=(LLM OR Large Language Model* OR GNN OR Graph Neural Network* OR Knowledge Graph* )) AND ALL=(Personality OR Interaction Style OR Expectation* OR Psychographic*)
-```
-Results: 15
-### ACM:
-```
-[[**All**: "user modeling"] **OR** [**All**: "user profiling"]] **AND** [[**All**: "smart building*"] **OR** [**All**: "intelligent environment*"] **OR** [**All**: "smart communit*"]] **AND** [[**All**: llm] **OR** [**All**: "large language model*"] **OR** [**All**: gnn] **OR** [**All**: "graph neural network*"] **OR** [**All**: "knowledge graph*"]] **AND** [[**All**: personality] **OR** [**All**: "interaction style"] **OR** [**All**: expectation*] **OR** [**All**: psychographic*]]
-```
-Results: 51
-
-### IEEE Xplore:
-```
-("All Metadata":User Modeling OR "All Metadata":User Profiling) AND ("All Metadata":Smart Building* OR "All Metadata":Intelligent Environment* OR "All Metadata":Smart Communit*) AND ("All Metadata":LLM OR "All Metadata":Large Language Model* OR "All Metadata":GNN OR "All Metadata":Graph Neural Network* OR "All Metadata":Knowledge Graph*) AND ("All Metadata":Personality OR "All Metadata":Interaction Style OR "All Metadata":Expectation* OR "All Metadata":Psychographic*)
-```
-Results: 41
-
-
-### V2
 Filters:
 - Last 5 years
 - Research Paper
@@ -135,4 +111,47 @@ For each paper:
 - What method it uses?
 - What type of solution it reaches (merely computational, real life test, demonstration)?
 - The innovation or the advancements of the paper
-- 
+
+## Rule-based Selection
+
+Script: `screen.py` — keyword heuristics applied to title + abstract only.
+Output: `screening_results.csv`
+
+### Corpus
+| Source | Raw entries | After dedup |
+|--------|------------|-------------|
+| WOS (`savedrecs.bib`) | 55 | — |
+| ACM (`acm.bib`) | 404 | — |
+| IEEE (2 files) | 174 | — |
+| **Total** | **633** | **625** |
+
+### Results
+| Decision | Count |
+|----------|-------|
+| INCLUDE | 4 |
+| EXCLUDE | 104 |
+| UNCERTAIN | 517 |
+
+### Exclusion Breakdown
+| Criterion | Count |
+|-----------|-------|
+| EC2 – web/social/recommendation platform | 73 |
+| EC4 – no abstract / non-full paper | 11 |
+| EC1 – environment-only modeling | ~20 |
+
+### UNCERTAIN Breakdown
+| Missing signals | Count |
+|----------------|-------|
+| All three (method + human + context) | 223 |
+| Method + context (has human dimension only) | 131 |
+| Human + context (has method only) | 79 |
+| Context only (has method + human) | 63 |
+| Method + human (has context only) | 16 |
+| Method only | 4 |
+| Human only | 1 |
+
+### Notes
+- The 63 papers with method + human but no context signal are recommendation-system papers (POI, video, sequential) that should likely move to EC2 after manual check.
+- The 223 missing all signals are almost certainly off-topic but were not safely auto-excluded; they require a fast title scan.
+- The 4 automatic INCLUDEs were verified as plausible candidates.
+- Rule-based pass is intentionally conservative (517 UNCERTAIN) to avoid false exclusions before manual screening.
