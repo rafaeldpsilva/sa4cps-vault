@@ -27,24 +27,27 @@ We exclude papers focused solely on environmental modeling (occupancy sensing, t
 
 ## Keywords
 
-A valid paper should cover at least one keyword from Category C or D (context anchor), at least one from Category B (human dimension), and at least one from Category A or E (AI method).
+A valid paper must cover at least one keyword from Category D (context anchor) and at least one from Category B (human dimension). Category A, C, and E keywords are used for the analytical synthesis — they are not inclusion gates.
 
-Category A (Generative AI Methods):
+Category A (Generative AI Methods — analytical lens):
 - Large Language Models / LLM
 - Generative AI
 - Foundation Models
 - Natural Language Processing
 - Multimodal AI
 
-Category B (Human Dimensions):
-- Personality Traits
+Category B (Human Dimensions — inclusion anchor):
+- User Preferences / Preference Modeling
+- Behavioral Profiling / Behavioral Patterns
+- Latent Intent / Intent Inference
 - Interaction Style / Modality
-- User Expectation
+- Personality Traits
+- User Expectation / Trust
 - Cognitive Modeling
-- Behavioral Archetypes
-- Psychographic Profiling
+- Collective / Group Preferences
+- Preference Evolution / Dynamic Profiling
 
-Category C (Relational AI Methods):
+Category C (Relational AI Methods — analytical lens):
 - Knowledge Graph
 - Graph Neural Networks / GNN
 - Ontology / Semantic Web
@@ -52,13 +55,20 @@ Category C (Relational AI Methods):
 - Relational Embedding
 - User Modeling / User Profiling
 
-Category D (Context):
+Category D (Context — inclusion anchor):
 - Smart Buildings / Smart Homes
 - Intelligent Environments
 - Built Environments
 - Ambient Intelligence
 - Smart Communities
 - IoT / Cyber-Physical Systems
+
+Category E (General AI Methods — analytical lens):
+- Machine Learning / Deep Learning
+- Reinforcement Learning
+- Bayesian / Probabilistic Models
+- Federated Learning
+- Transformer / Attention Models
 
 ## Inclusion and Exclusion Criteria
 
@@ -67,16 +77,18 @@ All inclusion criteria must be satisfied. Any single exclusion criterion is suff
 ### ✅ Inclusion Criteria
 1. **Publication type**: Peer-reviewed journal article or full conference paper (not workshop summary, poster, or extended abstract)
 2. **Language**: Written in English
-3. **AI Method**: Applies at least one relational AI method (knowledge graph, GNN, ontology, semantic model) OR at least one generative AI method (LLM, foundation model, generative architecture)
-4. **Human Dimension**: Models or infers at least one psychological or interactional occupant trait — personality, interaction style/modality, or expectation/trust
-5. **Context**: Work is situated in a built environment (smart building, smart home, intelligent environment, smart community, or equivalent)
+3. **AI Method**: Applies at least one AI method (machine learning, knowledge representation, probabilistic model, or generative architecture) to model or infer occupant-level information — not solely to optimize physical parameters
+4. **Human Dimension**: Models or infers at least one dimension of occupant preference, behavioral pattern, contextual need, or latent intent — beyond physical setpoints — including comfort preferences, interaction preferences, temporal behavioral patterns, intent signals, or collective/group dynamics
+5. **Context**: Work is situated in a built environment (smart building, smart home, intelligent environment, smart community, or equivalent physical space)
 
 ### ❌ Exclusion Criteria
-1. **EC1 – Environment-only**: Focuses exclusively on physical or environmental modeling (occupancy sensing, thermal comfort, energy, HVAC) without addressing the occupant's psychological or interactional nature
-2. **EC2 – Web platform**: User profiling for web-platform purposes (ad targeting, sentiment analysis, social media recommendation) with no built-environment application
-3. **EC3 – Black-box DL**: Uses deep learning purely as a black-box predictor with no interpretable user model, profile, or structured representation as output
+1. **EC1 – Environment-only**: Focuses exclusively on physical or environmental modeling (occupancy sensing, thermal comfort, energy, HVAC) with no occupant preference or intent layer
+2. **EC2 – Web platform**: User profiling for web-platform purposes (ad targeting, sentiment analysis, social media or e-commerce recommendation) with no built-environment application
+3. **EC3 – No learned representation**: Pure rule-based or sensor-threshold systems that produce no learned occupant model, profile, or preference representation
 4. **EC4 – Non-paper**: Workshop summaries, keynote abstracts, editorials, or papers with no retrievable abstract
 5. **EC5 – Out of date**: Published before 2019
+
+> **Note on method (IC3):** The AI method requirement is an *inclusion* gate only — it ensures a learned representation exists. The *type* of method (relational, generative, classical ML) is recorded as a data extraction variable and used in the synthesis to assess how much of the landscape relational and generative AI currently covers.
 
 ## Search Strings
 Filters:
@@ -153,15 +165,17 @@ Output: `screening_results.csv`
 
 ### UNCERTAIN Breakdown
 
-Individual flag frequency across the 517 uncertain papers:
+> ⚠️ **These results reflect the old criteria** (IC3 required relational/generative AI; IC4 required psychological/interactional traits). Under the revised criteria, the "no relational/generative AI method" flag is no longer an exclusion signal, and "no psychological/interactional dimension" is replaced by the broader human-dimension criterion. The 374 papers flagged only for missing IC3 (old) are candidates for recovery in the re-screening.
 
-| Missing criterion | Papers flagged | % of UNCERTAIN |
-|-------------------|---------------:|---------------:|
-| No built environment context | 496 | 95.9% |
-| No relational/generative AI method | 374 | 72.3% |
-| No psychological/interactional dimension | 319 | 61.7% |
+Individual flag frequency across the 517 uncertain papers (old criteria):
 
-Flag combinations:
+| Missing criterion | Papers flagged | % of UNCERTAIN | Status under new criteria |
+|-------------------|---------------:|---------------:|--------------------------|
+| No built environment context | 496 | 95.9% | Still an exclusion signal (IC5) |
+| No relational/generative AI method | 374 | 72.3% | **No longer an exclusion signal** |
+| No psychological/interactional dimension | 319 | 61.7% | Replaced by broader IC4 |
+
+Flag combinations (old criteria):
 
 | Missing signals | Count | % of UNCERTAIN |
 |----------------|------:|---------------:|
@@ -175,15 +189,17 @@ Flag combinations:
 
 ### Notes
 - **EC2 is the dominant exclusion driver** (87% of all exclusions). The search pulls heavily from recommendation-systems literature (social media, e-commerce, news) that shares the right methods but not the right domain.
-- **"No built environment context" is the dominant UNCERTAIN flag** (96% of uncertain papers). The UNCERTAIN pile is large but mostly not borderline — these papers lack domain relevance rather than methodological relevance.
+- **"No built environment context" is the dominant UNCERTAIN flag** (96% of uncertain papers). This signal remains valid under the revised criteria.
 - The 63 papers with method + human but no context signal are recommendation-system papers (POI, video, sequential) that should likely move to EC2 after manual check.
 - The 223 missing all signals are almost certainly off-topic but were not safely auto-excluded; they require a fast title scan.
 - The 4 automatic INCLUDEs were verified as plausible candidates.
-- Rule-based pass is intentionally conservative (517 UNCERTAIN) to avoid false exclusions before manual screening.
+- **Both screenings need to be re-run under the revised IC3 and IC4.** The 4 papers flagged only for "no relational/GenAI method" (old IC3) are the clearest recovery candidates; the 16 papers with built-env context but missing both method and human dimension under old IC4 also warrant a second look.
 
 ---
 
 ## Claude Reasoning Screening
+
+> ⚠️ **These results reflect the old criteria.** Under the revised RQ, IC3 no longer requires relational/generative AI as a *gate*, and IC4 is broadened to include any occupant preference, behavioral pattern, or intent dimension. This screening should be re-run with the updated criteria before full-text review begins.
 
 Script: `screen_claude.py` — full abstract read by Claude with IC/EC reasoning per paper.
 Output: `screening_claude.csv`
