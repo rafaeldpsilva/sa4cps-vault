@@ -189,25 +189,25 @@ Script: `screen_claude.py` — full abstract read by Claude with IC/EC reasoning
 Output: `screening_claude.csv`
 
 ### Results
-| Decision | Count | % of corpus |
-|----------|------:|------------:|
-| INCLUDE | 0 | 0% |
-| UNCERTAIN | 56 | 9.0% |
-| EXCLUDE | 569 | 91.0% |
+| Decision  | Count | % of corpus |
+| --------- | ----: | ----------: |
+| INCLUDE   |     0 |          0% |
+| UNCERTAIN |    56 |        9.0% |
+| EXCLUDE   |   569 |       91.0% |
 
 ### Exclusion Breakdown
-| Category | Count | % of exclusions |
-|----------|------:|----------------:|
-| EC2 – Web / social / recommendation platform | 269 | 47.3% |
-| Context mismatch – generic (wrong domain, no EC label applied) | 235 | 41.3% |
-| EC4 – Non-full paper / no abstract | 25 | 4.4% |
-| Context mismatch – Metaverse / VR / gaming | 17 | 3.0% |
-| EC1 – Environment-only (no user psychological model) | 6 | 1.1% |
-| Context mismatch – Healthcare / clinical | 5 | 0.9% |
-| Context mismatch – Robotics / HRI | 5 | 0.9% |
-| EC3 – Black-box DL / no interpretable user model | 3 | 0.5% |
-| Context mismatch – Wireless / comms / hardware | 3 | 0.5% |
-| Context mismatch – Education / e-learning | 2 | 0.4% |
+| Category                                                       | Count | % of exclusions |
+| -------------------------------------------------------------- | ----: | --------------: |
+| EC2 – Web / social / recommendation platform                   |   269 |           47.3% |
+| Context mismatch – generic (wrong domain, no EC label applied) |   235 |           41.3% |
+| EC4 – Non-full paper / no abstract                             |    25 |            4.4% |
+| Context mismatch – Metaverse / VR / gaming                     |    17 |            3.0% |
+| EC1 – Environment-only (no user psychological model)           |     6 |            1.1% |
+| Context mismatch – Healthcare / clinical                       |     5 |            0.9% |
+| Context mismatch – Robotics / HRI                              |     5 |            0.9% |
+| EC3 – Black-box DL / no interpretable user model               |     3 |            0.5% |
+| Context mismatch – Wireless / comms / hardware                 |     3 |            0.5% |
+| Context mismatch – Education / e-learning                      |     2 |            0.4% |
 
 The "generic context mismatch" category (235 papers) represents papers Claude rejected for clearly not fitting the built-environment scope, but whose reasons didn't map cleanly to EC1–EC4 (e.g., autonomous vehicles, dialog systems, urban analytics, finance). These are papers the keyword heuristic could not safely reject because they superficially matched the search terms.
 
