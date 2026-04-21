@@ -180,3 +180,86 @@ Flag combinations:
 - The 223 missing all signals are almost certainly off-topic but were not safely auto-excluded; they require a fast title scan.
 - The 4 automatic INCLUDEs were verified as plausible candidates.
 - Rule-based pass is intentionally conservative (517 UNCERTAIN) to avoid false exclusions before manual screening.
+
+---
+
+## Claude Reasoning Screening
+
+Script: `screen_claude.py` — full abstract read by Claude with IC/EC reasoning per paper.
+Output: `screening_claude.csv`
+
+### Results
+| Decision | Count | % of corpus |
+|----------|------:|------------:|
+| INCLUDE | 0 | 0% |
+| UNCERTAIN | 56 | 9.0% |
+| EXCLUDE | 569 | 91.0% |
+
+### Exclusion Breakdown
+| Category | Count | % of exclusions |
+|----------|------:|----------------:|
+| EC2 – Web / social / recommendation platform | 269 | 47.3% |
+| Context mismatch – generic (wrong domain, no EC label applied) | 235 | 41.3% |
+| EC4 – Non-full paper / no abstract | 25 | 4.4% |
+| Context mismatch – Metaverse / VR / gaming | 17 | 3.0% |
+| EC1 – Environment-only (no user psychological model) | 6 | 1.1% |
+| Context mismatch – Healthcare / clinical | 5 | 0.9% |
+| Context mismatch – Robotics / HRI | 5 | 0.9% |
+| EC3 – Black-box DL / no interpretable user model | 3 | 0.5% |
+| Context mismatch – Wireless / comms / hardware | 3 | 0.5% |
+| Context mismatch – Education / e-learning | 2 | 0.4% |
+
+The "generic context mismatch" category (235 papers) represents papers Claude rejected for clearly not fitting the built-environment scope, but whose reasons didn't map cleanly to EC1–EC4 (e.g., autonomous vehicles, dialog systems, urban analytics, finance). These are papers the keyword heuristic could not safely reject because they superficially matched the search terms.
+
+### UNCERTAIN Breakdown (n=56)
+
+These are the papers Claude could not safely decide from the abstract alone. Each paper had one or more ICs that were ambiguous.
+
+#### IC status across uncertain papers
+
+| IC | Missing / unclear | Borderline (partially met) |
+|----|------------------:|---------------------------:|
+| IC3 – Relational/generative AI method | 16 (29%) | 5 (9%) |
+| IC4 – Psychological/interactional dimension | 3 (5%) | 16 (29%) |
+| IC5 – Built environment context | 10 (18%) | 21 (38%) |
+
+**IC5 is the primary bottleneck** for uncertain papers: 59% have it either missing or borderline (e.g., hospitals, museums, cultural heritage sites, autonomous vehicles, smart cities). **IC3 is the second bottleneck**: 38% have it missing or unclear, mostly papers that have the right human dimension but use classical ML or statistical methods.
+
+#### IC combination patterns in UNCERTAIN papers
+
+| Pattern | Count |
+|---------|------:|
+| IC5 borderline only (method + human present) | 9 |
+| All ICs present — context ambiguity only | 9 |
+| IC5 missing (clearly outside built env) | 8 |
+| IC3 missing + IC4 borderline | 7 |
+| IC3 missing only | 4 |
+| IC3 missing + IC5 borderline | 4 |
+| IC4 + IC5 both borderline | 4 |
+| IC4 borderline only | 2 |
+| IC4 missing + IC5 borderline | 2 |
+| IC3 + IC5 both borderline | 1 |
+
+### Comparison with Rule-Based Screening
+
+#### Transition matrix (rule-based → Claude)
+
+| Rule-based \ Claude | → INCLUDE | → UNCERTAIN | → EXCLUDE | Row total |
+|---------------------|----------:|------------:|----------:|----------:|
+| INCLUDE | 0 | 3 | 1 | 4 |
+| UNCERTAIN | 0 | 48 | **469** | 517 |
+| EXCLUDE | 0 | 5 | 99 | 104 |
+| **Col total** | **0** | **56** | **569** | 625 |
+
+- **Overall agreement: 23.5%** — low because the rule-based screener deferred 517 papers to UNCERTAIN, while Claude resolved 91% of them.
+- **Agreement on exclusions: 95.2%** (99/104 rule-based EXCLUDEs confirmed). The 5 that Claude moved to UNCERTAIN were borderline EC4 or context-mismatch cases where the abstract hinted at some relevance.
+- **469 rule-based UNCERTAINs converted to EXCLUDE** by Claude: these were papers the keyword heuristic could not safely reject, but whose abstracts made the domain mismatch clear on reading.
+- **48 rule-based UNCERTAINs remained UNCERTAIN** in Claude: these are the true borderline cases for human review.
+- **1 rule-based INCLUDE downgraded to UNCERTAIN** by Claude (id=1: ontology-based smart home preferences, IC4 borderline — lighting/heating state, not psychological traits).
+- **0 INCLUDEs** confirmed by Claude at abstract level: the 4 rule-based INCLUDEs were either downgraded (1) or moved to UNCERTAIN (3), suggesting the full-text review is needed before confirming any inclusions.
+
+### Notes
+- The 56 UNCERTAIN papers are the actual pool for human full-text review; the rule-based 517 is now resolved to 56.
+- Claude's ability to recognize context mismatch (e.g., "cognitive radio" ≠ human cognition, metaverse ≠ physical built space) was the main driver of the 91% reduction in the UNCERTAIN pool.
+- EC5 (out-of-date, pre-2019) was not triggered by Claude — the search was already filtered to the last 5 years.
+- IC5 ambiguity (38% of UNCERTAIN) is the most consequential design decision going forward: whether museums, hospitals, autonomous vehicles, and smart cities count as "built environments" for this review needs a clear policy decision before full-text screening.
