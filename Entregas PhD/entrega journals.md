@@ -1,2 +1,2 @@
 
-Ranking | Journal | Publisher | Webpage | Why this journal | Scope | Quartil | IF | Cite Score  | Submission to first decision | Submission to decision after review | Submission to acceptance | Acceptance to online pulication | type(open access/hybrid | Su
+Ranking | Journal | Publisher | Webpage | Why this journal | Scope | Quartil | IF | Cite Score  | Submission to first decision | Submission to decision after review | Submission to acceptance | Acceptance to online publication | type (open access/hybrid) | Submission to publication
