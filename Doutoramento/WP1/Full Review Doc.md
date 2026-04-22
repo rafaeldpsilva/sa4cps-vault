@@ -130,19 +130,19 @@ Script: `screen.py` — keyword heuristics applied to title + abstract only.
 Output: `screening_results.csv`
 
 ### Corpus
-| Source | Raw entries | After dedup |
-|--------|------------|-------------|
-| WOS (`savedrecs.bib`) | 55 | — |
-| ACM (`acm.bib`) | 404 | — |
-| IEEE (2 files) | 174 | — |
-| **Total** | **633** | **625** |
+| Source                | Raw entries | After dedup |
+| --------------------- | ----------- | ----------- |
+| WOS (`savedrecs.bib`) | 55          | —           |
+| ACM (`acm.bib`)       | 404         | —           |
+| IEEE (2 files)        | 174         | —           |
+| **Total**             | **633**     | **625**     |
 
 ### Results
-| Decision | Count |
-|----------|-------|
-| INCLUDE | 4 |
-| EXCLUDE | 104 |
-| UNCERTAIN | 517 |
+| Decision  | Count |
+| --------- | ----- |
+| INCLUDE   | 4     |
+| EXCLUDE   | 104   |
+| UNCERTAIN | 517   |
 
 ### Exclusion Breakdown
 | Criterion | Count | % of exclusions |
