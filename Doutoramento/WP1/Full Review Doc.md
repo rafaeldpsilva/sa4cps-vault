@@ -394,4 +394,84 @@ Relying on these alternative methods creates several notable limitations in occu
 - **Tang et al. (2024)** and **Alsaadi & Alahmadi (2021)** describe user portraits formed predominantly through fixed demographic tags (gender, age, ethnicity) and basic functional tracking without accounting for temporal evolution.
 - **Tran et al. (2021)** highlights that in many recommender systems, the _personality_ component of a user profile (e.g., Big Five traits) is mathematically treated as "domain-independent" and "context-independent", meaning it is assumed to be a static baseline.
 
-Are you particularly interested in exploring how these adaptive models are implemented in a specific domain, like healthcare or smart home environments?
+**Papers Modeling Explicitly Stated Preferences** Several papers describe systems that depend on direct user input, structured surveys, or explicitly declared choices to build user profiles:
+
+- **Liu et al. (2023)** notes that early user profiling predominantly relied on explicit interviews and questionnaires, though this often faced challenges with users reluctant to provide ground truth data.
+- **Delle Monache et al. (2022)** explicitly defines the "explicit model" of personalization as one that relies entirely on the user’s direct input and motivation to provide personal information.
+- **Shukla et al. (2025)** builds its entire LANTERN framework around structured survey instruments where users directly self-report their truths regarding lifestyle, brand preferences, and purchasing intentions.
+- **Araujo & Junior (2026)** notes that traditional personality-aware systems typically require explicit user input through self-report instruments (like questionnaires) to infer psychological traits.
+
+**Papers Inferring Latent Intent or Unarticulated Needs** A growing body of research moves away from explicit questionnaires, instead capturing unconscious heuristics, hidden goals, and unarticulated interests from behavioral traces:
+
+- **Wu & Jokinen (2025)** highlights that identical user behaviors can mask completely different latent intentions (e.g., a novice stumbling through an interface vs. an expert taking a specific path due to preference). Their system simultaneously infers these hidden preferences and expertise levels without explicit feedback.
+- **Freire et al. (2021)** estimates passers-by's interest in public display content based purely on how long they look at different items, functioning entirely without interactive user input.
+- **Danry et al. (2026)** targets automatic, unnoticed cognitive patterns. Their system maps out recurring heuristics and habits from everyday conversations that humans themselves struggle to consciously articulate.
+- **Han et al. (2025)** models the "intent-to-action" process by interpreting real-time, improvised multimodal signals (like where a user looks and how their hand moves) to deduce what device the user intends to interact with.
+- **Langerak et al. (2026)** models the user's "internal representation" or belief state, calculating the discrepancy between what a user implicitly expects to happen and what the system actually does.
+
+**Methods Enabling Intent Inference** To successfully uncover these latent intents, researchers employ several advanced computational methods:
+
+- **Approximate Bayesian Inverse Reinforcement Learning (ABIRL):** Used by **Wu & Jokinen (2025)**, this method treats users as bounded-rational agents trying to maximize rewards in a Markov Decision Process. By matching summary statistics of observed user behavior against simulated paths, the system reverse-engineers the latent parameters (like preference and expertise) driving the behavior.
+- **Dynamic Bayesian Networks (DBNs):** **Han et al. (2025)** utilizes DBNs to process a continuous stream of noisy sensor data over time. The network treats the user's intention as a hidden variable and updates its probabilistic belief about what the user wants based on the observable outcomes of their actions (like gaze and touch).
+- **Inverse Foraging / Parameter Fitting:** **Freire et al. (2021)** applies Information Foraging Theory—the idea that humans optimize their attention to maximize information gain. By treating the display viewing process as an inverse problem, the system fits mathematical parameters to observed viewing times to calculate an exact numerical estimate of user interest.
+- **Large Language Model (LLM) Rule Mining:** **Danry et al. (2026)** uses a multi-stage LLM pipeline to process hundreds of hours of unstructured conversational audio. The LLM acts as an inductive reasoner to extract, refine, and quantify human-readable "if-then" behavioral rules (e.g., "If X context occurs, the user tends to do Y").
+- **Representation Learning:** **Liu et al. (2023)** describes using deep neural networks, tensor decomposition, and graph embeddings to implicitly learn low-dimensional vectors. These models capture the complex, non-linear dependencies in mobile behavioral data to automatically deduce user profiles.
+The majority of the research focuses exclusively on **single-occupant modeling**, treating the user as an isolated entity to infer their individual expertise, latent preferences, or demographic traits. For instance, **Wu & Jokinen (2025)** infer individual typing and navigation expertise, **Araujo & Junior (2026)** extract personal psychological traits from web behavior, and **Festus et al. (2024)** map single-user routines, such as one person’s specific lighting or coffee preferences, in an isolated smart home environment.
+
+However, several papers explicitly tackle the complexities of **multi-occupant or shared-space scenarios**, utilizing different mechanisms to resolve conflicting intents, preferences, or physical presence:
+
+**Algorithmic Preference Resolution in Group Decisions** **Tran et al. (2021)** provides the most comprehensive framework for multi-occupant environments via **group recommender systems** (e.g., friends choosing a movie or vacation destination). They resolve conflicting preferences through several distinct mechanisms:
+
+- **Optimization (Minimizing Misery):** For high-involvement decisions, systems frequently use the **"Least Misery"** strategy, which evaluates the group's happiness based on the minimum individual satisfaction score, actively optimizing to prevent any single member from being highly dissatisfied.
+- **Voting Rules:** For lower-involvement domains (like choosing background music), the system shifts to **"Average Voting"** optimization to find a generally acceptable middle ground.
+- **Dynamic Priority Rules (Fairness):** To prevent constant domination by assertive users in repeated shared decisions, the system adjusts user weights dynamically. Users whose preferences were ignored in prior decisions receive **higher priority weights** in subsequent ones.
+- **Negotiation & Consensus:** Conflicts are resolved through guided negotiation processes or by appointing a "Supra Decision Maker" (a domain expert or group leader) whose preferences serve as an anchor point for the rest of the group to reach consensus. The system also mathematically weighs a user's _assertiveness_ versus _cooperativeness_ to calculate a "Conflict Mode Weight," which dictates how likely they are to yield during a negotiation.
+
+**Power Dynamics in Smart Homes** **Albayaydh & Flechais (2024)** explores shared smart homes occupied by family members alongside domestic workers or bystanders.
+
+- **Resolution Method:** Rather than algorithmic optimization, conflicts regarding privacy and data collection are currently resolved through **human power dynamics and autocratic priority rules**. The less powerful occupants (domestic workers) are forced to compromise their privacy rights to maintain employment. The authors advocate for designing inclusive features (e.g., guest modes, transparent indicators) to actively balance these priority rules.
+
+**Interpersonal Conflict and Partner Contexts**
+
+- **Danry et al. (2026)** models multi-occupant dynamics by predicting how individuals will react to interpersonal friction (e.g., an argument with a spouse). The system does not resolve the conflict itself, but rather maps the user's habitual **negotiation or conflict response style** (e.g., acting defensively, accommodating to reduce load, or moving to problem-solving).
+- **Langerak et al. (2026)** explicitly models "partner" variables (like a partner's fatigue or mood) in a shared apartment. It uses an **optimization objective** to prioritize explaining hidden multi-occupant state variables (e.g., informing the user that "Partner is tired") to prevent misaligned expectations in shared spaces.
+
+**Task Allocation in Human-Robot Shared Workspaces** **Umbrico et al. (2021)** focuses on cyber-physical systems where a human and an autonomous robot share a collaborative manufacturing space.
+
+- **Resolution Method:** Potential conflicts in task execution are resolved through **task planning optimization**. The system acts as a central coordinator, assessing the robot's capabilities alongside the human's historical performance metrics to dynamically generate a schedule that minimizes overall production cycle time.
+
+**Signal Conflict in Physical Multi-Occupancy** **Naser et al. (2023)** addresses physical multi-occupancy tracking for elderly care, where classical sensors fail to distinguish between a resident and a visiting friend.
+
+- **Resolution Method:** It resolves overlapping signals using **sensor fusion optimization**. By processing optical flow from multiple thermal sensors placed at different angles, the system can merge overlapping heat signatures into a single entity, successfully preventing false positive alarms.
+
+The dominant methodological approach for occupant modeling in smart buildings relies on **traditional data-driven paradigms, such as classical machine learning (e.g., XGBoost, SVM) and deep neural networks**, to extract user profiles from historical behavioral data or physiological sensor inputs,,. These approaches predominantly focus on **static profiling or modeling the occupant as a collection of physical comfort setpoints**, such as preferred illuminance or temperature schedules,,.
+
+While these methods offer automation, relying on them creates distinct gaps in how intelligent environments understand and adapt to their occupants:
+
+**(a) Gaps in relational representations of user-environment-context relationships** Most current models treat user behaviors and environmental factors as independent, isolated features arranged in linear sequences or matrices,. This approach **fails to capture the hidden, non-Euclidean semantic connections** between a user, their changing context, and the physical space,. While emerging methods like Graph Neural Networks (GNNs) and Knowledge Graphs are beginning to structure users and environments as interconnected nodes to map these dependencies, they are not yet the dominant approach and still struggle to integrate real-time numerical data (like sensor streams) with complex semantic relationships,,.
+
+**(b) Gaps in generative AI for preference elicitation or reasoning** While Large Language Models (LLMs) possess unprecedented capabilities in natural language understanding and zero-shot reasoning, their application in smart environments is largely confined to conversational chatbots or basic instruction generation,,. There is a significant gap in using **Generative AI as an active reasoning engine to elicit unarticulated needs**. Systems rarely leverage LLMs to automatically act as inductive reasoners that extract hidden "if-then" behavioral heuristics from everyday interactions, or to inject dynamic world knowledge into the environment's decision-making process when a user's context unexpectedly changes,.
+
+**(c) Gaps in modeling the occupant as a "persona"** Occupant modeling currently suffers from a reductionist view, where systems predict physiologically optimal conditions (e.g., lighting or heating) but **entirely overlook the psychological and emotional aspects of the user**. Research emphasizes that psychological traits (like the Big Five or Jungian typologies), interaction styles, and cognitive expectations significantly influence technology acceptance and behavior,,. However, integrating these complex psychographic profiles—such as utilizing dynamic "Blueprint Personas" that adapt to an individual's evolving trust, cognitive load, and unique interaction preferences—remains a major underexplored frontier in smart building systems,,.
+
+|AI Method Category|Physical Setpoints / Comfort / Demographics|Behavioral Patterns / Interaction Styles|Cognitive / Personality / Latent Intent|
+|:--|:--|:--|:--|
+|**Classical ML**|**Delle Monache et al. (2022)**|**Yang et al. (2024)**, **Alsaadi & Alahmadi (2021)**|**Araujo & Junior (2026)**, **Cham & Kefalidou (2025)**, **Hashky et al. (2024)**, **Ma et al. (2022)**, **Riveiro & Thill (2022)**, **Sankaran & Markopoulos (2021)**, **Slavkovik et al. (2021)**, **Virvou & Tsihrintzis (2025)**, **Zukerman et al. (2023)**|
+|**Deep Learning**|_(Empty)_|**Constantinescu & Iftene (2025)**, **Jia et al. (2025)**, **Naser et al. (2023)**, **Shukla et al. (2025)**, **Yoo et al. (2024)**|_(Empty)_|
+|**Probabilistic /Statistical**|_(Empty)_|_(Empty)_|**Emami-Naeini et al. (2023)**, **Freire et al. (2021)**, **Wu & Jokinen (2025)**|
+|**Relational AI***(KG, Ontology, GNN)*|**Festus et al. (2024)**|**Javdani Rikhtehgar et al. (2023)**, **Liu et al. (2023a)**, **Liu et al. (2023b)**, **Qianji et al. (2024)**, **Umbrico et al. (2021)**|**Albayaydh & Flechais (2024)**, **Asprino et al. (2024)**, **Liu et al. (2025)**|
+|**Generative AI***(LLM, Foundation)*|**Huang et al. (2025)**|**Tamah Al-Shammari (2025)**, **Zhao & Silverajan (2024)**|**Danry et al. (2026)**, **Javdani Rikhtehgar et al. (2025)**, **Tsihrintzis et al. (2025)**|
+|**Reinforcement****Learning**|_(Empty)_|_(Empty)_|**Md Zuki et al. (2025)**|
+|**Hybrid**|**Klir et al. (2021)**, **Liu et al. (2024)**|**Guo & Yuan (2026)**, **Irfan et al. (2025)**, **Jin et al. (2026)**, **Packia et al. (2024)**, **Tang et al. (2024)**, **Tsitseklis et al. (2023)**, **Yu et al. (2024)**|**Di Napoli et al. (2023)**, **Florentino & Aquino-Junior (2025)**, **Han et al. (2025)**, **Langerak et al. (2026)**, **Pastrakis et al. (2025)**, **Tran et al. (2021)**, **Vozna et al. (2025)**|
+
+**Analysis of Empty or Underrepresented Cells**
+
+**1. Physical Setpoints / Comfort Domain is Generally Underrepresented** Across almost all AI methods, the physical setpoint depth (e.g., modeling temperature, basic lighting, or static demographics) has sparse representation. Most contemporary research has shifted toward higher-order behavioral tracking and cognitive inference. The few papers operating at this depth predominantly use knowledge representations (ontologies) to map environment states or hybrid methods combining classic contextual bandits with statistical data.
+
+**2. Deep Learning is Empty in the Cognitive / Personality Axis** Standalone deep learning models (like CNNs or RNNs) are heavily utilized for tracking observable behavioral patterns, such as wheelchair navigation, thermal fall detection, and structured survey representation. However, the cell for Deep Learning at the Cognitive/Personality depth is empty. This is likely due to the **"black-box interpretability problem."** Because modeling cognitive traits—such as user trust, privacy boundaries, and personality—requires high transparency, researchers avoid pure neural networks in favor of Hybrid systems (where DL is paired with symbolic logic/LLMs) or Classical ML.
+
+**3. Probabilistic / Statistical Methods are Empty in Physical and Behavioral Axes** Highly rigorous probabilistic models (such as Approximate Bayesian Inverse Reinforcement Learning) are exclusively clustered in the deepest cognitive tier, inferring latent intent and user expertise. They are entirely absent from the physical and behavioral tiers because of **computational bottlenecks**. These models carry significant processing overhead and require complex simulations to converge. Applying them to simple physical setpoints or direct behavioral tracking would be computationally inefficient when a standard rule engine or classical classifier suffices.
+
+**4. Reinforcement Learning as a Standalone Method is Severely Underrepresented** Only one paper strictly focuses on standalone Reinforcement Learning, using it to model the long-term cognitive shifts in persuasive technologies. While RL logic appears conceptually inside some hybrid frameworks (like Inverse RL or contextual bandits), it is underrepresented as a primary category. This may stem from the difficulty of allowing autonomous agents to explore and fail in real-time user-facing environments without a hybrid safety net.
+
+Would you like me to create an artifact (like an infographic or a slide deck) visualizing this 2D taxonomy and its specific gap areas?
