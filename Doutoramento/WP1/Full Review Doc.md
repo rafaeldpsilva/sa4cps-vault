@@ -279,3 +279,119 @@ These are the papers Claude could not safely decide from the abstract alone. Eac
 - Claude's ability to recognize context mismatch (e.g., "cognitive radio" ≠ human cognition, metaverse ≠ physical built space) was the main driver of the 91% reduction in the UNCERTAIN pool.
 - EC5 (out-of-date, pre-2019) was not triggered by Claude — the search was already filtered to the last 5 years.
 - IC5 ambiguity (38% of UNCERTAIN) is the most consequential design decision going forward: whether museums, hospitals, autonomous vehicles, and smart cities count as "built environments" for this review needs a clear policy decision before full-text screening.
+
+
+## Screening
+
+|Paper|(1) Occupant Dimension|(2) AI Method|(3) Evolution|(4) Evaluation Type|(5) Multi-Occupant Conflict/Negotiation|
+|:--|:--|:--|:--|:--|:--|
+|**Yang et al. (2024)**,|behavioral pattern|classical ML|evolves over time|simulation|No|
+|**Albayaydh & Flechais (2024)**,|collective/group dynamics|knowledge representation/ontology|static|user study|Yes (handles privacy tensions/conflicts)|
+|**Alsaadi & Alahmadi (2021)**|interaction style|classical ML|static|dataset benchmark|No|
+|**Araujo & Junior (2026)**|interaction style|classical ML|evolves over time|dataset benchmark|No|
+|**Asprino et al. (2024)**|collective/group dynamics|knowledge representation/ontology|static|dataset benchmark|Yes (models community cohesion)|
+|**Cham & Kefalidou (2025)**|comfort preference|classical ML|evolves over time|user study|No|
+|**Constantinescu & Iftene (2025)**|behavioral pattern|deep learning|evolves over time|simulation|No|
+|**Danry et al. (2026)**,|behavioral pattern|LLM/generative|evolves over time|user study|Yes (predicts conflict responses)|
+|**Delle Monache et al. (2022)**|comfort preference|classical ML|static|user study|No|
+|**Di Napoli et al. (2023)**,|behavioral pattern|hybrid|evolves over time|real deployment|No|
+|**Emami-Naeini et al. (2023)**|comfort preference|probabilistic|static|user study|No|
+|**Festus et al. (2024)**|comfort preference|knowledge representation/ontology|evolves over time|simulation|No|
+|**Florentino & Aquino-Junior (2025)**|interaction style|hybrid|evolves over time|simulation|No|
+|**Freire et al. (2021)**,|latent intent|probabilistic|evolves over time|user study|No|
+|**Guo & Yuan (2026)**,|behavioral pattern|hybrid|evolves over time|real deployment|No|
+|**Han et al. (2025)**|latent intent|hybrid|evolves over time|user study|No|
+|**Hashky et al. (2024)**|behavioral pattern|classical ML|static|dataset benchmark|No|
+|**Huang et al. (2025)**|comfort preference|LLM/generative|evolves over time|user study|No|
+|**Irfan et al. (2025)**,|interaction style|hybrid|evolves over time|simulation|Yes (multi-user interactions)|
+|**Javdani Rikhtehgar et al. (2023)**|behavioral pattern|GNN/relational|evolves over time|user study|No|
+|**Javdani Rikhtehgar et al. (2025)**|interaction style|LLM/generative|evolves over time|user study|No|
+|**Jia et al. (2025)**|behavioral pattern|deep learning|static|user study|No|
+|**Jin et al. (2026)**|behavioral pattern|hybrid|static|dataset benchmark|No|
+|**Langerak et al. (2026)**,|latent intent|hybrid|evolves over time|simulation|Yes (handles partner factors)|
+|**Liu et al. (2023a)**|behavioral pattern|GNN/relational|static|dataset benchmark|No|
+|**Liu et al. (2023b)**|behavioral pattern|GNN/relational|static|dataset benchmark|No|
+|**Liu et al. (2024)**|comfort preference|hybrid|evolves over time|dataset benchmark|No|
+|**Liu et al. (2025)**|interaction style|GNN/relational|static|dataset benchmark|No|
+|**Ma et al. (2022)**|comfort preference|classical ML|static|user study|No|
+|**Md Zuki et al. (2025)**,|behavioral pattern|reinforcement learning|evolves over time|simulation|No|
+|**Naser et al. (2023)**|behavioral pattern|deep learning|evolves over time|real deployment|No|
+|**Packia et al. (2024)**|interaction style|hybrid|evolves over time|simulation|No|
+|**Pastrakis et al. (2025)**|comfort preference|hybrid|evolves over time|dataset benchmark|No|
+|**Klir et al. (2021) / Preference Lighting**|comfort preference|hybrid|evolves over time|user study|No|
+|**Qianji et al. (2024)**|behavioral pattern|knowledge representation/ontology|static|simulation|No|
+|**Riveiro & Thill (2022)**|latent intent|classical ML|static|user study|No|
+|**Sankaran & Markopoulos (2021)**|interaction style|classical ML|static|user study|No|
+|**Shukla et al. (2025)**|behavioral pattern|deep learning|static|dataset benchmark|No|
+|**Slavkovik et al. (2021)**|behavioral pattern|classical ML|static|dataset benchmark|No|
+|**Tamah Al-Shammari (2025)**|interaction style|LLM/generative|evolves over time|simulation|No|
+|**Tang et al. (2024)**|behavioral pattern|hybrid|static|dataset benchmark|No|
+|**Tran et al. (2021)**,|collective/group dynamics|hybrid|evolves over time|dataset benchmark|Yes (resolves group conflict)|
+|**Tsihrintzis et al. (2025)**|interaction style|LLM/generative|static|user study|No|
+|**Tsitseklis et al. (2023)**|behavioral pattern|hybrid|evolves over time|dataset benchmark|No|
+|**Umbrico et al. (2021)**|collective/group dynamics|knowledge representation/ontology|evolves over time|simulation|Yes (team work & shared goals)|
+|**Virvou & Tsihrintzis (2025)**,|behavioral pattern|classical ML|evolves over time|dataset benchmark|No|
+|**Vozna et al. (2025)**,|interaction style|hybrid|evolves over time|simulation|No|
+|**Wu & Jokinen (2025)**|latent intent|probabilistic|evolves over time|user study|No|
+|**Yoo et al. (2024)**|behavioral pattern|deep learning|evolves over time|dataset benchmark|No|
+|**Yu et al. (2024)**|comfort preference|hybrid|evolves over time|simulation|No|
+|**Zhao & Silverajan (2024)**|interaction style|LLM/generative|static|user study|No|
+|**Zukerman et al. (2023)**,|behavioral pattern|classical ML|evolves over time|user study|No|
+Which papers use relational AI methods (knowledge graphs, ontologies, GNNs, semantic web) or generative AI methods (LLMs, foundation models, NLP-based generation)? For those that don't, what method do they use instead and what occupant modeling limitation does that create?
+**Papers Using Relational AI Methods** The following papers leverage relational AI, such as knowledge graphs (KGs), ontologies, Graph Neural Networks (GNNs), and the Semantic Web to map complex relationships and contexts:
+
+- **Asprino et al. (2024)** uses an Ontology Network (the SPICE Ontology Network) linked with the Semantic Web to interpret cultural heritage data, emotional responses, and citizen curation.
+- **Festus et al. (2024)** leverages ontology-based user preferencing to build a dynamic knowledge base for smart home environments.
+- **Javdani Rikhtehgar et al. (2023)** employs a Knowledge Graph to model user preferences and culturally relevant exhibits for personalized Virtual Reality museum tours.
+- **Liu et al. (2023a)** and **Liu et al. (2023b)** construct an Urban Knowledge Graph (UrbanKG) to extract semantic relationships (e.g., home, workplace, spatiality) combined with GNNs and tensor decomposition for mobile user profiling.
+- **Liu et al. (2024)** integrates knowledge graph technology into an AI-powered dialogue system for providing product recommendations in the home appliance industry.
+- **Liu et al. (2025)** proposes Graph Neural Networks (GNNs) to model the complex, hierarchical, and nonlinear dependencies between user behaviors and interface elements for satisfaction classification.
+- **Qianji et al. (2024)** builds a Knowledge Graph linked with user profiles to map entity relationships (like books, authors, and users) for library retrieval systems.
+- **Tsitseklis et al. (2023)** utilizes a Knowledge Graph coupled with NLP for a museum chatbot assistant to handle semantic reasoning between exhibits.
+- **Umbrico et al. (2021)** implements knowledge bases and standard semantic ontologies (OWL language) to model worker profiles and robot capabilities in cyber-physical manufacturing systems.
+- **Vozna et al. (2025)** uses an ASP-based engine and a Reference Ontology of Trust (ROT) for dynamic semantic reasoning and trust calibration in personalized digital health.
+
+**Papers Using Generative AI Methods** These papers employ Large Language Models (LLMs), foundation models, or NLP-based generation for reasoning, predicting behavior, or natural language generation:
+
+- **Danry et al. (2026)** utilizes a multi-stage LLM pipeline (based on GPT-5) to mine conversational data and extract human-readable "if-then" behavioral patterns.
+- **Han et al. (2025)** implements a hybrid framework combining a Dynamic Bayesian Network (DBN) with an LLM. The LLM acts as an "interaction design expert" to inject contextual world knowledge into the system for smart environments.
+- **Huang et al. (2025)** proposes an LLM-based system to dynamically scan images of built environments and generate personalized accessibility heuristics for users with limited mobility.
+- **Jin et al. (2026)** combines prompt fine-tuning of lightweight LLMs with traditional machine learning to efficiently extract hidden semantic features for dynamic privacy-portrait linkage.
+- **Md Zuki et al. (2025)** discusses the unprecedented capabilities of LLMs to generate personalized persuasive content and understand user preferences through natural language.
+- **Tamah Al-Shammari (2025)** relies on an AI-driven narrative engine for visual storytelling related to cultural heritage.
+- **Tsihrintzis et al. (2025)** evaluates user trust dynamics explicitly by having expert and non-expert stakeholders interact directly with Generative AI (ChatGPT) in the energy urban domain.
+- **Zhao & Silverajan (2024)** compares different LLMs (like ChatGPT-4, ChatGPT-4o, and Bing Chat) for modeling human behavior to evaluate cybersecurity dashboard usability.
+
+**Methods Used by Other Papers and the Limitations They Create** Papers that do not rely on relational or generative models predominantly use **Classical Machine Learning** (e.g., K-means clustering, Random Forests, Support Vector Machines), **Deep Learning** (e.g., CNNs, RNNs), or **Probabilistic/Statistical Modeling** (e.g., Bayesian Inverse Reinforcement Learning, Dynamic Bayesian Networks).
+
+Relying on these alternative methods creates several notable limitations in occupant modeling:
+
+- **Overlooking Context and Semantics:** Traditional data-driven paradigms often ignore the complex semantic relationships between a user and their environment. As noted in multiple domains, standard machine learning frequently overlooks highly influential, nuanced contextual factors like a user's self-esteem, motivation, and abstract experiential needs. They struggle to capture non-Euclidean relationships that graph structures easily map out.
+- **Stereotyping and Overgeneralization:** Methods reliant on traditional clustering and fixed stereotypes (e.g., classifying users strictly as 'novice' or 'expert' based on demographic or early behavioral data) lead to a "one-size-fits-all" trap. These systems generalize groups broadly but fail to individualize support. Consequently, they cannot dynamically adapt in real-time as a user's skills or preferences evolve, which can restrict users into biased profiles and outdated recommendations.
+- **The Black-Box Interpretability Problem:** Neural networks and deep learning models with massive parameter spaces often lack transparency. Because they implicitly learn low-dimensional vectors without explicit relationship mapping, they are prone to overfitting and poor cross-dataset generalization. Crucially, they fail to explain _why_ a prediction or user adaptation was made, making them unreliable in trust-sensitive scenarios.
+- **Computational Bottlenecks and Observability Constraints:** Highly rigorous probabilistic models (such as Approximate Bayesian Inverse Reinforcement Learning) are excellent at managing uncertainty but suffer from high computational overhead. They require extensive simulations to converge and frequently assume that all interface states and user traits are fully observable. In reality, human cognitive shifts are hidden and change dynamically during an ongoing task, making these models difficult to deploy for real-time occupant modeling without structural approximations.
+
+**Papers Modeling Preference Change Over Time** Several papers in the sources actively model how user preferences and profiles evolve over time:
+
+- **Yang et al. (2024)** highlights the necessity of dynamic user profiling for products with long life cycles, specifically tracking how needs, physiological states, and behaviors shift progressively over the stages of pregnancy.
+- **Virvou & Tsihrintzis (2025)** proposes an anti-bias framework that transitions from cold-start stereotypes to highly individualized models that continuously evolve over time based on ongoing behavioral interactions.
+- **Guo & Yuan (2026)** utilizes a dynamic tag weight iteration technique with a time-decay algorithm to downgrade historical behaviors and elevate recent interests (e.g., shifting from "daily consumption" to "maternal products").
+- **Vozna et al. (2025)** introduces evolving "Blueprint Personas" for digital health, adapting interaction styles and prompt frequencies as a patient's medical condition and trust in the system fluctuate over time.
+- **Klir et al. (2021)** implements a Preference Lighting Model using Contextual Multi-Armed Bandits to dynamically recommend optimal light spectra as the user's biological rhythms and preferences naturally alter throughout the day.
+- **Md Zuki et al. (2025)** utilizes Sequential Decision-Making Theory to model the complex, long-term patterns of user behavior in persuasive technologies, adjusting to progress, setbacks, and motivational shifts.
+- **Pastrakis et al. (2025)** argues that tourist personas are dynamic and must adapt to the fact that user preferences actively evolve following increased exposure to new cultural experiences.
+
+**Triggers for Adaptation: Explicit Feedback, Implicit Behavioral Drift, and Context Change** Adaptation in these dynamic models is triggered by three primary mechanisms:
+
+- **Explicit Feedback:** Some systems rely on the user directly telling the system to adjust. **Umbrico et al. (2021)** personalizes robotic assembly line support by updating profile weights via explicit operator feedback at the end of every task. Similarly, **Huang et al. (2025)** relies on textual feedback from users regarding environmental scans to continually adjust their personal accessibility model, and **Delle Monache et al. (2022)** relies on explicit survey feedback to calibrate sleep music profiles.
+- **Implicit Behavioral Drift:** Adaptation occurs silently as the system observes changes in interaction patterns. **Freire et al. (2021)** uses "inverse foraging" to estimate changing interests purely from how much time a user spends looking at a display. **Araujo & Junior (2026)** dynamically updates psychological profiling by logging real-time navigation variables like reading patterns, backspace usage, and menu dwell time. **Virvou & Tsihrintzis (2025)** specify that updates trigger automatically when user clicks or views significantly diverge from initial assumptions.
+- **Context Change:** The environment or situational framing prompts a preference shift. **Cham & Kefalidou (2025)** found that users skeptical of autonomous vehicles ("rejectors") exhibit profound preference changes when the context shifts from partial autonomy to full autonomy. **Festus et al. (2024)** triggers adaptations through IoT sensors identifying new temporal or physical contexts (e.g., stepping onto a pressure pad between 2:00 PM and 5:00 PM triggers a sleep lighting preference). **Tran et al. (2021)** notes that temporary emotional states act as a contextual trigger, dramatically altering preferences (e.g., desiring electronic music when happy, but jazz when depressed).
+
+**Papers Treating Preferences as Static Profiles** While dynamic modeling is growing, several systems still rely on static or fixed profiling:
+
+- **Tamah Al-Shammari (2025)** utilizes rule-based "cold-start" personalization for a heritage app. Because it avoids behavioral tracking or data retention to protect privacy, the chosen persona (e.g., scholar, tourist, child) remains static throughout the interaction.
+- **Liu et al. (2023)** extracts semantic connections from mobility data (UrbanKG) but largely uses it to statically classify a user's demographic traits, income level, and occupation based on their historical home and workplace locations.
+- **Tang et al. (2024)** and **Alsaadi & Alahmadi (2021)** describe user portraits formed predominantly through fixed demographic tags (gender, age, ethnicity) and basic functional tracking without accounting for temporal evolution.
+- **Tran et al. (2021)** highlights that in many recommender systems, the _personality_ component of a user profile (e.g., Big Five traits) is mathematically treated as "domain-independent" and "context-independent", meaning it is assumed to be a static baseline.
+
+Are you particularly interested in exploring how these adaptive models are implemented in a specific domain, like healthcare or smart home environments?
