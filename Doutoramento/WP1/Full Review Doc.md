@@ -337,7 +337,7 @@ These are the papers Claude could not safely decide from the abstract alone. Eac
 |**Yu et al. (2024)**|comfort preference|hybrid|evolves over time|simulation|No|
 |**Zhao & Silverajan (2024)**|interaction style|LLM/generative|static|user study|No|
 |**Zukerman et al. (2023)**,|behavioral pattern|classical ML|evolves over time|user study|No|
-Which papers use relational AI methods (knowledge graphs, ontologies, GNNs, semantic web) or generative AI methods (LLMs, foundation models, NLP-based generation)? For those that don't, what method do they use instead and what occupant modeling limitation does that create?
+
 **Papers Using Relational AI Methods** The following papers leverage relational AI, such as knowledge graphs (KGs), ontologies, Graph Neural Networks (GNNs), and the Semantic Web to map complex relationships and contexts:
 
 - **Asprino et al. (2024)** uses an Ontology Network (the SPICE Ontology Network) linked with the Semantic Web to interpret cultural heritage data, emotional responses, and citizen curation.
