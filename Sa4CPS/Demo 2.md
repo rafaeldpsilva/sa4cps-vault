@@ -1,22 +1,22 @@
-Implement edge learning on nodes for energy prediction
+- [ ] Implement edge learning on nodes for energy prediction
 
-Integrate personal models per household or group with privacy constraints
+- [ ] Integrate personal models per household or group with privacy constraints
 
-Connect models with IoT data streams in real-time
+- [ ] Connect models with IoT data streams in real-time
 
-Flexibility forecast
+- [ ] Flexibility forecast
 
-Implement desk monitors
+- [ ] Implement desk monitors
 
-Design safeguards against unauthorized or malicious actuation
+- [ ] Design safeguards against unauthorized or malicious actuation
 
-Integrate user involvement with XAI to make daily summaries
+- [ ] Integrate user involvement with XAI to make daily summaries
 
-Flexibility activation
+- [ ] Flexibility activation
 
-Develop enhanced interfaces for energy communities, including import/export views
+- [ ] Develop enhanced interfaces for energy communities, including import/export views
 
-Virtual energy community
+- [x] Virtual energy community
 
 # Demo 2 Sprint Planning
 
