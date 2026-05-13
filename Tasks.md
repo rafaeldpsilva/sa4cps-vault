@@ -6,17 +6,17 @@ kanban-plugin: board
 
 ## To do
 
-- [ ] Lista de research journals @{2026-05-28}
 
 
 ## Doing
 
-- [ ] Lista de review journals @{2026-04-27}
+- [ ] State of the art @{2026-06-15}
 
 
 ## Done
 
-- [ ] State of the art @{2026-06-15}
+- [ ] Lista de review journals @{2026-04-27}
+- [ ] Lista de research journals @{2026-05-28}
 
 
 
