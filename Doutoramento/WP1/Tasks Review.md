@@ -77,9 +77,9 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 - [x] T2.2: Run search strings in IEEE Xplore
 - [x] T2.3: Screen first batch of titles/abstracts
 - [x] T2.4: Screen second batch of titles/abstracts
-- [ ] T2.5: Perform backward snowballing
-- [ ] T2.6: Perform forward snowballing
-- [ ] T2.7: Finalize shortlist of papers
+- [x] T2.5: Perform backward snowballing
+- [x] T2.6: Perform forward snowballing
+- [x] T2.7: Finalize shortlist of papers
 
 ---
 
@@ -95,14 +95,14 @@ Profiling is the "input" side of the equation—building the foundation. Modelin
 - **Hour 20:** Summarize the "Gaps" identified in the literature (e.g., lack of cross-platform modeling).
 
 **Tasks:**
-- [ ] T3.1: Create synthesis matrix
-- [ ] T3.2: Read first batch of papers and extract data
-- [ ] T3.3: Read second batch of papers and extract data
-- [ ] T3.4: Read third batch of papers and extract data
-- [ ] T3.5: Complete reading and extraction of remaining papers
+- [x] T3.1: Create synthesis matrix
+- [x] T3.2: Read first batch of papers and extract data
+- [x] T3.3: Read second batch of papers and extract data
+- [x] T3.4: Read third batch of papers and extract data
+- [x] T3.5: Complete reading and extraction of remaining papers
 - [ ] T3.6: Identify thematic clusters
 - [ ] T3.7: Draft taxonomy diagram
-- [ ] T3.8: Summarize literature gaps
+- [x] T3.8: Summarize literature gaps
 
 ---
 
