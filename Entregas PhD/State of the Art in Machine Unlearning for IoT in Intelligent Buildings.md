@@ -102,7 +102,7 @@ Taken together, these three drivers — regulatory mandates that create legal ob
           unlearning [cite], differential-privacy framing [cite]
      C3 – the diversity of competing definitions reflects the absence
           of a single accepted standard — itself an open problem -->
-211520310 0029514352
+
 ### 2.3 Taxonomy of Unlearning Approaches
 
 <!-- PARAGRAPH CCC:
