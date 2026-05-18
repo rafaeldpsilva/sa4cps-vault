@@ -124,11 +124,45 @@ The coexistence of these three definitions — each with different strength, cos
           expensive; approximate methods are practical but hard to verify —
           a trade-off especially acute in IoT settings (§4.2) -->
 
-<!-- SECTION CLOSE (C3):
-     Summarise: machine unlearning has matured in centralised,
-     homogeneous settings. The missing piece is the intersection with
-     distributed, heterogeneous, resource-limited systems.
-     §3 establishes exactly what those systems look like. -->
+Existing machine unlearning methods divide into two broad families — **exact** and **approximate** — distinguished by the strength of the guarantee they provide relative to the definitions formalized in §2.2. Exact methods produce a model whose output distribution is provably identical to one retrained from scratch; approximate methods trade guarantee strength for computational efficiency, producing a model that is close to, but not identical with, the retrained baseline. Table 1 summarizes the key methods in each family along their guarantee type, computational cost, and assumptions.
+
+#### 2.3.1 Exact Unlearning
+
+Exact unlearning methods achieve certified removal by structuring the training process so that deletion requests can be satisfied through partial retraining rather than full retraining. The foundational approach is **SISA (Sharded, Isolated, Sliced, and Aggregated) training**, proposed by Bourtoule et al. [[22]]. SISA partitions the training dataset into $k$ disjoint shards, trains an independent sub-model on each shard, and aggregates their predictions at inference time. When a deletion request targets data point $z$, only the sub-model whose shard contains $z$ requires retraining — reducing the computational cost by a factor of approximately $k$. Within each shard, SISA further organizes training into incremental slices with saved checkpoints, enabling retraining to resume from the most recent unaffected checkpoint rather than from initialization.
+
+While SISA provides the strongest unlearning guarantee, its applicability depends on assumptions that may not hold in all settings. Sharding reduces each sub-model's effective training set, which can degrade accuracy — particularly for complex tasks or small datasets [[30]]. The aggregation mechanism introduces inference latency proportional to the number of shards, and the storage overhead of maintaining per-shard checkpoints scales linearly with both $k$ and the number of slices. Extensions to SISA have addressed some of these limitations: Yan et al. [[31]] propose adaptive sharding strategies that account for data heterogeneity, and Chen et al. [[32]] introduce graph-structured partitioning for relational data. Nevertheless, exact methods share a common limitation: they require the training procedure to be designed for unlearning from the outset, making them inapplicable to already-deployed models trained without such provisions.
+
+#### 2.3.2 Approximate Unlearning
+
+Approximate unlearning methods operate on already-trained models, modifying their parameters post-hoc to reduce the influence of targeted data points. These methods do not guarantee distributional identity with the retrained model but aim to minimize the residual influence to within a tolerable bound. Four principal techniques have emerged.
+
+**Gradient-based methods** apply corrective updates to the model parameters using gradient information computed on the data to be forgotten. Golatkar et al. [[23]] use the Fisher information matrix to compute a Newton step that approximately inverts the effect of the targeted data on the model parameters. Graves et al. [[33]] propose "amnesiac unlearning," which stores the per-sample gradient updates during training and subtracts them at deletion time. These methods are computationally efficient — typically requiring a single pass over the forget set — but their accuracy depends on the convexity of the loss landscape, and they degrade for highly non-convex models such as deep neural networks.
+
+**Influence function methods** estimate the effect of removing a data point on model parameters without explicit retraining. Originating from robust statistics [[34]], influence functions compute the change in model parameters that would result from infinitesimally up-weighting or down-weighting a training sample. Koh and Liang [[35]] adapted this technique to deep learning, enabling approximate leave-one-out retraining at the cost of a single Hessian-vector product computation. However, influence functions rely on a second-order Taylor approximation that becomes unreliable for large parameter perturbations — such as those caused by removing an entire user's data rather than a single sample — and computing the inverse Hessian remains expensive for large models [[36]].
+
+**Model editing methods** directly modify specific parameters or representations associated with the targeted data. Becker and Liebig [[37]] identify neurons most responsive to the forget set through activation analysis and selectively prune or reinitialize them. Jang et al. [[38]] propose "knowledge unlearning" through gradient ascent on the forget set, effectively maximizing the loss on the data to be removed. These methods are fast and require no access to the retained training data, but they risk degrading model performance on unrelated tasks — a phenomenon known as catastrophic forgetting of retained knowledge — and provide no formal bound on residual data influence.
+
+**Knowledge distillation methods** train a new "student" model to replicate the behavior of the original "teacher" model on all data except the forget set. Chundawat et al. [[39]] propose a competent-incompetent teacher framework where the student simultaneously learns to match the teacher's outputs on retained data and to match a randomly initialized model's outputs on the forget set. This approach naturally preserves utility on retained data while degrading performance on forgotten data, but it requires access to a representative retained dataset and incurs the full cost of training a new model — approaching the cost of retraining from scratch for large forget sets.
+
+#### 2.3.3 Comparison and Trade-offs
+
+The choice between exact and approximate unlearning involves a three-way trade-off among guarantee strength, computational cost, and deployment flexibility. Exact methods provide certified removal but require forward-compatible training design, substantial storage for checkpoints, and per-shard retraining that scales with deletion frequency. Approximate methods can be applied to existing models without architectural changes, handle deletion requests in sublinear time, but offer weaker and harder-to-verify guarantees. Table 1 summarizes this landscape.
+
+| Method Family | Representative Work | Guarantee | Compute Cost | Needs Training Redesign | Verification |
+|---|---|---|---|---|---|
+| SISA / sharding | Bourtoule et al. [[22]] | Certified | $O(n/k)$ retrain | Yes | By construction |
+| Gradient-based | Golatkar et al. [[23]], Graves et al. [[33]] | Approximate ($\epsilon$-bounded) | $O(|D_f|)$ gradient steps | No | Empirical (MIA) |
+| Influence functions | Koh & Liang [[35]] | Approximate (first-order) | $O(np)$ Hessian-vector | No | Empirical (MIA) |
+| Model editing | Jang et al. [[38]], Becker & Liebig [[37]] | Heuristic | $O(|D_f|)$ gradient steps | No | Empirical (MIA, activation) |
+| Knowledge distillation | Chundawat et al. [[39]] | Approximate | $O(n)$ distillation | No | Empirical (MIA) |
+
+*Table 1: Taxonomy of machine unlearning approaches. $n$ = training set size, $k$ = number of shards, $|D_f|$ = forget set size, $p$ = number of parameters. MIA = membership inference attack.*
+
+This trade-off becomes especially acute in resource-constrained environments. Exact methods demand storage and compute budgets that edge devices cannot provide; approximate methods are lightweight but lack the verifiable guarantees that regulators may require. This tension — between what is provable and what is deployable — runs through the remainder of this survey and motivates the domain-specific analysis in §4.2.
+
+<!-- SECTION CLOSE (C3): -->
+
+The methods surveyed in this section have been developed and validated primarily in centralized, homogeneous settings: single models trained on static datasets hosted on powerful hardware. The definitions of §2.2 and the taxonomy of §2.3 provide the theoretical and methodological foundation against which any domain-specific adaptation must be evaluated. However, intelligent building IoT systems present a fundamentally different operational context — one characterized by distributed model state, heterogeneous hardware, continuous data streams, and frequent consent revocations. Section 3 establishes the concrete properties of these systems before §4 examines what happens when unlearning methods from this section encounter real IB-IoT constraints.
 
 ---
 
