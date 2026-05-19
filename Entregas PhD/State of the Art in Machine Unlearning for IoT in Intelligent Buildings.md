@@ -203,7 +203,7 @@ The methods surveyed in this section have been developed and validated primarily
 - **Cloud/backend tier** — training, long-term storage, cross-building analytics, and operator dashboards; resource-rich but latency- and bandwidth-bound, which pushes inference work downward.
 
 **C2 — Protocols, volumes, heterogeneity, ML placement.**
-- Protocol mix spans **MQTT** (lightweight pub/sub), **CoAP** (constrained REST), **Zigbee / Z-Wave** (low-power mesh), legacy BMS stacks (**BACnet, KNX, Modbus**), and **LoRaWAN** for long-range low-rate links [[44], [45]].
+- Protocol mix spans **MQTT** (lightweight pub/sub), **CoAP** (constrained REST), **Zigbee / Z-Wave** (low-power mesh), legacy BMS stacks (**BACnet, KNX, Modbus**), and **LoRaWAN** for long-range low-rate links [[44], [45]]. 
 - Data volume: per-building sensor streams aggregate from sub-second sampling to minute-resolution time series, reaching TB-scale per year across building portfolios [[46]].
 - Heterogeneity is intrinsic — device generations, vendor silos, and firmware drift coexist on the same network, precluding a uniform model substrate [[47]].
 - Latency budget: comfort and safety loops (HVAC actuation, occupancy-driven lighting, alarms) demand sub-second inference, forcing model replicas to live at the edge rather than only in the cloud [[48]].
