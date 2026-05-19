@@ -182,6 +182,11 @@ The methods surveyed in this section have been developed and validated primarily
      optimisation and comfort, but also produces detailed behavioural
      profiles of occupants who may later revoke consent. -->
 
+- Intelligent buildings operate as socio-technical systems where continuous ML inference over occupant-sensitive streams underpins routine operation [[40]].
+- A standing tension defines the setting: fine-grained sensing enables HVAC, energy, and comfort optimisation, while simultaneously producing detailed behavioural profiles of the occupants generating that data [[41]].
+- Occupants may revoke consent at any point — tenancy changes, policy updates, or individual objection — placing deletion obligations on a system architected for retention, not erasure [[15]].
+- The following subsections decompose this setting along three axes: the layered architecture that distributes model state (§3.1), the data and privacy regime that governs it (§3.2), and the ML workloads that consume it (§3.3). Together they define the constraint surface §4 evaluates existing unlearning methods against.
+
 ### 3.1 IoT Architectures in Intelligent Buildings
 
 <!-- PARAGRAPH CCC:
@@ -191,6 +196,27 @@ The methods surveyed in this section have been developed and validated primarily
      C3 – because model state is replicated across tiers, a single
           deletion request may require coordinated updates across
           multiple devices — a challenge absent in centralised settings -->
+
+**C1 — Layered architecture.** IB-IoT deployments converge on a three-tier topology [[42]]:
+- **Perception tier** — occupancy sensors, PIR, CO₂, smart meters, cameras, wearables, and legacy BMS field devices. Hosted on resource-tight MCUs with intermittent connectivity and minimal local storage.
+- **Edge/gateway tier** — Raspberry-Pi-class to industrial gateways performing aggregation, protocol translation, and local inference; commonly the site of lightweight ML (TinyML, quantised models) [[43]].
+- **Cloud/backend tier** — training, long-term storage, cross-building analytics, and operator dashboards; resource-rich but latency- and bandwidth-bound, which pushes inference work downward.
+
+**C2 — Protocols, volumes, heterogeneity, ML placement.**
+- Protocol mix spans **MQTT** (lightweight pub/sub), **CoAP** (constrained REST), **Zigbee / Z-Wave** (low-power mesh), legacy BMS stacks (**BACnet, KNX, Modbus**), and **LoRaWAN** for long-range low-rate links [[44], [45]].
+- Data volume: per-building sensor streams aggregate from sub-second sampling to minute-resolution time series, reaching TB-scale per year across building portfolios [[46]].
+- Heterogeneity is intrinsic — device generations, vendor silos, and firmware drift coexist on the same network, precluding a uniform model substrate [[47]].
+- Latency budget: comfort and safety loops (HVAC actuation, occupancy-driven lighting, alarms) demand sub-second inference, forcing model replicas to live at the edge rather than only in the cloud [[48]].
+- Typical ML placement per tier:
+    - *Cloud*: model training, periodic federated aggregation, anomaly model fitting.
+    - *Edge*: live inference, online fine-tuning, federated client role.
+    - *Perception*: rare deployments — keyword spotting, threshold classifiers, heavily quantised models.
+
+**C3 — Implication for unlearning.**
+- Model state is **replicated across tiers**: the cloud holds the trained model, the edge runs a distilled or quantised copy, and a sensor may carry a further-reduced threshold variant.
+- A single deletion request therefore demands **coordinated updates across every tier holding a derived artifact** — a coordination problem absent from the centralised settings assumed in §2.
+- Quantisation and distillation sever the **provenance link** between individual training samples and edge weights; even certified-removal procedures such as SISA [[22]] cannot retroactively reach an edge replica produced by a lossy transform [[49]].
+- Intermittent connectivity blocks synchronous propagation of revocations, so the system must tolerate **partial-unlearn states** in which some tiers have forgotten and others have not — a failure mode no existing unlearning definition (§2.2) explicitly handles.
 
 ### 3.2 Data Management and Privacy Challenges
 
