@@ -212,6 +212,31 @@ This architecture has structural consequences for unlearning. Model state is **r
           occupant-facing systems, creating a high-throughput stream
           of unlearning requests that must be handled efficiently -->
 
+**C1 — Sensitive data categories produced by IB-IoT.**
+- **Occupancy traces**: presence/absence, room-level localisation, dwell time, movement paths inferred from PIR, BLE beacons, Wi-Fi probe requests, camera analytics. Reveal routines, social ties, work patterns [[50]].
+- **Energy/consumption profiles**: per-circuit and per-appliance smart-meter readings. Non-intrusive load monitoring (NILM) can disaggregate to individual device usage → infer activities (cooking, sleep, showering) [[51]].
+- **Environmental + biometric signals**: CO₂, temperature, humidity (proxy for occupant count); wearables and access-control biometrics (fingerprint, face, gait) [[52]].
+- **Derived inferences**: comfort preferences, schedules, health proxies. Often more sensitive than raw inputs because they aggregate across modalities [[53]].
+- All four categories qualify as **personal data** under GDPR once tied to an identifiable occupant — including indirect identification via device MAC, lease record, or behavioural fingerprint [[13]].
+
+**C2 — Regulatory landscape, data minimisation, consent lifecycle.**
+- **GDPR Art. 5** (data minimisation, purpose limitation, storage limitation) + **Art. 17** (right to erasure) + **Art. 25** (data protection by design) define the EU baseline [[13]].
+- **ePrivacy Directive** governs electronic communications metadata — relevant for occupancy data carried over building networks [[54]].
+- **CCPA / CPRA** in California and **HIPAA** for health-adjacent data (assisted-living, hospitals) impose analogous obligations [[14]].
+- **Data minimisation in practice**: edge aggregation (count instead of raw images), differential privacy noise on telemetry, retention windows. None of these remove already-trained model traces [[55]].
+- **Consent lifecycle** in multi-tenant buildings:
+  - *Granting* per-tenant, per-purpose, often at lease start.
+  - *Updating* on policy revision, sub-letting, role change.
+  - *Revoking* on move-out, dispute, or unilateral objection.
+  - Joint/shared spaces (lobbies, gyms) → **overlapping consent domains** where one tenant's revocation cannot retroactively unmix their contribution from co-occupant data [[56]].
+- **Data controller ambiguity**: building owner, facility manager, vendor cloud, and tenant may each be controller for different streams → unclear who executes an unlearning request [[57]].
+
+**C3 — Implication for unlearning: high-throughput, multi-source revocations.**
+- Revocation rate is **structurally high**: tenant turnover, short-term occupancy, contract workers, visitors → deletion requests arrive continuously, not in rare batches as §2 methods assume.
+- Each request may span **multiple data subjects' overlapping records** (shared-space sensing) → unlearning unit is rarely a clean single-sample slice.
+- Aggregated derived inferences must be **transitively unlearned**: removing raw occupancy data does not by itself erase a downstream comfort-preference model trained on it [[58]].
+- Throughput requirement: an IB-IoT unlearning pipeline must process revocations at the rate at which occupants change — orders of magnitude above the deletion frequency assumed in centralised settings.
+
 ### 3.3 Role of Machine Learning in Intelligent Building Systems
 
 <!-- PARAGRAPH CCC:
@@ -222,6 +247,30 @@ This architecture has structural consequences for unlearning. Model state is **r
      C3 – online and federated regimes mean the "clean snapshot to
           retrain from" is ill-defined — the core assumption of most
           exact unlearning methods breaks down here -->
+
+**C1 — ML tasks across the IB stack.**
+- **Occupancy prediction / detection**: time-series classification from PIR, CO₂, BLE — drives HVAC and lighting scheduling [[59]].
+- **HVAC optimisation / setpoint control**: regression and reinforcement learning over weather, occupancy, energy price → comfort vs. cost trade-off [[60]].
+- **Anomaly + fault detection**: unsupervised / semi-supervised models flag sensor drift, equipment failure, intrusion [[61]].
+- **User preference modelling**: per-occupant comfort profiles, often heterogeneous GNNs over user–device–space graphs [[62]].
+- **Energy disaggregation (NILM)** and **load forecasting**: sequence models on smart-meter streams [[63]].
+- **Access control + biometric ID**: face/gait/fingerprint classifiers at entry points [[64]].
+
+**C2 — Model types and training regimes.**
+- *Model families*: classical time-series (ARIMA, state-space) → deep sequence models (LSTM, Transformer) → graph models (heterogeneous GNNs) for user-preference and digital-twin tasks → RL policies for control [[65]].
+- *Training regimes*:
+  - **Online / streaming**: weights update continuously from live telemetry; no fixed dataset boundary [[66]].
+  - **Periodic batch**: nightly/weekly retrain on accumulated windows; cleaner provenance but stale models between cycles.
+  - **Federated**: per-building or per-edge clients train locally, share gradients/weights to a coordinator; raw data never centralised [[67]].
+  - **Continual / incremental**: model expands as new occupants, sensors, or spaces are added — no clean "initial state" [[68]].
+- *Deployment placement* (cross-ref §3.1): cloud trains heavy models, edge fine-tunes locally, perception tier carries quantised inference kernels.
+
+**C3 — Implication for unlearning: no clean snapshot to retrain from.**
+- Online and continual regimes produce a **non-stationary parameter trajectory**; "the model before sample $z$ was seen" is not a well-defined state — gradient updates from $z$ are interleaved with millions of others [[69]].
+- Federated training removes the **central dataset** that exact methods (SISA) require: the coordinator never sees raw samples, so it cannot retrain a shard from scratch on $D \setminus \{z\}$ [[70]].
+- RL policies are even worse: the influence of $z$ propagates through state-action visitations, not just gradient steps → influence-function methods (§2.3) lose their theoretical footing [[71]].
+- GNN-based user models entangle a user's data with neighbours via message passing → removing one user requires re-propagation, not just node deletion [[72]].
+- Net effect: the core assumption of §2's methods — that a clean baseline exists to compare against — fails across **every dominant training regime** in IB-IoT. §4 examines how the field has tried to work around this.
 
 <!-- SECTION CLOSE (C3):
      The distinctive properties of IB-IoT — distributed state,
