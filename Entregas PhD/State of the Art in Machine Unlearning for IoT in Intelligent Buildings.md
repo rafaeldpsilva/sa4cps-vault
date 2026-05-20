@@ -244,20 +244,22 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
 ---
 
 <!-- ══════════════════════════════════════════════════════
-     WHOLE-PAPER C2 – CONTENT  (§4–§5)
-     Goal: report WHAT has been done
+     WHOLE-PAPER C2 – CONTENT  (§4)
+     Goal: report WHAT has been done; ground in concrete scenarios
      ══════════════════════════════════════════════════════ -->
 
 ## 4. Machine Unlearning in IoT and Intelligent Buildings
 
 <!-- SECTION CCC:
      C1 – Opening paragraph: the intersection of MU and IoT/IBs is nascent;
-          most work adapts centralised methods with varying success
-     C2 – research landscape, domain-specific challenges, existing
-          frameworks, evaluation metrics (§4.1–§4.4)
+          most work adapts centralised methods with varying success.
+          Case-grounded: each sub-claim illustrated with an operational
+          IB scenario rather than a standalone case-study section.
+     C2 – research landscape, constraint dimensions, stack-tier coverage
+          with embedded scenarios, evaluation gap (§4.1–§4.4)
      C3 – Closing paragraph: existing approaches address isolated sub-
-          problems but no integrated framework covers the full IB stack;
-          §5 instantiates this through concrete scenarios -->
+          problems; no integrated framework covers the full IB stack —
+          motivating the challenges + directions in §5 -->
 
 <!-- SECTION OPENING (C1):
      Characterise the maturity of the field: volume of publications,
@@ -293,15 +295,27 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
 
 ### 4.3 Current Approaches Address Only Isolated Sub-Problems of IB-IoT Unlearning
 
-<!-- PARAGRAPH CCC:
+<!-- PARAGRAPH CCC + EMBEDDED CASE-STUDY VIGNETTES:
      C1 – categorise by where in the IB stack the method operates:
           cloud-side, edge-side, federated
      C2 – for each category: method, assumptions, reported performance,
-          and which of the §4.2 constraints it addresses or ignores
+          and which of the §4.2 constraints it addresses or ignores.
+          Each category illustrated by one IB scenario as concrete evidence:
+            • Cloud-side  → smart-home occupant move-out deletion
+                            (lightweight approximate methods work for
+                             single-tenant settings but cannot verify)
+            • Edge-side   → energy-management model retraction after
+                            biased sensor data is detected
+                            (utility degradation dominates; approximate
+                             unlearning degrades performance non-uniformly)
+            • Federated   → multi-tenant building with per-tenant
+                            consent revocation
+                            (federated topology amplifies verification
+                             difficulty; weakest node is bottleneck)
      C3 – cloud-side methods ignore edge constraints;
           edge-side methods ignore federated coordination;
           federated methods weaken unlearning guarantees —
-          no single approach satisfies all four constraint dimensions -->
+          no single approach satisfies all four §4.2 constraint dimensions -->
 
 ### 4.4 The Absence of IB-Specific Benchmarks Prevents Systematic Comparison
 
@@ -316,121 +330,75 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
           standardisation is a prerequisite for production deployment -->
 
 <!-- SECTION CLOSE (C3):
-     Existing methods address isolated fragments of the problem.
-     §5 illustrates how this plays out in three operational IB scenarios,
-     making the gaps concrete rather than abstract. -->
-
----
-
-## 5. Case Studies and Applications
-
-<!-- SECTION CCC:
-     C1 – Opening paragraph: case studies ground abstract method limitations
-          in operational IB contexts and surface practical bottlenecks
-     C2 – three representative scenarios (§5.1–§5.3)
-     C3 – Closing paragraph: across all scenarios, approximate unlearning
-          dominates because exact methods are computationally infeasible;
-          verification remains the weakest link in every case -->
-
-### 5.1 Unlearning Personal Data in Smart Home Systems
-
-<!-- C1 – scenario: occupant requests deletion of their data after moving out
-     C2 – method applied, system configuration, results, failure modes
-     C3 – lesson: lightweight approximate methods work for single-tenant
-          settings but cannot provide verifiable guarantees -->
-
-### 5.2 Model Retraction in Energy Management Systems
-
-<!-- C1 – scenario: erroneous or biased sensor data identified post-deployment
-     C2 – method applied, impact on HVAC model accuracy, retraining cost
-     C3 – lesson: utility degradation is the dominant cost; approximate
-          unlearning degrades model performance non-uniformly -->
-
-### 5.3 Privacy-Preserving Updates in Building Automation
-
-<!-- C1 – scenario: multi-tenant building with per-tenant consent revocation
-     C2 – federated unlearning approach, communication overhead, coordination
-     C3 – lesson: federated topology amplifies verification difficulty;
-          the weakest node in the federation becomes the bottleneck -->
-
-<!-- SECTION CLOSE (C3):
-     All three scenarios confirm the analysis in §4: no existing method
-     handles the full combination of IB-IoT constraints.
-     §6 provides a structured articulation of the open research problems. -->
+     Across the four sub-claims, the dominant pattern is the same:
+     approximate methods deploy because exact methods are infeasible
+     under IB-IoT constraints, and verification remains the weakest
+     link in every category. §5 articulates the structural problems
+     this leaves open and the directions that could close them. -->
 
 ---
 
 <!-- ══════════════════════════════════════════════════════
-     WHOLE-PAPER C3 – CONCLUSION  (§6–§8)
+     WHOLE-PAPER C3 – CONCLUSION  (§5–§6)
      Goal: synthesise WHAT IS MISSING and WHERE TO GO
      ══════════════════════════════════════════════════════ -->
 
-## 6. Open Challenges
+## 5. Open Challenges and Research Directions
 
 <!-- SECTION CCC:
-     C1 – Opening paragraph: the case studies in §5 surface four structural
-          obstacles that prevent responsible deployment in IBs
-     C2 – one subsection per challenge (§6.1–§6.4)
-     C3 – Closing paragraph: the challenges are interdependent —
-          solving scalability without solving verification is insufficient;
-          §7 proposes directions that address them jointly
-
-  RULE 4 – PARALLELISM:
-     §6 challenges map 1-to-1 onto §7 directions.
-     §6.1 (scalability)   → §7.2 (hardware-accelerated unlearning)
-     §6.2 (verification)  → §7.3 (PETs: TEEs, ZKPs)
-     §6.3 (regulation)    → §7.3 (compliance-by-design)
-     §6.4 (interop/stds)  → §7.1 (federated reference architecture) -->
-
-### 6.1 Scalability and Efficiency in Large-Scale IoT
-
-### 6.2 Verification and Formal Guarantees of Unlearning
-
-### 6.3 Regulatory and Ethical Considerations
-
-### 6.4 Interoperability and Standardisation
-
-<!-- SECTION CLOSE (C3):
-     The four challenges form a coherent research agenda.
-     §7 maps each challenge onto a concrete research direction. -->
-
----
-
-## 7. Future Research Directions
-
-<!-- SECTION CCC:
-     C1 – Opening paragraph: recent advances in adjacent fields (FL,
-          trusted execution environments, PETs) open new solution
-          pathways for the challenges identified in §6
-     C2 – three directions, each mapped to one or more §6 challenges (§7.1–§7.3)
-     C3 – Closing paragraph: realising these directions requires
-          cross-disciplinary collaboration (systems, ML, law, HCI);
-          a community benchmark and reference architecture would
-          provide the shared foundation needed
+     C1 – Opening paragraph: §4 surfaces four structural obstacles that
+          prevent responsible IB-IoT deployment; recent advances in
+          adjacent fields (FL, TEEs, PETs) open partial pathways.
+     C2 – one subsection per challenge; each subsection contains both
+          the challenge framing and its proposed research direction
+          (§5.1–§5.4)
+     C3 – Closing paragraph: the four are interdependent —
+          scalability without verification is insufficient.
+          Realising the directions requires cross-disciplinary
+          collaboration (systems, ML, law, HCI); a community benchmark
+          and reference architecture would provide the shared foundation.
 
   RULE 4 – PARALLELISM:
      Each subsection has the same internal structure:
-     (a) which §6 challenge(s) it targets,
-     (b) the proposed direction and its technical basis,
-     (c) what is still needed to realise it. -->
+     **Challenge:** what is broken and why §4 methods do not solve it.
+     **Direction:** the proposed pathway, its technical basis, and
+                    what is still needed to realise it. -->
 
-### 7.1 Federated Unlearning Architectures for Distributed IB-IoT
-<!-- Targets §6.1 (scalability) and §6.4 (interoperability / standardisation) -->
+### 5.1 Scalability and Efficiency in Large-Scale IoT
+<!-- Challenge: edge compute/memory limits + revocation throughput.
+     Direction: hardware-accelerated and on-device unlearning
+                (TinyML kernels, sparse update primitives, MCU runtimes). -->
 
-### 7.2 Hardware-Accelerated and On-Device Unlearning
-<!-- Targets §6.1 (edge compute constraints) -->
+### 5.2 Verification and Formal Guarantees of Unlearning
+<!-- Challenge: approximate methods dominate but offer no auditable
+                certificate of erasure — regulator-facing gap.
+     Direction: verifiable unlearning via PETs — TEEs for trusted
+                attestation of the unlearning procedure, ZKPs for
+                proof-of-erasure without revealing model internals. -->
 
-### 7.3 Verifiable Unlearning via Privacy-Enhancing Technologies
-<!-- Targets §6.2 (formal guarantees via TEEs / ZKPs) and §6.3 (compliance) -->
+### 5.3 Regulatory and Ethical Considerations
+<!-- Challenge: GDPR Art. 17 + controller ambiguity + multi-tenant
+                overlapping consent domains have no technical mapping
+                in current methods.
+     Direction: compliance-by-design unlearning pipelines that bind
+                technical erasure certificates to the legal data-subject
+                lifecycle (consent, sub-letting, move-out). -->
+
+### 5.4 Interoperability and Standardisation
+<!-- Challenge: heterogeneous tiers, vendor silos, federated topology
+                → no shared substrate for cross-system unlearning.
+     Direction: a federated reference architecture and shared benchmark
+                that defines APIs, evaluation metrics, and minimum
+                interoperability contracts across cloud / edge / device. -->
 
 <!-- SECTION CLOSE (C3):
-     Progress on these fronts will collectively close the gap between
-     the theoretical guarantees established in §2 and the operational
-     reality demonstrated in §3–§5. -->
+     The four challenge–direction pairs form a coherent research agenda
+     that collectively closes the gap between the theoretical guarantees
+     of §2 and the operational reality of §3–§4. -->
 
 ---
 
-## 8. Conclusion
+## 6. Conclusion
 
 <!-- RULE 8 — DISCUSSION / CONCLUSION STRUCTURE:
      First paragraph: recapitulate the central finding (fills the gap
