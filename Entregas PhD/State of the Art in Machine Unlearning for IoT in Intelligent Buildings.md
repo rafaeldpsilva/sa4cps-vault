@@ -412,8 +412,8 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
      C1 – restate the problem: ML models in IBs retain sensitive data;
           existing unlearning methods are insufficient for IB-IoT constraints
      C2 – what the survey found: taxonomy (§2), IB-IoT requirements (§3),
-          fragmented state of the art (§4), concrete failure modes (§5),
-          four open challenges (§6), three research directions (§7)
+          fragmented state of the art with case-grounded failure modes (§4),
+          four interdependent challenges + matched research directions (§5)
      C3 – closing claim: machine unlearning for IB-IoT is a critical,
           underserved area; the community needs shared benchmarks,
           reference architectures, and formal verification frameworks
