@@ -271,156 +271,17 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
      so that the reader can fact-check it. After writing, these headers
      become the logical spine of the section argument. -->
 
-**§4 opener — maturity of the field.**
-- Intersection of MU and IoT/IBs is young (≈ 2021–2026); volume rising but small relative to centralised MU literature [[73]].
-- Most contributions adapt centralised methods (SISA, gradient-based) to FL or edge — IB-specific constraints rarely modelled jointly.
-- Adjacent fields drive borrowing: federated learning (gradient correction, client dropout), differential privacy (DP-SGD), edge ML (TinyML, quantisation) [[74]].
-- Sub-problems with most attention: federated unlearning + edge inference. Underserved: verification, multi-tenant consent, transitive unlearning of derived models.
-- Forward pointer: §4.1 scope, §4.2 constraints, §4.3 stack-tier coverage with vignettes, §4.4 benchmark gap.
+The intersection of machine unlearning and IoT in intelligent buildings is a young field, with contributions appearing primarily from 2021 onward. Despite growing interest in machine unlearning as a research area, the vast majority of work targets centralized settings or general federated learning, and few published methods explicitly model the constraints of intelligent building deployments [REF]. Most contributions borrow techniques from adjacent fields: gradient correction and client dropout protocols from federated learning, noise injection from differential privacy, and model compression from edge ML and TinyML [REF]. These borrowed tools address isolated sub-problems but none were designed for the combined constraint envelope that intelligent buildings impose. Verification, multi-tenant consent handling, and transitive unlearning of derived models remain largely unaddressed. The remainder of this section evaluates what has been attempted, organized by where in the building stack each approach operates, and identifies the structural gaps that prevent any single method from covering the full deployment context.
 
-### 4.1 Research at the Intersection of Machine Unlearning and IB-IoT Remains Nascent and Fragmented
+Existing approaches can be grouped by where in the building stack they operate: cloud-side, edge-side, and federated.
 
-<!-- PARAGRAPH CCC:
-     C1 – survey scope: databases searched, time period, inclusion criteria
-     C2 – quantitative overview (paper count, venue distribution, topic
-          clusters); most work targets general IoT or FL settings —
-          few papers explicitly model IB constraints
-     C3 – fragmentation means findings are hard to compare and
-          no consensus method has emerged for this domain -->
+Cloud-side methods rely on centralized datasets and ample compute. SISA-style sharding (§2.3.1), gradient-based corrections, and knowledge distillation (§2.3.2) all assume infrequent deletion requests processed on powerful hardware [REF]. In a single-tenant smart-home scenario, these methods can function: when a tenant vacates, the backend applies approximate gradient updates to remove their data's influence [REF]. But the approach yields no verifiable certificate of erasure, and edge replicas on the in-home hub remain unchanged until the next synchronization cycle [REF]. Cloud-side methods address none of the constraints established in §3: they ignore edge resource limits, assume a single model rather than heterogeneous replicas across tiers, and require a centralized dataset that federated deployments do not provide.
 
-**C1 — survey scope.**
-- Databases: IEEE Xplore, ACM DL, Scopus, Web of Science, arXiv (cs.LG, cs.CR, cs.DC).
-- Time window: 2015 (Cao & Yang, original "machine unlearning" paper [[75]]) → 2026.
-- Inclusion criteria: explicit unlearning mechanism **and** IoT / edge / federated / IB context. Pure FL papers without an unlearning hook excluded.
-- Search strings: `("machine unlearning" OR "data deletion" OR "right to be forgotten") AND ("IoT" OR "edge" OR "federated" OR "smart building" OR "intelligent building")`.
-- Snowballing: backward refs from seed papers (SISA [[22]], FedEraser [[76]]).
+Edge-side methods operate directly on device-hosted models using gradient ascent on the forget set (§2.3.2), neuron pruning, or local fine-tuning with a replay buffer [REF]. These are lightweight enough to run on constrained hardware, partially addressing the resource limitation. However, they assume an isolated device with local access to the data to be forgotten. When a biased sensor stream is detected in an HVAC model post-deployment, local gradient ascent on the affected data window can patch the model, but utility drops non-uniformly. Comfort degrades for occupants whose data was unaffected by the bias [REF]. Edge-side methods ignore multi-tenant consent boundaries and operate without coordination across the federated topology, leaving other tiers holding stale model state.
 
-**C2 — quantitative overview.**
-- ~$N$ papers retained (placeholder pending final count); ≈70% target FL or generic IoT, <15% explicitly model IB constraints.
-- Venue spread: ML venues (NeurIPS, ICML), security (CCS, USENIX), IoT systems (SenSys, IoTDI), some domain-specific (BuildSys). No single home venue.
-- Topic clusters: federated unlearning (largest), edge / on-device unlearning, verifiable unlearning (TEEs, ZKPs), DP-grounded unlearning.
-- IB-specific work concentrated on smart-home + HVAC scenarios; multi-tenant offices nearly absent.
+Federated methods such as FedEraser, gradient-rollback aggregation, and federated SISA variants address the distributed topology directly [REF]. In a multi-tenant building, each edge device acts as a federated client; a consent revocation triggers rollback of that client's gradient contributions from the aggregated model [REF]. But federated unlearning weakens guarantee strength. The result is statistical, not certified. Verification difficulty compounds across clients: the least attestable node bottlenecks the global guarantee, and offline clients retain stale weights in their local models indefinitely [REF]. These methods assume a trusted aggregator and sufficiently synchronous clients, assumptions that break down in real building networks with intermittent connectivity and heterogeneous firmware.
 
-**C3 — consequence.**
-- Fragmentation → no shared experimental protocol, no shared dataset, no cross-paper comparability.
-- No consensus method for IB-IoT has emerged; the field is pre-paradigmatic in Kuhn's sense.
-- Sets up §4.2 (why no method satisfies the constraints) and §4.4 (why benchmarks are missing).
-
-### 4.2 IB-IoT Environments Impose Constraints That Existing Unlearning Methods Cannot Satisfy
-
-<!-- PARAGRAPH CCC:
-     C1 – four constraint dimensions that distinguish IB-IoT from
-          the centralised settings in which most methods were designed
-     C2 – (a) edge resource limits (memory, compute),
-          (b) model heterogeneity across tiers,
-          (c) multi-tenancy (multiple data owners per device),
-          (d) real-time availability and federated topology
-     C3 – each constraint individually complicates unlearning;
-          in combination they are unsolved by any single existing method -->
-
-**C1 — four constraint dimensions distinguishing IB-IoT.**
-- Drawn from the IB-IoT properties in §3 (architecture, data regime, ML regimes).
-- Form a four-axis envelope no centralised method was designed to occupy.
-
-**C2 — the four dimensions.**
-- **(a) Edge resource limits**: MCU-class RAM (kB–MB), no GPU, energy budget for inference but not retraining → exact methods (SISA) infeasible on-device [[43]].
-- **(b) Model heterogeneity across tiers**: cloud reference / edge distilled / sensor quantised replicas with broken provenance link → unlearning must coordinate non-identical artefacts [[49]].
-- **(c) Multi-tenancy + overlapping consent**: shared sensors encode multiple data subjects' contributions; deletion request rarely maps to one clean slice [[56]].
-- **(d) Real-time availability + federated topology**: closed-loop control cannot tolerate downtime; clients drop in/out; no central dataset for retraining [[67], [70]].
-
-**C3 — combined effect.**
-- Each constraint individually challenges one method family; combined, they exclude every surveyed method from full coverage.
-- Used as the evaluation rubric in §4.3 (which constraints each method addresses / ignores).
-
-### 4.3 Current Approaches Address Only Isolated Sub-Problems of IB-IoT Unlearning
-
-<!-- PARAGRAPH CCC + EMBEDDED CASE-STUDY VIGNETTES:
-     C1 – categorise by where in the IB stack the method operates:
-          cloud-side, edge-side, federated
-     C2 – for each category: method, assumptions, reported performance,
-          and which of the §4.2 constraints it addresses or ignores.
-          Each category illustrated by one IB scenario as concrete evidence:
-            • Cloud-side  → smart-home occupant move-out deletion
-                            (lightweight approximate methods work for
-                             single-tenant settings but cannot verify)
-            • Edge-side   → energy-management model retraction after
-                            biased sensor data is detected
-                            (utility degradation dominates; approximate
-                             unlearning degrades performance non-uniformly)
-            • Federated   → multi-tenant building with per-tenant
-                            consent revocation
-                            (federated topology amplifies verification
-                             difficulty; weakest node is bottleneck)
-     C3 – cloud-side methods ignore edge constraints;
-          edge-side methods ignore federated coordination;
-          federated methods weaken unlearning guarantees —
-          no single approach satisfies all four §4.2 constraint dimensions -->
-
-**C1 — categorisation by stack tier.**
-- Three categories tracking the §3.1 tier model: cloud-side, edge-side, federated.
-- Each tier hosts a different unlearning operating model and addresses a different subset of §4.2 constraints.
-
-**C2a — Cloud-side methods + vignette.**
-- Methods: SISA-style sharding [[22]], retrain-on-shard, gradient-based correction on the full model, knowledge distillation [[39]].
-- Assumptions: centralised dataset, ample compute, infrequent deletions.
-- Addresses §4.2 (c) partially (subject-slice deletion). Ignores (a), (b), (d).
-- *Vignette — Smart-home occupant move-out.* Tenant vacates; backend unlearns their data via approximate gradient updates [[33]]. Works in single-tenant deployment but yields no verifiable certificate of erasure; edge replicas on the in-home hub remain unchanged until next sync [[77]].
-
-**C2b — Edge-side methods + vignette.**
-- Methods: gradient ascent on forget set [[38]], neuron pruning [[37]], on-device fine-tune with replay buffer.
-- Assumptions: local data still available; small model; isolated device.
-- Addresses §4.2 (a) and partial (b). Ignores (c) multi-tenant + (d) federated coordination.
-- *Vignette — Energy management retraction.* Biased sensor stream detected post-deployment; edge HVAC model patched via local gradient ascent on the affected window [[78]]. Utility drops non-uniformly across occupancy regimes — comfort degrades for occupants whose data was unaffected by the bias [[20]].
-
-**C2c — Federated methods + vignette.**
-- Methods: FedEraser [[76]], gradient-rollback aggregation, client-side unlearning with coordinator re-averaging, federated SISA variants [[79]].
-- Assumptions: synchronous-enough clients, trusted aggregator, no raw data leaves clients.
-- Addresses §4.2 (d). Partial (c). Weakens guarantee strength: unlearning becomes statistical, not certified.
-- *Vignette — Multi-tenant building with per-tenant revocation.* Per-edge federated client; revocation triggers rollback of contributions from that client's history [[80]]. Verification difficulty amplified — the weakest / least-attestable node bottlenecks the global guarantee; offline clients leave stale weights in their local model [[81]].
-
-**C3 — coverage gap.**
-- Cloud-side: ignores (a) edge + (b) replica heterogeneity.
-- Edge-side: ignores (c) multi-tenancy + (d) federation.
-- Federated: weakens guarantee strength; ignores (a) deeply.
-- No surveyed approach satisfies all four §4.2 dimensions simultaneously.
-
-### 4.4 The Absence of IB-Specific Benchmarks Prevents Systematic Comparison
-
-<!-- PARAGRAPH CCC:
-     C1 – evaluation metrics used across the surveyed papers vary widely
-     C2 – metrics catalogue: unlearning completeness (membership
-          inference [cite], activation analysis [cite]), model utility
-          retention, computational cost, communication overhead;
-          datasets used and their representativeness for IBs
-     C3 – without shared benchmarks and agreed metrics, claims of
-          "efficient" or "complete" unlearning cannot be compared;
-          standardisation is a prerequisite for production deployment -->
-
-**C1 — heterogeneity of evaluation.**
-- Each paper picks its own metrics, datasets, and threat model → no apples-to-apples comparison.
-- IB-IoT lacks a canonical dataset analogous to MNIST/CIFAR for centralised MU benchmarks.
-
-**C2 — metrics + datasets catalogue.**
-- *Completeness*: membership-inference attack (MIA) accuracy [[16]], activation-distance analysis [[82]], gradient-residual probes [[83]].
-- *Utility retention*: post-unlearn accuracy on retained data, downstream task drift, control-loop stability for HVAC.
-- *Computational cost*: wall-clock unlearn time, FLOPs, energy (Joules) — last especially relevant for edge.
-- *Communication overhead*: bytes exchanged per revocation in federated setting.
-- *Datasets used*: CIFAR / MNIST adapted (non-IB), ECO / REDD for energy [[84]], occupancy CSV traces from KTH / Sutton, synthetic FL benchmarks (LEAF) — none jointly cover IB sensor mix + multi-tenancy.
-- *Threat models*: rarely specified; honest-but-curious aggregator default; physical-edge-attacker considered in <5% of surveyed work.
-
-**C3 — implication.**
-- Claims of "efficient" / "complete" unlearning are not falsifiable across papers.
-- Standardisation = prerequisite for production deployment + for regulator-facing audits.
-- Direct setup for §5.4 (interoperability + standardisation direction).
-
-<!-- SECTION CLOSE (C3):
-     Across the four sub-claims, the dominant pattern is the same:
-     approximate methods deploy because exact methods are infeasible
-     under IB-IoT constraints, and verification remains the weakest
-     link in every category. §5 articulates the structural problems
-     this leaves open and the directions that could close them. -->
-
-**§4 close.** Approximate methods deploy because exact methods are infeasible under IB-IoT constraints; verification is the weakest link in every category; no method covers all four §4.2 dimensions. §5 articulates the structural challenges this leaves open and the matched directions that could close them.
+The pattern across all three tiers is consistent: each approach addresses one or two of the constraints from §3 while ignoring the rest. Cloud-side methods ignore edge resources and federation. Edge-side methods ignore multi-tenancy and cross-tier coordination. Federated methods weaken the unlearning guarantee itself. No existing approach satisfies the full constraint envelope simultaneously. Compounding this gap, there is no shared benchmark against which to compare partial solutions. Each study uses its own metrics, datasets, and threat models. One measures membership inference accuracy, another activation distance, a third wall-clock time [REF]. Datasets range from adapted CIFAR and MNIST benchmarks to ECO and REDD energy traces, none of which jointly cover the multi-modal sensor mix and multi-tenant structure of an intelligent building [REF]. Without a canonical evaluation framework, claims of efficient or complete unlearning cannot be compared across papers, and no certification path exists for regulator-facing audits.
 
 ---
 
@@ -450,113 +311,27 @@ The consequence is that no clean snapshot exists from which to retrain. Online a
      **Direction:** the proposed pathway, its technical basis, and
                     what is still needed to realise it. -->
 
-**§5 opener.**
-- §4 surfaces four interdependent obstacles: scalability, verification, regulation, interoperability.
-- Adjacent advances open partial pathways: FL maturity, TEEs (Intel SGX, ARM TrustZone), ZKP toolchains (Halo2, Plonk), TinyML runtimes.
-- Each subsection pairs **Challenge** (what is broken) with **Direction** (proposed pathway + technical basis + what is still needed).
+Recent advances in adjacent fields provide building blocks that could address the obstacles identified in §4. Federated learning frameworks have matured, trusted execution environments are increasingly available on edge hardware, zero-knowledge proof toolchains have reached practical compilation targets, and TinyML runtimes now support on-device model manipulation [REF]. None of these were designed for unlearning, but each can be adapted. The following subsections identify concrete research directions organized around three axes: scalability, verification, and the regulatory-standardisation gap.
 
-### 5.1 Scalability and Efficiency in Large-Scale IoT
-<!-- Challenge: edge compute/memory limits + revocation throughput.
-     Direction: hardware-accelerated and on-device unlearning
-                (TinyML kernels, sparse update primitives, MCU runtimes). -->
+### 5.1 Scalability and Efficiency
 
-**Challenge.**
-- Edge devices have MCU-class RAM (kB–MB) and no GPU → SISA / full gradient methods do not fit on-device.
-- Revocation throughput is high (§3.2) → unlearn pipeline must run continuously, not as a rare event.
-- Cloud-only unlearning leaves edge replicas stale until sync; sync windows can span hours/days.
-- Energy budget: training-class workloads exceed harvest rates on battery / PoE-limited devices.
+Several research directions could bring unlearning capability to resource-constrained tiers. Sparse and structured update primitives restrict unlearning to a small fraction of model parameters, analogous to LoRA-style adapters, reducing memory requirements enough to fit within MCU constraints [REF]. TinyML unlearning kernels could compile unlearning operations to MCU runtimes such as TensorFlow Lite Micro or microTVM, bringing erasure capability to the perception tier [REF]. Hardware-accelerated paths using NPU or DSP primitives could further reduce the cost of on-device operations [REF]. A two-tier approach offers a pragmatic middle ground: the cloud performs heavy retraining while pushing a lightweight residual patch to edge devices, bounding the computational cost at the edge without leaving replicas permanently stale.
 
-**Direction.**
-- **Sparse / structured update primitives**: restrict unlearning to a small fraction of parameters (LoRA-style adapters, slice updates) → fits MCU memory [[85]].
-- **TinyML unlearning kernels**: compile unlearning ops to MCU runtimes (TFLM, microTVM) [[86]].
-- **Hardware-accelerated paths**: NPU/DSP unlearning primitives; on-die accumulator zeroing for influence-tracked weights [[87]].
-- **Two-tier unlearn**: heavy retrain in cloud + lightweight residual patch pushed to edge → bounded edge cost.
+These directions remain largely unvalidated. No benchmarks exist for unlearning time or energy consumption on Cortex-M-class targets. Formal bounds on residual error when sparse updates replace full retraining have not been established. Compiler support for unlearning operations in TinyML stacks does not yet exist. Until these gaps are filled, scalable on-device unlearning remains a promising direction rather than a deployable capability.
 
-**Still needed.**
-- Benchmarks for unlearn time / energy on Cortex-M-class targets.
-- Formal bounds on residual error when sparse updates replace full retrain.
-- Compiler support for unlearn ops in TinyML stacks.
+### 5.2 Verification and Formal Guarantees
 
-### 5.2 Verification and Formal Guarantees of Unlearning
-<!-- Challenge: approximate methods dominate but offer no auditable
-                certificate of erasure — regulator-facing gap.
-     Direction: verifiable unlearning via PETs — TEEs for trusted
-                attestation of the unlearning procedure, ZKPs for
-                proof-of-erasure without revealing model internals. -->
+Three privacy-enhancing technologies offer partial pathways toward auditable erasure. Trusted execution environments such as Intel SGX, ARM TrustZone, and AMD SEV can run the unlearning procedure inside a hardware enclave, producing a cryptographic attestation report as evidence that the declared procedure executed on the stated inputs [REF]. Zero-knowledge proofs can demonstrate that the final model weights result from applying a declared unlearning function to declared data, without revealing the model internals [REF]. Differential privacy composition tracking treats each unlearning event as consuming privacy budget, producing an auditable ledger of remaining deletion capacity [REF]. A hybrid approach combining TEE attestation for runtime evidence, zero-knowledge proofs for post-hoc audit, and differential privacy accounting for cumulative guarantees could provide layered verification across the building stack.
 
-**Challenge.**
-- Approximate methods dominate (§4.3) but offer no auditable certificate of erasure.
-- MIA-based empirical evaluation is regulator-unfriendly: "low attack accuracy" is not a legal proof.
-- §2.2 definitional fragmentation (certified / approximate / DP) means no single guarantee is agreed.
-- Federated topology amplifies: any node may be malicious / faulty → trust assumption unrealistic.
+Each pathway faces its own barriers. Zero-knowledge proof generation for million-parameter models remains prohibitively expensive. TEE memory limits are incompatible with full-model unlearning and require enclave-friendly model partitioning schemes that do not yet exist. Most critically, no legal precedent maps any of these technical mechanisms to GDPR Article 17 compliance, leaving a gap between what can be cryptographically proven and what regulators will accept as erasure.
 
-**Direction.**
-- **TEE-attested unlearning**: run unlearn procedure inside Intel SGX / ARM TrustZone / AMD SEV enclave; attestation report = cryptographic evidence that procedure ran on stated inputs [[88]].
-- **ZKP proof-of-erasure**: prove (in zero knowledge) that final weights = $U(\theta, z)$ for declared $U$ and $z$, without revealing $\theta$ [[89]].
-- **DP composition tracking**: each unlearning event consumes privacy budget → auditable ledger of remaining capacity [[28]].
-- **Hybrid**: TEE for runtime attestation + ZKP for post-hoc audit + DP accounting for cumulative guarantee.
+### 5.3 Regulatory, Ethical, and Standardisation Considerations
 
-**Still needed.**
-- ZKP cost reduction for million-parameter models (current proving time prohibitive).
-- TEE memory limits incompatible with full-model unlearning → enclave-friendly model partitioning.
-- Legal framework mapping "ZKP proof-of-erasure" to GDPR Art. 17 compliance — currently no precedent.
+Compliance-by-design pipelines could bridge the gap between legal obligations and technical mechanisms. Treating the data-subject lifecycle — consent grant, update, revocation — as a first-class state machine wired directly to unlearning triggers would automate erasure rather than relying on manual intervention [REF]. Provenance ledgers linking raw sensor streams to trained models to derived inferences would allow a deletion request to walk the dependency graph, ensuring transitive unlearning reaches downstream models that inherited the data's influence [REF]. A consent ontology for intelligent buildings, encoding per-modality, per-purpose, and per-space consent atoms in machine-readable form, would make revocations unambiguous and actionable across controllers [REF]. Cross-controller protocols would standardise how revocations propagate from building owner to vendor cloud to edge gateway, resolving the controller ambiguity that currently leaves unlearning responsibility undefined.
 
-### 5.3 Regulatory and Ethical Considerations
-<!-- Challenge: GDPR Art. 17 + controller ambiguity + multi-tenant
-                overlapping consent domains have no technical mapping
-                in current methods.
-     Direction: compliance-by-design unlearning pipelines that bind
-                technical erasure certificates to the legal data-subject
-                lifecycle (consent, sub-letting, move-out). -->
+On the standardisation side, intelligent building stacks span vendor silos with proprietary BMS protocols, and no shared substrate exists for cross-system unlearning. A federated reference architecture defining open unlearning APIs at cloud, edge, and device interfaces would provide the missing interoperability layer [REF]. A shared benchmark combining multi-modal sensor data with multi-tenant structure, paired with a standardised metric suite covering completeness, utility retention, energy cost, and communication overhead, would make claims comparable across studies [REF]. Integration with existing building protocols through BACnet, KNX, or Haystack tag extensions for consent and unlearn-state fields would embed erasure capability into infrastructure that buildings already run [REF].
 
-**Challenge.**
-- GDPR Art. 17 requires erasure "without undue delay" — undefined latency target; no technical SLA in current methods.
-- **Controller ambiguity** (§3.2): which entity (owner / FM / vendor / tenant) executes the request is legally + technically unclear.
-- **Overlapping consent domains** in shared spaces: revocation by one occupant cannot legally cascade to co-occupants' data nor unmix sensor records.
-- Transitive scope: derived inferences (preference models, health proxies) inherit deletion obligations but rarely tracked.
-- Ethics: model "forgetting" can harm utility for retained users (fairness) — under-explored.
-
-**Direction.**
-- **Compliance-by-design pipelines**: data-subject lifecycle (grant → update → revoke) as a first-class state machine wired to unlearn triggers [[90]].
-- **Provenance ledgers**: tamper-evident log linking raw streams → models → derived inferences; deletion request walks the graph [[91]].
-- **Consent ontology** for IB-IoT: per-modality, per-purpose, per-space consent atoms → machine-readable revocation [[92]].
-- **Cross-controller protocols**: standardised inter-controller API for forwarding revocations (owner → vendor cloud → edge gateway).
-
-**Still needed.**
-- Legal-technical mapping: which `(metric, threshold)` pair satisfies "erasure" under Art. 17.
-- Fairness audits of post-unlearn models.
-- Reference consent ontology adopted by IB vendor consortia.
-
-### 5.4 Interoperability and Standardisation
-<!-- Challenge: heterogeneous tiers, vendor silos, federated topology
-                → no shared substrate for cross-system unlearning.
-     Direction: a federated reference architecture and shared benchmark
-                that defines APIs, evaluation metrics, and minimum
-                interoperability contracts across cloud / edge / device. -->
-
-**Challenge.**
-- IB-IoT stacks span vendor silos (Siemens / Honeywell / Schneider / Tridium) with proprietary BMS protocols (§3.1).
-- No shared substrate for cross-system unlearning → revocations cannot propagate across vendor boundaries.
-- §4.4 benchmark gap: each paper picks own metrics / datasets → no comparability, no certification path.
-- Federated topology amplifies: each client may run a different unlearning algorithm with different guarantee.
-
-**Direction.**
-- **Federated reference architecture**: open spec defining unlearning APIs at cloud / edge / device interfaces (`POST /unlearn`, status, attestation) [[93]].
-- **Shared IB-IoT unlearning benchmark**: canonical dataset (multi-modal sensor + multi-tenant) + metric suite (completeness, utility, energy, comms) + reference threat models — analogous to LEAF [[94]] for FL.
-- **Minimum interoperability contracts**: vendor commitments on unlearn latency SLA, attestation format, audit interface.
-- **Integration with existing IB stacks**: BACnet / KNX / Haystack tag extensions for consent + unlearn-state fields [[95]].
-
-**Still needed.**
-- Community consortium to host benchmark + maintain ground truth.
-- Conformance test suite for vendors.
-- Bridge to existing FL frameworks (Flower, FedML) so unlearning is not bolted on.
-
-<!-- SECTION CLOSE (C3):
-     The four challenge–direction pairs form a coherent research agenda
-     that collectively closes the gap between the theoretical guarantees
-     of §2 and the operational reality of §3–§4. -->
-
-**§5 close.** Interdependence: scalability without verification = unauditable; verification without standardisation = vendor-local; regulation without scalability = unenforceable. Solving any single pair is insufficient; the four directions must advance jointly. Cross-disciplinary collaboration (systems, ML, law, HCI) + community benchmark + reference architecture = shared foundation.
+The obstacles are not purely technical. No legal-technical mapping exists to define which metric and threshold pair satisfies erasure under GDPR Article 17. Fairness audits of post-unlearn models are virtually absent from the literature, despite the risk that forgetting one occupant's data degrades service for others. No vendor consortium has adopted a reference consent ontology, and no conformance test suite exists to hold implementations accountable. The regulatory and standardisation gaps reinforce each other: without agreed standards, regulators cannot specify technical requirements, and without regulatory clarity, vendors have no incentive to standardise.
 
 ---
 
