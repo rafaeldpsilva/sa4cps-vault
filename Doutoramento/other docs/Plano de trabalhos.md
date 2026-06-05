@@ -1,4 +1,4 @@
-**Title:** Human-centric Agent-based Adaptive Intelligent Communities 
+**Title:** Human-centric intelligent environments: From signals to adaptive environments
 
 **Abstract:** The proposed research aims to conceive, develop, implement, and validate a novel and adaptive intelligent solution for intelligent facilities, designed to model, mediate, and respond to human preferences and contextual dynamics in real time. The proposed solution will use agents to resolve conflicts between users, manage and operate the system within defined permission boundaries. The system will integrate graph neural networks and large/small language models to model the user preferences, and to provide autonomous, personalized and context-aware control. This research also envisions agents that can identify users’ latent needs to autonomously discover and deploy additional services. This will enable a more accurate digital representation of the user, interactions that will adapt to each given user, and enable communication and resource sharing between intelligent buildings. 
 
@@ -18,25 +18,30 @@ In conclusion, while the literature presents advances in user preference modelin
 The primary objective of this research project is to conceive, develop, implement, test, and validate a novel distributed and adaptive intelligence framework for intelligent buildings, capable of modeling, mediating, and responding to human preferences and contextual dynamics in real time.
 
 To achieve this goal, a set of intermediary objectives are established:
-1. Continuous monitoring and update of the state of the art (RQ0-4). 
-2. Conceive and develop a graph-based user-modelling (RQ1). 
-3. Conceive and develop a multi-agent architecture, based on LLM/SLM mechanisms, for user interaction and latent needs discovery (RQ2). 
-4. Develop an agentic control framework that enables agents to autonomously manage the system (RQ3). 
-5. Define and implement a comprehensive security and privacy-preserving architecture (RQ4). 
-6. Integrate, test and validate the complete models using realistic scenarios and real pilots (RQ1-4). Throughout the development of the PhD, efforts to disseminate the discoveries and achievements will be made to advance more in state of the art in this scientific field.
+- O1: Analyze and synthesize existing approaches to occupant modeling, preference inference, conflict resolution, and privacy-preserving multi-agent architectures in intelligent buildings.
+- O2: Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate multimodal data streams and support downstream preference inference.
+- O3: Investigate and assess mechanisms for inferring occupant preferences and contextual intent from dynamic profiles, analyzing how inference accuracy evolves across varying conditions and temporal patterns.
+- O4: Investigate the role of language models in proactive occupant engagement, evaluating their capacity to recognize latent intent and mediate preference elicitation and negotiation through natural dialogue.
+- O5: Analyze conflict patterns arising from competing occupant preferences in shared spaces and compare resolution strategies against fairness, satisfaction, and individual autonomy criteria.
+- O6: Assess the viability of privacy-preserving peer-to-peer resource and knowledge sharing between building agents, evaluating the trade-off between community-level contextual exchange and individual occupant privacy.
+- O7: Evaluate the integrated framework across Digital Twin simulation and real-environment pilots, assessing each component's contribution to the system's capacity to continuously anticipate and fulfill individual and collective occupant needs.
+
+Throughout the development of the PhD, efforts to disseminate the discoveries and achievements will be made to advance more in state of the art in this scientific field.
 
 ### Detailed description
 #### Research Questions: 
 Main research question: 
-RQ0 – How can agents effectively manage an intelligent community? 
+How can intelligent systems continuously synthesize and evolve holistic occupant representations to proactively infer latent intent and fulfill the heterogeneous, dynamic needs of individual and collective occupants?
 
-RQ1. How can intelligent buildings dynamically model and adapt to the user’s individual and group preferences using graph-based heterogeneous representations? 
+RQ1: How can a dynamic and organic user preference profile be generated and evolve from user’s behavioral, environmental contexts, and interactions?
 
-RQ2. In what ways can LLMs and SLMs be employed, not only to infer user intent and contextual relevance, but also to interact with occupants through dialog for clarification, negotiation, and preference definition? 
+RQ2: How can user preferences be inferred from a profile across varying contexts and over time?
 
-RQ3. How can an agent identify a user's latent needs and autonomously discover, negotiate for, and deploy and use containerized services to address them? 
+RQ3: How can intelligent systems proactively engage with human users based on the recognition of latent intent from real-time signals and inferred preferences? 
 
-RQ4. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
+RQ4: How can multiple holistic and organic user preference profiles be interconnected to accommodate active learning and negotiations in a shared context?
+
+RQ5: How can an intelligent human-centric community be boosted by the proposed holistic and organic user preference modelling?
 
 ### Work Packages
 
