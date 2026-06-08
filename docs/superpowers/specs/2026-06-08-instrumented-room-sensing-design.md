@@ -1,27 +1,47 @@
-# Instrumented Room — Sensing Foundation (Design)
+# Instrumented Room — Context Channel (Design)
 
 **Date:** 2026-06-08
 **Author:** Rafael Silva
-**Status:** Approved design → ready for implementation plan
-**Thesis link:** WP3 (data ingestion, digital twin), WP4 (context modeling, GNN substrate)
+**Status:** Subordinate spec → activated after the preference loop works
+**Role:** **Context channel #3** of the
+[Occupant-Preference Foundation](2026-06-08-occupant-preference-foundation-design.md).
+**Thesis link:** WP3 (data ingestion, digital twin), WP4 (context modeling) —
+serves RQ1 as a **context-richness ablation arm**.
 
-## Goal
+## Position in the bigger picture (read first)
 
-Stand up the **sensing foundation** for a single instrumented room: continuously
-perceive room world-state from camera + microphone, store it over time, and
-materialize a semantic world-model. This is the data substrate every later
-component (JEPA world-model, voice agent, proactive nudges, preference modeling)
-feeds on.
+This spec is **not the foundation** — it is the **context envelope** that wraps
+preference signals captured by the
+[Occupant-Preference Foundation](2026-06-08-occupant-preference-foundation-design.md).
+On its own it records the *room*, not the *occupant* (EC1 — environment-only,
+the review's off-topic exclusion). It earns its place only as the context
+stamped onto identity-attributed preference events.
+
+**Hard requirement added:** every world-state record must be **occupant-indexable**
+— emitted with a timestamp so the preference layer can join it to the active
+occupant's signals. Context with no person attached is ambient data, not thesis
+data.
+
+**Sequencing:** build the preference loop **first** (HA events + voice, no
+camera). Activate this channel **second**, as an experiment:
+
+> Does camera / sound / tidiness context improve preference prediction over
+> HA-only context? (RQ1 — a publishable ablation.)
+
+Each component below is justified by whether it improves that prediction — not by
+data collection for its own sake.
 
 Explicitly **deferred** to later cycles (own spec each):
-- Idea 1 — LeCun JEPA world-model (will re-process the raw buffer).
-- Idea 3 — agent voice communication (**already largely built** in
-  `local-voice-ai`; later cycle feeds world-state into its context).
+- Idea 1 — LeCun JEPA world-model (will re-process the raw buffer). Note: JEPA
+  models room *physics*, not occupant preference — keep it scoped as a separate
+  exploratory probe, not on the preference critical path.
+- Idea 3 — agent voice communication: **already built** in `local-voice-ai`;
+  it is the preference foundation's interaction loop, not a deferral of this spec.
 - Idea 5 — manipulative / proactive behavior (needs actuation surface; nudges
-  later via Home Assistant).
+  later via Home Assistant + bounded autonomy, WP5).
 
 This spec covers ideas **2 (capture image + sound)**, **6 (map world-state)**,
-**4 (knowledge DB over time)**.
+and the context-storage portion of **4 (knowledge DB over time)**.
 
 ## Scope decisions (locked)
 
@@ -108,6 +128,14 @@ One timestamped `world-state` record per fast tick.
 | `sound_level` | float dB | audio | RMS |
 | `confidence` | per-field float | all | model scores |
 | `*_ts` | datetime | fuser | freshness stamp for slow (carried-forward) fields |
+| `room_id` | str | config | which instrumented room |
+| `active_occupant` | str \| null | join | resolved by the preference layer from identity at `ts` (voice-ID / HA presence). Makes the record occupant-indexable, not ambient. |
+
+The context channel emits the timestamped state; the
+[preference foundation](2026-06-08-occupant-preference-foundation-design.md)
+resolves `active_occupant` and joins the state onto that occupant's preference
+signals. A `world-state` row with no resolvable occupant is stored but flagged
+as ambient (excluded from preference attribution).
 
 ## Data flow, cadence, retention
 
