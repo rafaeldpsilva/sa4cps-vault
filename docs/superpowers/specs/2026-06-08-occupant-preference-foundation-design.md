@@ -32,11 +32,11 @@ no multi-occupant conflict (RQ4/WP5).
 ### 2. Three preference-signal channels
 Matches the adaptation triggers in the review (`Full Review Doc.md`, 384-388):
 
-| Channel | Source | Example |
-|---------|--------|---------|
-| **Explicit** | voice agent | user says "make it warmer"; answers an elicitation prompt |
-| **Implicit / drift** | Home Assistant device events, attributed to the identified occupant | turned on lamp; nudged thermostat |
-| **Context envelope** | the **context-channel spec** (sensing foundation) | world-state stamped onto each signal: time, presence, light, sound, later tidiness |
+| Channel              | Source                                                              | Example                                                                            |
+| -------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Explicit**         | voice agent                                                         | user says "make it warmer"; answers an elicitation prompt                          |
+| **Implicit / drift** | Home Assistant device events, attributed to the identified occupant | turned on lamp; nudged thermostat                                                  |
+| **Context envelope** | the **context-channel spec** (sensing foundation)                   | world-state stamped onto each signal: time, presence, light, sound, later tidiness |
 
 Channels 1+2 are the **preference signal**. Channel 3 is the **context around
 it** — the job of the subordinate sensing spec
