@@ -74,7 +74,7 @@ Reolink E1 ──RTSP(video+audio)──> mac-mini
 
    reused, separate process:  local-voice-ai → llama.cpp endpoint (LLAMA_BASE_URL)
                               vision-svc calls it over HTTP for VLM tidiness
-   parallel, future:          Home Assistant → light/motion/presence + nudge actuator
+   parallel, future:          Home Assistant → sensors + actuator
 ```
 
 ### Components (each isolated, own interface)
