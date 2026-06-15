@@ -1,4 +1,4 @@
-# Occupant-Preference Foundation (Design)
+ # Occupant-Preference Foundation (Design)
 
 **Date:** 2026-06-08
 **Author:** Rafael Silva
