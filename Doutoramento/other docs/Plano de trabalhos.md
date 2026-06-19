@@ -17,23 +17,14 @@ In conclusion, while the literature presents advances in user preference modelin
 ### Objectives
 The primary objective of this research project is to conceive, develop, implement, test, and validate a novel distributed and adaptive intelligence framework for intelligent buildings, capable of modeling, mediating, and responding to human preferences and contextual dynamics in real time.
 
-To achieve this goal, a set of intermediary objectives are established:**O1: Characterize the landscape and open challenges** *(foundational → all RQs)*
-Systematically identify and synthesize the state of the art in occupant modeling and profiling, preference inference, human-building interaction through LLMs/SLMs, and privacy-preserving multi-agent systems in intelligent building environments, surfacing the open research challenges that motivate this thesis.
-
-**O2: Design and evaluate a dynamic occupant profiling architecture** *(→ RQ1, RQ2)*
-Design a heterogeneous graph-based architecture for constructing dynamic occupant profiles from behavioral, environmental, and interaction data, and evaluate its capacity to infer occupant preferences across varying contexts and over time.
-
-**O3: Develop and assess a proactive LLM/SLM interaction model** *(→ RQ3)*
-Develop a structured interaction model, grounded in real-time system context via MCP schemas, enabling LLMs and SLMs to recognize latent occupant intent and proactively engage occupants through natural dialogue for preference elicitation and clarification.
-
-**O4: Propose and validate a multi-occupant preference negotiation mechanism** *(→ RQ4)*
-Propose and validate a conflict-aware negotiation mechanism that models the preferences and intents of multiple co-occupants and mediates conflicts through structured dialogue and priority resolution.
-
-**O5: Define and evaluate a privacy-preserving community agent architecture** *(→ RQ5)*
-Define a bounded-autonomy agent architecture enabling a community of intelligent building agents to share resources, sensor data, and contextual knowledge via P2P mechanisms while preserving individual occupant privacy and maintaining local control.
-
-**O6: Validate the integrated HAAIC framework** *(→ Main RQ)*
-Evaluate the HAAIC framework holistically in realistic scenarios (Digital Twin simulation and real pilots), assessing emergent system behavior and measuring performance against human-centric KPIs when all components operate together.
+To achieve this goal, a set of intermediary objectives are established:
+- O1: Analyze and synthesize existing approaches to occupant modeling, preference inference, conflict resolution, and privacy-preserving multi-agent architectures in intelligent buildings.
+- O2: Evaluate the suitability of heterogeneous relational representations for dynamic occupant profiling, analyzing their capacity to integrate multimodal data streams and support downstream preference inference.
+- O3: Investigate and assess mechanisms for inferring occupant preferences and contextual intent from dynamic profiles, analyzing how inference accuracy evolves across varying conditions and temporal patterns.
+- O4: Investigate the role of language models in proactive occupant engagement, evaluating their capacity to recognize latent intent and mediate preference elicitation and negotiation through natural dialogue.
+- O5: Analyze conflict patterns arising from competing occupant preferences in shared spaces and compare resolution strategies against fairness, satisfaction, and individual autonomy criteria.
+- O6: Assess the viability of privacy-preserving peer-to-peer resource and knowledge sharing between building agents, evaluating the trade-off between community-level contextual exchange and individual occupant privacy.
+- O7: Evaluate the integrated framework across Digital Twin simulation and real-environment pilots, assessing each component's contribution to the system's capacity to continuously anticipate and fulfill individual and collective occupant needs.
 
 Throughout the development of the PhD, efforts to disseminate the discoveries and achievements will be made to advance more in state of the art in this scientific field.
 
@@ -42,14 +33,15 @@ Throughout the development of the PhD, efforts to disseminate the discoveries an
 Main research question: 
 How can intelligent systems continuously synthesize and evolve holistic occupant representations to proactively infer latent intent and fulfill the heterogeneous, dynamic needs of individual and collective occupants?
 
-**RQ1**. How can intelligent buildings dynamically model and adapt to the user’s individual and group preferences using graph-based heterogeneous representations? 
+RQ1: How can a dynamic and organic user preference profile be generated and evolve from user’s behavioral, environmental contexts, and interactions?
 
-**RQ2**. In what ways can LLMs and SLMs be employed, not only to infer user intent and contextual relevance, but also to interact with occupants through dialog for clarification, negotiation, and preference definition? 
+RQ2: How can user preferences be inferred from a profile across varying contexts and over time?
 
-RQ3. How can an agent (or system) identify a user's latent goals and needs to autonomously discover, negotiate for, and deploy and use containerized services to address them? 
-**RQ3v2**. How can an agent identify a user's goals and needs to adapt the hardware and software landscape surrounding the user?
+RQ3: How can intelligent systems proactively engage with human users based on the recognition of latent intent from real-time signals and inferred preferences? 
 
-**RQ4**. What mechanisms are required to enable peer-to-peer sharing of resources, such as computational availability and sensor data, between the autonomous agents of different users while preserving privacy and individual control?
+RQ4: How can multiple holistic and organic user preference profiles be interconnected to accommodate active learning and negotiations in a shared context?
+
+RQ5: How can an intelligent human-centric community be boosted by the proposed holistic and organic user preference modelling?
 
 ### Work Packages
 
