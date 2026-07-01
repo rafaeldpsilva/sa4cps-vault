@@ -145,11 +145,11 @@ Output: `screening_results.csv`
 | UNCERTAIN | 517   |
 
 ### Exclusion Breakdown
-| Criterion | Count | % of exclusions |
-|-----------|------:|----------------:|
-| EC2 – web/social platform context | 90 | 86.5% |
-| EC4 – non-full paper / no abstract | 11 | 10.6% |
-| EC1 – environment-only modeling | 3 | 2.9% |
+| Criterion                          | Count | % of exclusions |
+| ---------------------------------- | ----: | --------------: |
+| EC2 – web/social platform context  |    90 |           86.5% |
+| EC4 – non-full paper / no abstract |    11 |           10.6% |
+| EC1 – environment-only modeling    |     3 |            2.9% |
 
 #### EC2 sub-contexts
 | Sub-context | Count |
@@ -224,7 +224,6 @@ Output: `screening_claude.csv`
 | EC3 – Black-box DL / no interpretable user model               |     3 |            0.5% |
 | Context mismatch – Wireless / comms / hardware                 |     3 |            0.5% |
 | Context mismatch – Education / e-learning                      |     2 |            0.4% |
-
 The "generic context mismatch" category (235 papers) represents papers Claude rejected for clearly not fitting the built-environment scope, but whose reasons didn't map cleanly to EC1–EC4 (e.g., autonomous vehicles, dialog systems, urban analytics, finance). These are papers the keyword heuristic could not safely reject because they superficially matched the search terms.
 
 ### UNCERTAIN Breakdown (n=56)
