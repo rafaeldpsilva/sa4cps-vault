@@ -1,5 +1,6 @@
 
 The experimental work is a real-world, multi-node deployment of the **Caravels**, a distributed architecture, meant to validate the practical applicability, modularity, and scalability of the approach for intelligent buildings organized as an energy community. Caravels treats each building as an autonomous "caravel" (a System of Systems node) orchestrated with Kubernetes, where the community is the cluster and each building is a node.
+![[Pasted image 20260706142816.png]]
 
 The testbed is seven Raspberry Pi 4B nodes (4 GB RAM), each running MicroK8s and representing one caravel, each with access to a subset of IoT devices (energy meters, light/PV sensors). Four containerized services were developed and deployed across nodes: Energy Monitoring, Storage, Energy Forecasting (pre-trained SVM), and Display (E-Ink). MQTT handles intra-building service data, and a Kubernetes HTTP overlay handles inter-node communication.
 
@@ -37,27 +38,6 @@ Caravels runs on resource-constrained SBCs with stable deployment/recovery, low 
 
 The experiment directly serves the PhD's core thesis: decentralized, edge-based, human-centered intelligence for buildings/communities that preserves autonomy and privacy. It provides a validated infrastructure baseline the later WPs build on.
 
-## 4. What Is Missing (relative to the PhD planning)
-
-**WP4 — user preference modeling (the largest gap):**
-- No **heterogeneous GNN**. The current model is a hand-built tree of typed nodes with a Q-learning agent, not a learned graph neural network over a heterogeneous graph.
-- No **Neo4j / Jena** graph-store backing (planned for the graph representation).
-- No **LLM/SLM interaction** with the preference structure (planned for natural-language preference elicitation / conflict explanation).
-- Conflict "fairness" weighting is acknowledged as statistically unsolved as concurrent users grow; grafting across heterogeneous structures with inconsistent branch ordering is unresolved.
-
-**WP3:**
-- Ingestion uses **MQTT, not Kafka**; no **digital twin** component yet.
-- Inter-agent communication is service-level HTTP, not a formal agent-communication layer.
-
-**WP5:**
-- No **MCP (Model Context Protocol) JSON schema** and no formal **bounded-autonomy agent** — sharing is manual/policy-driven, discovery is basic API announcement.
-
-**WP6 / evaluation:**
-- Scale is small (7 nodes; stress test only 4). Horizontal scalability is argued from literature, not measured at community scale.
-- Per-service independent benchmarking is flagged as needed (results depend heavily on the deployed service).
-- No end-to-end KPI validation against the project's experimental scenarios.
-
-**Cross-cutting:**
-- Energy/optimization outcomes (savings, forecasting accuracy, demand-response) are not evaluated — the study is infrastructure- and mechanism-focused, not application-impact-focused.
+## What Is Missing
 
 The experimental work shows an infrastructure and mechanism baseline: container orchestration, personalized preference modeling with conflict resolution, and secure inter-building P2P sharing, all running on edge SBC hardware with measured performance. It supports WP3, WP5, WP6 groundwork and part of preliminary concept of WP4. The main missing items are the GNN-based preference model, LLM/SLM integration, MCP-based bounded-autonomy agents, digital-twin ingestion, and community-scale evaluation.
