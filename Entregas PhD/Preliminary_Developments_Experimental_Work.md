@@ -33,12 +33,12 @@ Reproducibility artifacts (MicroK8s manifests, Headscale config, ACL policies, d
 
 ## 3. Alignment with the PhD Planning
 
-| PhD WP theme | Covered by this experiment |
-|---|---|
-| **WP3** – data ingestion, frontend prototype, inter-agent communication | ✅ MQTT ingestion pipeline (Monitoring → Storage → aggregation), Display/Web frontend, HTTP overlay for node-to-node communication |
-| **WP5** – service discovery, P2P resource sharing, bounded-autonomy agent | ✅ P2P inter-building service/data sharing over Headscale VPN; catalog-based service announcement; shared computation delegation |
-| **WP6** – K8s deployment, integration testing, KPI validation, experimental scenarios | ✅ 7-node MicroK8s cluster, three-part integration case study, CPU/memory/thermal/throughput/latency KPIs |
-| **WP4** – user preference modeling, conflict resolution | ⚠️ Partial: graph-based preference modeling and multi-user conflict resolution are demonstrated, but with a tree/Q-learning approach, not the planned heterogeneous GNN |
+| PhD WP                                                                                | Covered by this experiment                                                                                                                                              |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **WP3** – data ingestion, frontend prototype, inter-agent communication               | ✅ MQTT ingestion pipeline (Monitoring → Storage → aggregation), Display/Web frontend, HTTP overlay for node-to-node communication                                       |
+| **WP5** – service discovery, P2P resource sharing, bounded-autonomy agent             | ✅ P2P inter-building service/data sharing over Headscale VPN; catalog-based service announcement; shared computation delegation                                         |
+| **WP6** – K8s deployment, integration testing, KPI validation, experimental scenarios | ✅ 7-node MicroK8s cluster, three-part integration case study, CPU/memory/thermal/throughput/latency KPIs                                                                |
+| **WP4** – user preference modeling, conflict resolution                               | ⚠️ Partial: graph-based preference modeling and multi-user conflict resolution are demonstrated, but with a tree/Q-learning approach, not the planned heterogeneous GNN |
 
 The experiment directly serves the PhD's core thesis: **decentralized, edge-based, human-centered intelligence for buildings/communities that preserves autonomy and privacy.** It provides a validated infrastructure baseline the later WPs build on.
 
@@ -67,4 +67,4 @@ The experiment directly serves the PhD's core thesis: **decentralized, edge-base
 
 ## 5. Summary
 
-The experimental work delivers a **validated infrastructure and mechanism baseline**: container orchestration, personalized preference modeling with conflict resolution, and secure inter-building P2P sharing, all running on edge SBC hardware with measured performance. It strongly supports WP3/WP5/WP6 groundwork and part of WP4. The main outstanding items are the **GNN-based preference model, LLM/SLM integration, MCP-based bounded-autonomy agents, Kafka/digital-twin ingestion, and community-scale evaluation** — these define the next phase of the PhD.
+The experimental work shows an infrastructure and mechanism baseline: container orchestration, personalized preference modeling with conflict resolution, and secure inter-building P2P sharing, all running on edge SBC hardware with measured performance. It supports WP3 ,WP5/WP6 groundwork and part of preliminary concept of WP4. The main missing items are the GNN-based preference model, LLM/SLM integration, MCP-based bounded-autonomy agents, digital-twin ingestion, and community-scale evaluation.
