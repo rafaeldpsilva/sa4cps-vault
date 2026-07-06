@@ -1,15 +1,14 @@
 
-The experimental work is a real-world, multi-node deployment of the **Caravels** distributed architecture, meant to validate the practical applicability, modularity, and scalability of the approach for intelligent buildings organized as an energy community. Caravels treats each building as an autonomous "caravel" (a System of Systems node) orchestrated with Kubernetes, where the community is the cluster and each building is a node.
+The experimental work is a real-world, multi-node deployment of the **Caravels**, a distributed architecture, meant to validate the practical applicability, modularity, and scalability of the approach for intelligent buildings organized as an energy community. Caravels treats each building as an autonomous "caravel" (a System of Systems node) orchestrated with Kubernetes, where the community is the cluster and each building is a node.
 
-The testbed is **seven Raspberry Pi 4B nodes (4 GB RAM)**, each running MicroK8s and representing one caravel, each with access to a subset of IoT devices (energy meters, light/PV sensors). Four containerized services were developed and deployed across nodes: **Energy Monitoring, Storage, Energy Forecasting (pre-trained SVM), and Display** (E-Ink). MQTT handles intra-building service data; a Kubernetes HTTP overlay handles inter-node communication.
+The testbed is seven Raspberry Pi 4B nodes (4 GB RAM), each running MicroK8s and representing one caravel, each with access to a subset of IoT devices (energy meters, light/PV sensors). Four containerized services were developed and deployed across nodes: Energy Monitoring, Storage, Energy Forecasting (pre-trained SVM), and Display (E-Ink). MQTT handles intra-building service data, and a Kubernetes HTTP overlay handles inter-node communication.
 
-The evaluation is a **three-part case study**:
+The evaluation is a three-part case study:
+1. Service Modularity — per-node service composition, historical energy aggregation over 24 h, and dynamic Display service that adapts to whichever services a node runs.
+2. User Preference Modeling — a graph-based (tree-like) per-user preference structure with node types (User, Preference, Condition, Context, Value) and operations (planting, weeding, harvesting, trimming, grafting, flourishing). Value nodes adapt from logged interactions over one week, a Q-learning RL agent is embedded as an isolated value node. Multi-user conflict is resolved by trimming and grafting structures into a temporary merged structure using a dynamic weight-based strategy. Preference portability across caravels is demonstrated (User B visiting another household).
+3. Inter-Building Data Sharing — peer-to-peer sharing over a Headscale VPN with zero-trust ACLs. Scenario A shares an IoT device (weather station) route; Scenario B shares a hosted weather-forecasting service to a resource-constrained caravel.
 
-1. **Service Modularity** — per-node service composition, historical energy aggregation over 24 h, and dynamic Display service that adapts to whichever services a node runs.
-2. **User Preference Modeling** — a graph-based (tree-like) per-user preference structure with node types (User, Preference, Condition, Context, Value) and operations (planting, weeding, harvesting, trimming, grafting, flourishing). Value nodes adapt from logged interactions over one week; a **Q-learning RL agent** is embedded as an isolated value node (reward −1 on manual override, +1 otherwise; γ=0.9, α=0.1, ε-greedy, 1000 episodes). Multi-user conflict is resolved by trimming and grafting structures into a temporary merged structure using a dynamic weight-based strategy. Preference portability across caravels is demonstrated (User B visiting another household).
-3. **Inter-Building Data Sharing** — peer-to-peer sharing over a **Headscale/WireGuard VPN** with zero-trust ACLs. Scenario A shares an IoT device (weather station) route; Scenario B shares a hosted weather-forecasting service to a resource-constrained caravel.
-
-Reproducibility artifacts (MicroK8s manifests, Headscale config, ACL policies, deployment runbook) are published on Zenodo; full detail is in the associated MSc dissertation.
+Reproducibility artifacts (MicroK8s manifests, Headscale config, ACL policies, deployment runbook) are published on Zenodo.
 
 ## 2. Findings
 
@@ -65,6 +64,4 @@ The experiment directly serves the PhD's core thesis: **decentralized, edge-base
 **Cross-cutting:**
 - Energy/optimization outcomes (savings, forecasting accuracy, demand-response) are not evaluated — the study is infrastructure- and mechanism-focused, not application-impact-focused.
 
-## 5. Summary
-
-The experimental work shows an infrastructure and mechanism baseline: container orchestration, personalized preference modeling with conflict resolution, and secure inter-building P2P sharing, all running on edge SBC hardware with measured performance. It supports WP3 ,WP5/WP6 groundwork and part of preliminary concept of WP4. The main missing items are the GNN-based preference model, LLM/SLM integration, MCP-based bounded-autonomy agents, digital-twin ingestion, and community-scale evaluation.
+The experimental work shows an infrastructure and mechanism baseline: container orchestration, personalized preference modeling with conflict resolution, and secure inter-building P2P sharing, all running on edge SBC hardware with measured performance. It supports WP3, WP5, WP6 groundwork and part of preliminary concept of WP4. The main missing items are the GNN-based preference model, LLM/SLM integration, MCP-based bounded-autonomy agents, digital-twin ingestion, and community-scale evaluation.
