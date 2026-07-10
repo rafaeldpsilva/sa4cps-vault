@@ -17,3 +17,5 @@
  - [ ] a secção 8 deveria ter mais detalhe e profundidade. Podes retirar conteúdo dos deliverables e chapar aqui de forma a mostrar mesmo o que foi feito
 
  - [ ] a secção 11 tem de ser vista com o Pedro
+
+semestre 1/abril 2025 31 marco 2026
