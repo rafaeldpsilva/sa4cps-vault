@@ -2,7 +2,7 @@
 
 - [ ] Integrate personal models per household or group with privacy constraints
 
-- [ ] Connect models with IoT data streams in real-time
+- [x] Connect models with IoT data streams in real-time
 
 - [ ] Flexibility forecast
 
@@ -57,10 +57,6 @@
 - [ ] B5.1 Create desk-level energy monitor UI component (Vue.js)
 - [ ] B7.4 Expose desk-level metrics via REST API
 - [ ] B5.3 Add personalized energy usage notifications per desk
-
-### Feature 6 – Safeguards (foundation)
-- [ ] C10.1 Develop threat model for actuation endpoints
-- [ ] C10.2 Enforce TLS + auth tokens on all actuation APIs
 
 ---
 
