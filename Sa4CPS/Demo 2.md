@@ -6,7 +6,7 @@
 
 - [ ] Flexibility forecast
 
-- [ ] Implement desk monitors
+- [x] Implement desk monitors
 
 - [ ] Design safeguards against unauthorized or malicious actuation
 
