@@ -4,7 +4,7 @@
 
 - [x] Connect models with IoT data streams in real-time
 
-- [ ] Flexibility forecast
+- [x] Flexibility forecast
 
 - [x] Implement desk monitors
 
@@ -14,7 +14,7 @@
 
 - [ ] Flexibility activation
 
-- [ ] Develop enhanced interfaces for energy communities, including import/export views
+- [x] Develop enhanced interfaces for energy communities, including import/export views
 
 - [x] Virtual energy community
 
