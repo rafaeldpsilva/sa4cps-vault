@@ -1,28 +1,28 @@
 # Review of Rafael
-1. Keywords could be improved
-2. Several affirmations on Introduction are missing citation support
-3. On Introduction 5 paragraph, the author does not explain the advantages of ANFIS, only states general ANN properties and fuzzy logic
-4. On Introduction 6 paragraph, the author again states very well know properties of GA
-5. On the Introduction there is not much clarity on how ANFIS and HICS are integrated. 
-6. The author uses citations as [x-x]
-7. Throughout the manuscript, the author repeats the same ideas or phrases several times.
-8. Pre-processing module is not explained
-9. At the equations sections, most of them just describe how the algorithms work, not author modifications. Such as ANFIS "model is written as: y = fANFIS(x)", this is just a function, there is not much interest on these
-10. input variables should be in english
-11. Sugeno system is not explain nor supported by citation
-12. Membership concept is not explained
-13. Normalized activation strength is just an average function, equation part could be simplified
-14. Training objective function is not explained, it seams like is just MSE
-15. 1000 observations, seems very low, and after author defends that the model is not overfitting
-16. ANFIS model training results paragraph statements are concerning "mse decreased steadily, demonstrating the model's strong ability to approximate nonlinear relationships..."
-17. Figure 1. Model looks like it has not converged, analysis paragraph says otherwise
-18. Table 2. Model looks overfitted
-19. Figure 3. Axis Legend should be in english
-20. Figure 3 show that as SO2 concentration increases, sulfur yield decreases. What is the central part of the Pareto front. What is the Pareto front?
-21. Not clear how comparison evaluation is done. How is PID controller tested on a dataset?
-22. On discussion of results, again, repeated sentences
-23. Statement of when disturbances was increased the model accuracy deterioration was insignificant should be further developed and demonstrated.
-24. Conclusion, repeats same phrases/ideas again. I interpreted that the scientific novelty of the manuscript is the integration of the different concepts, the 5 paragraph should be rephrased to reflect that, right now is not clear.
+1. The keywords only name generic methods (hybrid intelligent system, ANFIS, genetic algorithm, fuzzy logic, intelligent control). Please consider adding domain-specific keywords, such as "sulfur recovery unit", "Claus process" or "surrogate model", to make the manuscript easier to find.
+2. Several statements in the Introduction lack citation support. For example, the claim that conventional PID-based systems "are unable to account for uncertainty ... or adapt in real time" (paragraph 3) and the claim that combining ANFIS and a genetic algorithm "provides high prediction accuracy and high-quality control decisions" (paragraph 6). Please add supporting references.
+3. Paragraph 5 of the Introduction describes ANFIS mainly through general properties of neural networks and fuzzy logic (accuracy, robustness to noise, interpretability). Please explain why ANFIS is particularly suited to this process, compared with alternatives such as other neural network or machine learning models.
+4. Paragraph 6 of the Introduction describes well-known general properties of genetic algorithms. Please replace this with a justification of why a genetic algorithm was chosen for this specific optimization problem, ideally with references to its use in similar processes.
+5. The Introduction does not make clear how ANFIS fits within the proposed hybrid intelligent control system (HICS), i.e., how data and decisions flow between the modules. Please clarify this early in the manuscript, ideally with a block diagram.
+6. Several citations group many references together (e.g., [4–14]). Please avoid reference lumping and explain what each cited work contributes.
+7. Some ideas and sentences are repeated throughout the manuscript (e.g., the scientific novelty statement appears almost word for word in the Introduction and in the Conclusions). Please revise to remove redundant passages.
+8. The data pre-processing module is listed as part of the HICS architecture but is not described beyond the normalization to [0; 1]. Please describe the steps it performs (e.g., outlier removal, filtering, handling of missing values).
+9. Most of the equations in Section II describe the standard ANFIS and genetic algorithm formulations rather than modifications introduced by the authors, and some add little information (e.g., "y = f_ANFIS(x)"). Please consider condensing the standard formulations, citing the original sources, and using the space for details that are currently missing (e.g., the fitness function weights, variable bounds and the PID setup).
+10. The linguistic terms of the input variables are written in Russian ("Низкий, Средний, Высокий"). Please translate them into English (Low, Medium, High).
+11. The Sugeno-type rule base and ANFIS are presented without citing the foundational works (e.g., Takagi and Sugeno, 1985; Jang, 1993). Please add these references.
+12. The membership function concept is used without a reference. Please add a citation to a standard fuzzy logic source when it is first introduced.
+13. The normalized activation strength is a standard ANFIS normalization step (the firing strengths are scaled to sum to one). This part of the equations could be condensed.
+14. The training objective function J is the mean squared error, but it is not named as such, and Section III later refers to the root mean square error as the quantity being minimized. Please state explicitly which error metric is used as the training objective.
+15. The model is trained on 750 samples (75% of 1000), while a 729-rule ANFIS with first-order consequents has over 5000 parameters. Please justify how the dataset size is sufficient for this number of parameters, and support the claim that the model does not overfit.
+16. In the ANFIS training results, the statement that the decrease in MSE demonstrates "the model's strong ability to approximate nonlinear relationships" is not supported by a falling training error alone. Generalization can only be shown with validation or test data. Please revise this statement or support it with test-set results.
+17. In Figure 1, the training error still decreases between epochs 80 and 100, while the text states that the curve reaches a plateau after the 80th epoch. Please clarify, or show additional epochs to demonstrate convergence. It would also help to plot every epoch rather than seven points.
+18. The test metrics in Table 2 (R² = 0.992, MAPE = 0.23%) are unusually high for industrial process data. Please report training and test metrics side by side, and clarify whether the data are real plant measurements or synthetic, to rule out data leakage or an overly smooth data-generation process.
+19. The axis labels of Figure 3 are in Russian. Please translate them into English.
+20. Figure 3 shows sulfur yield decreasing as SO₂ concentration increases, so the curve does not appear to represent a trade-off between the two objectives. Please define the Pareto optimality criterion used, explain how the front was obtained, and clarify what is meant by the "central part of the Pareto front".
+21. It is not clear how the comparison in Table 4 was carried out. Please explain how the PID controller was implemented and evaluated against the dataset (plant model, tuning, controlled and manipulated variables), and what the RMSE value means for a controller.
+22. In the Discussion of results, several sentences repeat content from earlier in Section III (e.g., the Pareto front analysis). Please remove the repeated passages.
+23. The statement that increasing random disturbances to 15% caused only an insignificant drop in prediction accuracy is not supported by results. Please describe this experiment in the methodology and report the quantitative results.
+24. The Conclusions repeat ideas already stated earlier in the manuscript. In addition, the scientific novelty appears to lie in the integration of existing methods (ANFIS, genetic algorithm and fuzzy logic) for this application. Please rephrase the novelty paragraph (paragraph 5 of the Conclusions) to state this more clearly.
 # Review: ICSC26_0042 "Hybrid Intelligent Control System for High-Quality Sulfur Production under Uncertainty"
 
 The manuscript proposes a hybrid intelligent system for a sulfur production unit (Atyrau refinery). An adaptive neuro-fuzzy inference system (ANFIS) predicts sulfur yield, sulfur recovery degree and SO₂ concentration from six process variables, and a genetic algorithm (GA) then searches for operating conditions that maximize a weighted combination of these outputs. The authors report a coefficient of determination of 0.992 on test data, a 1.3% increase in sulfur yield, a 36% reduction in SO₂ concentration, and better performance than a PID controller and a standalone ANFIS model. However, the way the evaluation was set up, and the link between the claimed contributions (control, uncertainty handling, fuzzy multi-criteria decision making, Pareto analysis) and what is actually presented all need clarification. The state of the art is also thin, and several references appear unrelated to the topic or have incorrect publication years.
