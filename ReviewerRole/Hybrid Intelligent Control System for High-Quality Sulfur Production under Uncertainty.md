@@ -9,7 +9,12 @@
 8. Pre-processing module is not explained
 9. At the equations sections, most of them just describe how the algorithms work, not author modifications. Such as ANFIS "model is written as: y = fANFIS(x)", this is just a function, there is not much interest on these
 10. input variables should be in english
-11. Sugeno system is not explain nor supported by 
+11. Sugeno system is not explain nor supported by citation
+12. Membership concept is not explained
+13. Normalized activation strength is just an average function, equation part could be simplified
+14. Training objective function is not explained, it seams like is just MSE
+15. 1000 observations, seems very low, and after author defends that the model is not overfitting
+16. ANFIS model training results paragraph statements 
 # Review: ICSC26_0042 "Hybrid Intelligent Control System for High-Quality Sulfur Production under Uncertainty"
 
 The manuscript proposes a hybrid intelligent system for a sulfur production unit (Atyrau refinery). An adaptive neuro-fuzzy inference system (ANFIS) predicts sulfur yield, sulfur recovery degree and SO₂ concentration from six process variables, and a genetic algorithm (GA) then searches for operating conditions that maximize a weighted combination of these outputs. The authors report a coefficient of determination of 0.992 on test data, a 1.3% increase in sulfur yield, a 36% reduction in SO₂ concentration, and better performance than a PID controller and a standalone ANFIS model. However, the way the evaluation was set up, and the link between the claimed contributions (control, uncertainty handling, fuzzy multi-criteria decision making, Pareto analysis) and what is actually presented all need clarification. The state of the art is also thin, and several references appear unrelated to the topic or have incorrect publication years.
