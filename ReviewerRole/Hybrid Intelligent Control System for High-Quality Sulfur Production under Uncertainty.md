@@ -21,7 +21,8 @@
 20. Figure 3 show that as SO2 concentration increases, sulfur yield decreases. What is the central part of the Pareto front. What is the Pareto front?
 21. Not clear how comparison evaluation is done. How is PID controller tested on a dataset?
 22. On discussion of results, again, repeated sentences
-23. Statement of when disturbanc
+23. Statement of when disturbances was increased the model accuracy deterioration was insignificant should be further developed and demonstrated.
+24. Conclusion, repeats same phrases/ideas again. I interpreted that the scientific novelty of the manuscript is the integration of the different concepts, the 5 paragraph should be rephrased to reflect that, right now is not clear.
 # Review: ICSC26_0042 "Hybrid Intelligent Control System for High-Quality Sulfur Production under Uncertainty"
 
 The manuscript proposes a hybrid intelligent system for a sulfur production unit (Atyrau refinery). An adaptive neuro-fuzzy inference system (ANFIS) predicts sulfur yield, sulfur recovery degree and SO₂ concentration from six process variables, and a genetic algorithm (GA) then searches for operating conditions that maximize a weighted combination of these outputs. The authors report a coefficient of determination of 0.992 on test data, a 1.3% increase in sulfur yield, a 36% reduction in SO₂ concentration, and better performance than a PID controller and a standalone ANFIS model. However, the way the evaluation was set up, and the link between the claimed contributions (control, uncertainty handling, fuzzy multi-criteria decision making, Pareto analysis) and what is actually presented all need clarification. The state of the art is also thin, and several references appear unrelated to the topic or have incorrect publication years.
