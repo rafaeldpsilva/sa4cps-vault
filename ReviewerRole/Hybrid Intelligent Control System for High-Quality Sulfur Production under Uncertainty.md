@@ -1,9 +1,13 @@
 # Review of Rafael
 1. Keywords could be improved
 2. Several affirmations on Introduction are missing citation support
-3. On 5 paragraph, the author does not explain the advantages of ANFIS, only states general ANN properties and fuzzy logic
-4. On 6 paragraph, the author again states very well know properties of GA
-5. There is not much clarity on how ANFIS and HICS related on
+3. On Introduction 5 paragraph, the author does not explain the advantages of ANFIS, only states general ANN properties and fuzzy logic
+4. On Introduction 6 paragraph, the author again states very well know properties of GA
+5. On the Introduction there is not much clarity on how ANFIS and HICS are integrated. 
+6. The author uses citations as [x-x]
+7. Throughout the manuscript, the author repeats the same ideas or phrases several times.
+8. Pre-processing module is not explained
+9. At the equeations
 # Review: ICSC26_0042 "Hybrid Intelligent Control System for High-Quality Sulfur Production under Uncertainty"
 
 The manuscript proposes a hybrid intelligent system for a sulfur production unit (Atyrau refinery). An adaptive neuro-fuzzy inference system (ANFIS) predicts sulfur yield, sulfur recovery degree and SO₂ concentration from six process variables, and a genetic algorithm (GA) then searches for operating conditions that maximize a weighted combination of these outputs. The authors report a coefficient of determination of 0.992 on test data, a 1.3% increase in sulfur yield, a 36% reduction in SO₂ concentration, and better performance than a PID controller and a standalone ANFIS model. However, the way the evaluation was set up, and the link between the claimed contributions (control, uncertainty handling, fuzzy multi-criteria decision making, Pareto analysis) and what is actually presented all need clarification. The state of the art is also thin, and several references appear unrelated to the topic or have incorrect publication years.
