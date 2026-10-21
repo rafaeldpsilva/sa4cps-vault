@@ -6,6 +6,7 @@ The manuscript presents a vision-based closed-loop positioning system for steppe
 - There is no evidence of the vision processing implementation, which is part of the claimed contributions, beyond a brief mention that the lines are segmented by color (Section III-C). Please provide more details, such as how the calibration plate corners are detected and matched, how the laser lines are segmented (color space and thresholds), the software used, example images of the intermediate processing results, and the processing time per image, which according to Section IV-A was not recorded.
 - The manuscript is very dense, particularly Sections IV-A to IV-D, where a large number of numerical values are reported in running text, which makes the main findings hard to extract. Please consider moving secondary values into tables and adding a short, intuitive explanation of the analysis and of what the results mean in practice.
 - Minor: the fourth paragraph of the introduction begins with "These results suggest". Please consider stating explicitly which of the previously cited findings are meant.
+- Minor: the abstract states "In 240 positioning runs on a prototype with two motorized line lasers [...], every closed-loop run met its tolerance within two moves". As only 120 of the 240 runs were performed in closed loop, with the other 120 in open loop, please consider rephrasing to make this split explicit (e.g., "In 240 positioning runs, 120 in open loop and 120 in closed loop, [...]").
 
 # Review of Claude
 
