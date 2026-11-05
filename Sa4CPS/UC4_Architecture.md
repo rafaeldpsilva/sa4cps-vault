@@ -6,7 +6,7 @@ flowchart TD
     classDef edge    fill:#ffd599,stroke:#c68000,color:#1a1a1a
     classDef sim     fill:#d4a8e8,stroke:#7b4fa6,color:#1a1a1a
     classDef ingest  fill:#a8c8ff,stroke:#3a6fc4,color:#1a1a1a
-    classDef kafka   fill:#e8e8e8,stroke:#909090,color:#1a1a1a
+    classDef MQTT   fill:#e8e8e8,stroke:#909090,color:#1a1a1a
     classDef twin    fill:#a8d5a2,stroke:#3a8a3a,color:#1a1a1a
     classDef voltmon fill:#f5a8a3,stroke:#c04040,color:#1a1a1a
     classDef flex    fill:#ffd599,stroke:#c68000,color:#1a1a1a
@@ -41,7 +41,7 @@ flowchart TD
             BROKER --> VALID --> CONSENT
         end
 
-        subgraph KAFKA["Kafka"]
+        subgraph MQTT["MQTT"]
             direction LR
             KRR[/"raw-readings"/]
             KTS[/"twin-state"/]
@@ -119,40 +119,40 @@ flowchart TD
     MQTTC  -->|"MQTT · TLS"| BROKER
     SIMCLI -->|"MQTT · TLS"| BROKER
 
-    %% Ingestion → Kafka
+    %% Ingestion → MQTT
     CONSENT --> KRR
     MQTTC   -->|model updates| KFL
 
-    %% Kafka → Digital Twin
+    %% MQTT → Digital Twin
     KRR --> SYNCLOOP
 
-    %% Digital Twin → Kafka
+    %% Digital Twin → MQTT
     SYNCLOOP --> KTS
 
-    %% Kafka → Voltage Monitor
+    %% MQTT → Voltage Monitor
     KRR --> THRESH
     KTS --> THRESH
 
-    %% Voltage Monitor → Kafka
+    %% Voltage Monitor → MQTT
     FORECAST --> KVE
     FORECAST --> KFR
 
-    %% Kafka → Trust Engine
+    %% MQTT → Trust Engine
     KRR --> COMREL
     KRR --> PLAUS
 
     %% Trust Engine → Comprehension
     TSCORE --> CONSFORECAST
 
-    %% Kafka → Comprehension Engine
+    %% MQTT → Comprehension Engine
     KRR --> CONSFORECAST
     KTS --> FLEXEST
     KFL --> FLAGG
 
-    %% Comprehension Engine → Kafka
+    %% Comprehension Engine → MQTT
     SITSUM --> KCO
 
-    %% Kafka → Flexibility Coordinator
+    %% MQTT → Flexibility Coordinator
     KFR --> DECIDE
     KTS --> DECIDE
 
@@ -182,7 +182,7 @@ flowchart TD
     class METER,FLEDGE,MQTTC edge
     class CSV,SIMCLI sim
     class BROKER,VALID,CONSENT ingest
-    class KRR,KTS,KVE,KFR,KCO,KFL kafka
+    class KRR,KTS,KVE,KFR,KCO,KFL MQTT
     class PPNET,SYNCLOOP twin
     class THRESH,FORECAST voltmon
     class DECIDE,SIMACT,XAIGEN flex
