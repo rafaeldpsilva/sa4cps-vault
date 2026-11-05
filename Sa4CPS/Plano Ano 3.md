@@ -80,7 +80,7 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 
 **Tempo para resolver problemas de tensão / capacidade: N/A → 10 min**
 - Corresponde à latência da cadeia: deteção → decisão → comando → resposta física → confirmação.
-- Medível de ponta a ponta com hardware real: deteção no digital twin (alimentado por injeções reais), comando à bateria real, resposta medida no BMS, confirmação no gémeo.
+- Medível de ponta a ponta com hardware real: deteção no digital twin (alimentado por injeções reais), comando à bateria real, resposta medida no BMS, confirmação no digital twin.
 - A cadeia deve ficar na ordem de segundos a 1–2 min (ciclo de 1 min do digital twin). Instrumentar cada etapa com timestamps.
 
 ### Grupo 2: KPIs da rede (contagem e duração de eventos)
@@ -89,15 +89,15 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 
 **Estratégia:**
 1. **Linha de base a partir de dados históricos da rede** (exportação única). Fixa os 20 e 45 eventos num período definido (p. ex., por mês) e numa topologia concreta.
-2. **digital twin da rede** (pandapower com a topologia e parâmetros reais), alimentado por medições reais (habitações + GECAD) e pelo histórico em `replay`.
+2. **Digital twin da rede** (pandapower com a topologia e parâmetros reais), alimentado por medições reais (habitações + GECAD) e pelo histórico em `replay`.
 3. **Avaliação em ciclo fechado:** a atuação é real (baterias, cargas) e o efeito na rede é quantificado no digital twin, com a flexibilidade real escalada ao nível do alimentador. Comparar a operação com e sem Sa4CPS sobre os mesmos dados históricos (contrafactual).
 4. **Implementar o cálculo de capacidade de linha** (loading das linhas no pandapower) no T1.
 5. **Reportar com transparência:** "redução de eventos avaliada sobre digital twin validado com dados reais da rede e atuação real".
 
-**Alternativa caso os dados históricos não estejam disponíveis a tempo:** linha de base gerada por cenários no gémeo, com uma topologia de referência (p. ex., rede de teste BT/MT) calibrada com os perfis reais das habitações e do GECAD.
+**Alternativa caso os dados históricos não estejam disponíveis a tempo:** linha de base gerada por cenários no digital twin, com uma topologia de referência (p. ex., rede de teste BT/MT) calibrada com os perfis reais das habitações e do GECAD.
 
 ### Ação formal sobre os KPIs
-- Incluir no plano do 3.º ano (D6.5/D6.6) uma **nota de metodologia** para os KPIs do Grupo 2: mantêm-se os alvos, define-se o ambiente de medição (gémeo + replay + atuação real).
+- Incluir no plano do 3.º ano (D6.5/D6.6) uma **nota de metodologia** para os KPIs do Grupo 2: mantêm-se os alvos, define-se o ambiente de medição (digital twin + replay + atuação real).
 - Acrescentar KPIs complementares mensuráveis no ambiente real (disponibilidade, latência, MAPE, redução de pico, taxa de bloqueio das salvaguardas). Não substituem os prometidos, mas reforçam a evidência.
 
 ---
@@ -112,7 +112,7 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 - [ ] Fechar os itens pendentes da Demo 2: salvaguardas (C10), ativação de flexibilidade, aprendizagem no edge, modelos pessoais
 - [ ] Registar a instabilidade da rede no registo de riscos do projeto, com a mitigação proposta
 - [ ] Reunir topologia da rede, histórico de eventos (tensão e capacidade) e lista de consumidores a inscrever
-- [ ] Implementar o cálculo de capacidade de linha no gémeo
+- [ ] Implementar o cálculo de capacidade de linha no digital twin
 - [ ] Instrumentar a cadeia de atuação com timestamps (KPI "tempo para resolver")
 - [ ] Fluxo de inscrição/consentimento pronto para habitações e consumidores da comunidade
 
@@ -123,14 +123,14 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 - [ ] Estudo com utilizadores n.º 1: resumos XAI testados com ocupantes reais e com o gestor da comunidade
 - [ ] Atingir os 20 kWh transacionados (meta interna)
 - [ ] Inscrever as habitações participantes e as zonas GECAD no programa de flexibilidade
-- [ ] Gémeo da rede com linha de base de eventos (ou alternativa com rede de referência)
+- [ ] digital twin da rede com linha de base de eventos (ou alternativa com rede de referência)
 
 ### T3: Validação (mai–jul)
 - [ ] Operação contínua sem supervisão durante 4–8 semanas, com KPIs registados automaticamente (evidência para os entregáveis finais)
 - [ ] Testes de segurança no caminho de atuação real: tentar comandos maliciosos e verificar que as salvaguardas os bloqueiam
 - [ ] Integrar dados históricos da rede através do backend `replay`
 - [ ] Estudo com utilizadores n.º 2
-- [ ] Avaliação contrafactual dos eventos de tensão/capacidade (com vs. sem Sa4CPS) no gémeo
+- [ ] Avaliação contrafactual dos eventos de tensão/capacidade (com vs. sem Sa4CPS) no digital twin
 - [ ] M30: ponto de decisão sobre inscrições e sobre a viabilidade da ligação `live` à rede na demonstração final
 
 ### T4: Demonstração final e entregáveis (ago–out)
