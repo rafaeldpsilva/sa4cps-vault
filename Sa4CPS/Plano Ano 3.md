@@ -70,7 +70,7 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 - As baterias do laboratório permitem atingir o alvo com poucas ativações.
 - Definir "transacionada" = flexibilidade ativada e liquidada no registo da comunidade (pedido → ativação → medição → liquidação).
 - Somar ativações por preço (OMIE) e por pedido emulado do DSO, mais deslocamento de cargas nas habitações participantes.
-- Meta interna: 20 kWh até ao fim do T2, para ter margem; registo contínuo no T3.
+- Meta interna: 20 kWh até meados de maio (avaliação no D4.4); registo contínuo até julho (D6.6).
 
 **Consumidores inscritos: 0 → 10**
 - 2–3 habitações + edifício(s)/zonas GECAD como participantes ≈ 4–5.
@@ -97,45 +97,79 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 **Alternativa caso os dados históricos não estejam disponíveis a tempo:** linha de base gerada por cenários no digital twin, com uma topologia de referência (p. ex., rede de teste BT/MT) calibrada com os perfis reais das habitações e do GECAD.
 
 ### Ação formal sobre os KPIs
-- Incluir no plano do 3.º ano (D6.5/D6.6) uma **nota de metodologia** para os KPIs do Grupo 2: mantêm-se os alvos, define-se o ambiente de medição (digital twin + replay + atuação real).
+- **D1.3v2 (jan 2027):** primeiro veículo formal. Os requisitos revistos refletem a abordagem (ativos reais, rede como sinal) e o método de medição dos KPIs do Grupo 2.
+- **D6.5 (abr 2027):** **nota de metodologia** detalhada para os KPIs do Grupo 2: mantêm-se os alvos, define-se o ambiente de medição (digital twin + replay + atuação real).
+- **D6.6 (set 2027):** resultados finais de todos os KPIs, com o método declarado.
 - Acrescentar KPIs complementares mensuráveis no ambiente real (disponibilidade, latência, MAPE, redução de pico, taxa de bloqueio das salvaguardas). Não substituem os prometidos, mas reforçam a evidência.
+
+---
+
+## Entregáveis do 3.º ano
+
+| Entregável | Data | Tarefas | O que tem de conter deste plano | Evidência necessária até |
+|---|---|---|---|---|
+| **D1.3v2** Revised Requirements | jan 2027 | T1.3 | Requisitos revistos: ativos reais como base, rede como sinal de entrada, método de medição dos KPIs, requisitos de inscrição/consentimento | Inventário de ativos (dez) |
+| **D3.3v2** Designs perception & comprehension | abr 2027 | T3.3, T3.4 | Ingestão de dados reais (Pis, habitações, GECAD), qualidade de dados, deteção de eventos de tensão e capacidade de linha, FL/previsão, XAI | Pipeline real a funcionar (mar) |
+| **D4.3v2** Designs status, projections & actions | abr 2027 | T4.1, T4.3, T4.4 | Grid Adapter (3 backends), digital twin com topologia real/referência, ativação de flexibilidade em baterias e cargas reais, dashboard | Ciclo fechado com bateria real (mar) |
+| **D5.3v2** Designs trust, security & privacy | abr 2027 | T5.1–T5.4 | Fluxo de inscrição/consentimento, salvaguardas na atuação real, trust scoring em dados reais | Salvaguardas ativas (mar) |
+| **D6.5** Plan final experiments & demos | abr 2027 | T6.3, T6.4 | Experiências finais sobre ativos reais, nota de metodologia dos KPIs do Grupo 2, plano da demonstração final | Linha de base dos KPIs fixada (mar) |
+| **D3.4** Final solutions & evaluations perception & comprehension | jun 2027 | T3.3, T3.4 | Avaliação com dados reais: MAPE da previsão, FL (real vs. centralizado), deteção de eventos, estudo XAI n.º 1 | Resultados (meados de mai) |
+| **D4.4** Final solutions & evaluations status, projections & actions | jun 2027 | T4.1, T4.3, T4.4 | kWh transacionados, tempo para resolver (latência medida), avaliação contrafactual no digital twin | Resultados (meados de mai) |
+| **D5.4** Final solutions & evaluations trust, security & privacy | jun 2027 | T5.1–T5.4 | Testes de segurança na atuação real, taxa de bloqueio das salvaguardas, inscrições/consentimentos | Resultados (meados de mai) |
+| **D6.6** Final experiments & demonstrations | set 2027 | T6.3, T6.4 | Resultados finais de todos os KPIs, operação contínua, demonstração final, estudo XAI n.º 2 | Operação contínua concluída (jul) |
+| **D7.5** Dissemination & exploitation | set 2027 | T7.1 | Publicações (FL com dados reais, estudo XAI, modelação de preferências), demonstrações, exploração | Submissões (jul–ago) |
+
+**Consequências para o calendário:**
+- **Abril é o pico:** 4 entregáveis de design/plano no mesmo mês. Os rascunhos devem estar prontos no início de março, por isso o essencial da arquitetura (Grid Adapter, digital twin, consentimento, salvaguardas) tem de estar decidido e implementado em fevereiro.
+- **Junho exige avaliações, não só implementação.** D3.4/D4.4/D5.4 precisam de resultados com dados reais até meados de maio. A operação contínua começa em abril, não em maio.
+- **D6.6 em setembro fecha os KPIs.** A demonstração final e o registo contínuo de KPIs ficam concluídos até ao fim de julho; agosto serve para redação.
+- **M30 = abril 2027**, coincide com o pacote de abril. É o momento natural para o ponto de decisão sobre inscrições e sobre a ligação `live` à rede.
+- Outubro fica como margem para revisões e para a revisão final.
 
 ---
 
 ## Plano trimestral (M25–M36)
 
-### T1: Base de dados reais (nov–jan)
-- [ ] Inventariar os ativos reais: número de Pis, circuitos medidos, cargas controláveis, kWh/kW das baterias
+### T1: Base de dados reais (nov–jan) → D1.3v2
+- [ ] Inventariar os ativos reais: número de Pis, circuitos medidos, cargas controláveis, kWh/kW das baterias (até dez)
 - [ ] Concluir a instalação dos sensores e criar um dashboard de qualidade de dados e disponibilidade
 - [ ] **Começar já a acumular histórico.** FL, previsão e modelação de preferências precisam de meses de dados reais; é o item com maior tempo de espera do plano
-- [ ] Implementar o Grid Adapter com o backend `emulator`
-- [ ] Fechar os itens pendentes da Demo 2: salvaguardas (C10), ativação de flexibilidade, aprendizagem no edge, modelos pessoais
 - [ ] Registar a instabilidade da rede no registo de riscos do projeto, com a mitigação proposta
 - [ ] Reunir topologia da rede, histórico de eventos (tensão e capacidade) e lista de consumidores a inscrever
+- [ ] Implementar o Grid Adapter com o backend `emulator`
 - [ ] Implementar o cálculo de capacidade de linha no digital twin
-- [ ] Instrumentar a cadeia de atuação com timestamps (KPI "tempo para resolver")
+- [ ] Fechar os itens pendentes da Demo 2: salvaguardas (C10), ativação de flexibilidade, aprendizagem no edge, modelos pessoais
 - [ ] Fluxo de inscrição/consentimento pronto para habitações e consumidores da comunidade
+- [ ] **Entregar D1.3v2** (jan)
 
-### T2: Fechar o ciclo sobre ativos reais (fev–abr)
-- [ ] Ativação de flexibilidade nas baterias e cargas controláveis, acionada por pedidos emulados do DSO e por sinais de preço reais
+### T2: Fechar o ciclo sobre ativos reais (fev–abr) → D3.3v2, D4.3v2, D5.3v2, D6.5
+- [ ] Ativação de flexibilidade nas baterias e cargas controláveis, acionada por pedidos emulados do DSO e por sinais de preço reais (fev)
+- [ ] Instrumentar a cadeia de atuação com timestamps (KPI "tempo para resolver")
 - [ ] FL nos Pis reais com dados reais. Manter as habitações virtuais apenas para escala, claramente identificadas como virtuais
 - [ ] Modelação de preferências com feedback real dos ocupantes, usando os monitores de secretária como canal de feedback
-- [ ] Estudo com utilizadores n.º 1: resumos XAI testados com ocupantes reais e com o gestor da comunidade
-- [ ] Atingir os 20 kWh transacionados (meta interna)
 - [ ] Inscrever as habitações participantes e as zonas GECAD no programa de flexibilidade
-- [ ] digital twin da rede com linha de base de eventos (ou alternativa com rede de referência)
-
-### T3: Validação (mai–jul)
-- [ ] Operação contínua sem supervisão durante 4–8 semanas, com KPIs registados automaticamente (evidência para os entregáveis finais)
-- [ ] Testes de segurança no caminho de atuação real: tentar comandos maliciosos e verificar que as salvaguardas os bloqueiam
-- [ ] Integrar dados históricos da rede através do backend `replay`
-- [ ] Estudo com utilizadores n.º 2
-- [ ] Avaliação contrafactual dos eventos de tensão/capacidade (com vs. sem Sa4CPS) no digital twin
+- [ ] Digital twin da rede com linha de base de eventos fixada (ou alternativa com rede de referência) (mar)
+- [ ] Rascunhos D3.3v2, D4.3v2, D5.3v2, D6.5 (início de mar)
+- [ ] **Iniciar a operação contínua** com registo automático de KPIs (abr)
 - [ ] M30: ponto de decisão sobre inscrições e sobre a viabilidade da ligação `live` à rede na demonstração final
+- [ ] **Entregar D3.3v2, D4.3v2, D5.3v2, D6.5** (abr)
 
-### T4: Demonstração final e entregáveis (ago–out)
-- [ ] Demonstração final ao vivo sobre ativos reais, com o ambiente de avaliação da rede claramente descrito
-- [ ] Versões finais dos entregáveis: D3.3v2/D3.4, D4.3v2/D4.4, D5.3v2/D5.4, D6.5/D6.6, D7.5 (confirmar os meses de entrega no anexo FPP)
+### T3: Avaliação e validação (mai–jul) → D3.4, D4.4, D5.4
+- [ ] Estudo com utilizadores n.º 1: resumos XAI testados com ocupantes reais e com o gestor da comunidade (até meados de mai)
+- [ ] Testes de segurança no caminho de atuação real: tentar comandos maliciosos e verificar que as salvaguardas os bloqueiam (até meados de mai)
+- [ ] Atingir os 20 kWh transacionados (até meados de mai)
+- [ ] Avaliação contrafactual dos eventos de tensão/capacidade (com vs. sem Sa4CPS) no digital twin (até meados de mai)
+- [ ] Integrar dados históricos da rede através do backend `replay`
+- [ ] **Entregar D3.4, D4.4, D5.4** (jun)
+- [ ] Continuar a operação contínua até ao fim de jul (evidência para D6.6)
+- [ ] Estudo com utilizadores n.º 2 (jul)
+- [ ] Demonstração final (jul)
+- [ ] Submeter publicações para D7.5
+
+### T4: Fecho (ago–out) → D6.6, D7.5
+- [ ] Consolidar os resultados finais de todos os KPIs (ago)
+- [ ] **Entregar D6.6 e D7.5** (set)
+- [ ] Preparar a revisão final; out como margem
 
 ---
 
