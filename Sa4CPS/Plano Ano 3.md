@@ -41,7 +41,7 @@ Narrativa para a ITEA: *"Dispositivos reais, utilizadores reais, atuação real.
 
 O `UC4_Architecture.md` já tem os tópicos `voltage-events` e `flexibility-requests` separados, por isso o lado da rede já está isolado. Acrescentar um único **Grid Adapter** que publica nesses tópicos, com três backends:
 
-- `emulator`: gémeo digital + cenários de stress gerados
+- `emulator`: digital twin + cenários de stress gerados
 - `replay`: dados históricos reais da rede
 - `live`: ligação em tempo real à rede
 
@@ -80,8 +80,8 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 
 **Tempo para resolver problemas de tensão / capacidade: N/A → 10 min**
 - Corresponde à latência da cadeia: deteção → decisão → comando → resposta física → confirmação.
-- Medível de ponta a ponta com hardware real: deteção no gémeo (alimentado por injeções reais), comando à bateria real, resposta medida no BMS, confirmação no gémeo.
-- A cadeia deve ficar na ordem de segundos a 1–2 min (ciclo de 1 min do gémeo). Instrumentar cada etapa com timestamps.
+- Medível de ponta a ponta com hardware real: deteção no digital twin (alimentado por injeções reais), comando à bateria real, resposta medida no BMS, confirmação no gémeo.
+- A cadeia deve ficar na ordem de segundos a 1–2 min (ciclo de 1 min do digital twin). Instrumentar cada etapa com timestamps.
 
 ### Grupo 2: KPIs da rede (contagem e duração de eventos)
 
@@ -89,10 +89,10 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 
 **Estratégia:**
 1. **Linha de base a partir de dados históricos da rede** (exportação única). Fixa os 20 e 45 eventos num período definido (p. ex., por mês) e numa topologia concreta.
-2. **Gémeo digital da rede** (pandapower com a topologia e parâmetros reais), alimentado por medições reais (habitações + GECAD) e pelo histórico em `replay`.
-3. **Avaliação em ciclo fechado:** a atuação é real (baterias, cargas) e o efeito na rede é quantificado no gémeo, com a flexibilidade real escalada ao nível do alimentador. Comparar a operação com e sem Sa4CPS sobre os mesmos dados históricos (contrafactual).
+2. **digital twin da rede** (pandapower com a topologia e parâmetros reais), alimentado por medições reais (habitações + GECAD) e pelo histórico em `replay`.
+3. **Avaliação em ciclo fechado:** a atuação é real (baterias, cargas) e o efeito na rede é quantificado no digital twin, com a flexibilidade real escalada ao nível do alimentador. Comparar a operação com e sem Sa4CPS sobre os mesmos dados históricos (contrafactual).
 4. **Implementar o cálculo de capacidade de linha** (loading das linhas no pandapower) no T1.
-5. **Reportar com transparência:** "redução de eventos avaliada sobre gémeo validado com dados reais da rede e atuação real".
+5. **Reportar com transparência:** "redução de eventos avaliada sobre digital twin validado com dados reais da rede e atuação real".
 
 **Alternativa caso os dados históricos não estejam disponíveis a tempo:** linha de base gerada por cenários no gémeo, com uma topologia de referência (p. ex., rede de teste BT/MT) calibrada com os perfis reais das habitações e do GECAD.
 
@@ -155,7 +155,7 @@ Mudar de backend é uma alteração de configuração. A instabilidade da rede d
 
 | Risco | Impacto | Mitigação |
 |---|---|---|
-| Instabilidade da rede impede atuação direta | KPIs de eventos não mensuráveis na rede | Gémeo digital + `replay` + atuação real em ativos controláveis |
+| Instabilidade da rede impede atuação direta | KPIs de eventos não mensuráveis na rede | digital twin + `replay` + atuação real em ativos controláveis |
 | Dados em tempo real da rede indisponíveis | Sem backend `live` | Exportação única de dados históricos; backend `replay` |
 | Dados históricos indisponíveis a tempo | Linha de base fraca | Topologia de referência calibrada com perfis reais |
 | Inscrições abaixo do alvo | KPI de consumidores incompleto | Fluxo de consentimento disponibilizado pela plataforma; ponto de controlo no M30 |
